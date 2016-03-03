@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.wakeup">
+
+    <uses-permission android:name="android.permission.CAMERA" />
+
+    <uses-feature
+        android:name="android.hardware.camera.flash"
+        android:required="true" />
+
+    <application
+        android:allowBackup="true"
+        android:icon="@drawable/ic_launcher"
+        android:label="@string/app_name"
+        android:theme="@style/AppTheme">
+        <activity
+            android:name=".MainActivity"
+            android:label="@string/app_name">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".LocActivitySimple"
+            android:label="@string/title_activity_loc"></activity>
+
+        <receiver android:name=".AlarmSetter">
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
+            </intent-filter>
+        </receiver>
+        <receiver android:name=".AlarmReceiver" />
+
+        <service android:name=".AlarmService" />
+        <service
+            android:name=".WakeLockService"
+            android:enabled="true"
+            android:exported="true" />
+
+        <activity
+            android:name=".ShowAlarm"
+            android:label="@string/title_activity_show_alarm"></activity>
+        <activity
+            android:name=".PreferenceUser"
+            android:label=""></activity>
+        <activity android:name=".LocActivityArithmetic"></activity>
+    </application>
+
+</manifest>
