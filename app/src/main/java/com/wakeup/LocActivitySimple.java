@@ -3,55 +3,40 @@ package com.wakeup;
 import android.app.Activity;
 import android.app.AlarmManager;
 import android.app.PendingIntent;
-import android.app.ProgressDialog;
-import android.app.Service;
 import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.content.res.AssetFileDescriptor;
-import android.content.res.AssetManager;
 import android.hardware.Camera;
-import android.media.AudioManager;
-import android.media.SoundPool;
 import android.os.Bundle;
 import android.os.Handler;
-import android.speech.tts.TextToSpeech;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.WindowManager;
-import android.widget.Button;
 import android.widget.TextView;
 
 
 
 import java.io.IOException;
-import java.net.URISyntaxException;
-import java.util.Locale;
 
 
 public class LocActivitySimple extends Activity   {
     private Camera camera;
     final String myLog = "myLog";
     public static final String ID = "id";
-    private SoundPool mSoundPool;
-    private AssetManager mAssetManager;
-    private int mRingtonSound;
     TextView fieldForContent;
-    boolean active = true;
+    Ring ring;
+
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_loc);
+        setContentView(R.layout.activity_loc_activity_simple);
         camera = Camera.open();
         fieldForContent = (TextView)findViewById(R.id.showInfoFieldLocActivitySimple);
-        mSoundPool = new SoundPool(1, AudioManager.STREAM_MUSIC, 0);
-        mAssetManager = getAssets();
-        // получим идентификаторы
-        mRingtonSound = loadSound("b.mp3");
+
 
         //включение экрана
         Activity activity = this;
@@ -73,14 +58,8 @@ public class LocActivitySimple extends Activity   {
                 PendingIntent.FLAG_UPDATE_CURRENT);
         alarmManager.cancel(pendingIntent);
 
-         // SLEEP 1 SECONDS HERE ...
-        Handler handler = new Handler();
-        handler.postDelayed(new Runnable() {
-            public void run() {
-                playSound(mRingtonSound);
-            }
-        }, 500);
-
+        ring = new Ring();
+        ring.start(this);
 
     }
 
@@ -105,39 +84,14 @@ public class LocActivitySimple extends Activity   {
         camera.startPreview();
     }
 
-
-    private void playSound(int sound) {
-        if (sound > 0) {
-            mSoundPool.play(sound, 1, 1, 1, -1, 1);
+    public void stopAlarm(View view) {
+        int rezult = ring.stopSound();
+        if(rezult == 1){//сработал метод остановки аудио
+            offLight();
+            finish();
         }
     }
 
-
-    private int loadSound(String fileName) {
-        AssetFileDescriptor afd = null;
-        try {
-            afd = mAssetManager.openFd(fileName);
-        } catch (IOException e) {
-            Log.d(myLog, "LocActivity loadSound ОШИБКА ЗАГРУЗКИ ФАЙЛА ");
-            e.printStackTrace();
-            return -1;
-        }
-        return mSoundPool.load(afd, 1);
-    }
-
-
-    public void StopSound(View view) {
-        mSoundPool.stop(mRingtonSound);
-        active = false;
-        // SLEEP 1 SECONDS HERE ...
-        Handler handler = new Handler();
-        handler.postDelayed(new Runnable() {
-            public void run() {
-                finish();
-            }
-        }, 2000);
-        offLight();
-    }
 
 
     @Override
@@ -168,11 +122,6 @@ public class LocActivitySimple extends Activity   {
     public void onBackPressed() {
 
     }
-
-
-
-
-
 
 
 

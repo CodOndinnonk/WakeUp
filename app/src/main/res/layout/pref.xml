@@ -5,9 +5,8 @@
 
     <ListPreference
         android:entries="@array/entriesLoc"
-        android:entryValues="@array/entry_valuesLoc"
+        android:entryValues="@array/entriesValuesLoc"
         android:key="listLocActivity"
-        android:summary=""
         android:title="@string/loc"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content">

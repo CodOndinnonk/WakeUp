@@ -11,7 +11,7 @@
         android:layout_height="wrap_content"
         android:id="@+id/buttonStopAlarmLocActivitySimple"
         android:layout_alignParentLeft="true"
-        android:onClick="StopSound"
+        android:onClick="stopAlarm"
         android:textColor="@color/text_color_blue_light"
         android:text="off"
         android:layout_alignParentRight="true" />

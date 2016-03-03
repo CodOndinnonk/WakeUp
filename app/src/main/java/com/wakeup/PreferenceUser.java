@@ -7,16 +7,21 @@ import android.preference.Preference;
 import android.preference.PreferenceActivity;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.os.Bundle;
 import android.preference.PreferenceActivity;
 import android.widget.Spinner;
 
+import java.util.ArrayList;
+
 public class PreferenceUser extends PreferenceActivity {
     ListPreference  listLoc;
-    public static final String APP_PREFERENCES = "mySettings";// это будет именем файла настроек
-    public static final String APP_PREFERENCES_LOGIN = "Login"; // логин
+    public static final String APP_PREFERENCES = "mySettings";// СЌС‚Рѕ Р±СѓРґРµС‚ РёРјРµРЅРµРј С„Р°Р№Р»Р° РЅР°СЃС‚СЂРѕРµРє
+    public static final String APP_PREFERENCES_LOGIN = "Login"; // Р»РѕРіРёРЅ
+    final String myLog = "myLog";
+
 
 
     @Override
@@ -24,9 +29,12 @@ public class PreferenceUser extends PreferenceActivity {
         super.onCreate(savedInstanceState);
         addPreferencesFromResource(R.layout.pref);
         listLoc = (ListPreference)findPreference("listLocActivity");
+        
         listLoc.setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
             @Override
             public boolean onPreferenceChange(Preference preference, Object newValue) {
+                Log.d(myLog, "Р’С‹Р±СЂР°РЅС‹Р№ СЌРєСЂРІРЅ Р±Р»РѕРєРёСЂРѕРІРєРё = " + (CharSequence) newValue);
+                listLoc.setSummary((CharSequence) newValue);
 
                 return false;
             }
@@ -39,7 +47,7 @@ public class PreferenceUser extends PreferenceActivity {
         super.onResume();
     }
 
-    public void SetSumarys(){//задаем отображение выбраных пораметров
+    public void SetSumarys(){//Р·Р°РґР°РµРј РѕС‚РѕР±СЂР°Р¶РµРЅРёРµ РІС‹Р±СЂР°РЅС‹С… РїРѕСЂР°РјРµС‚СЂРѕРІ
 
     }
 

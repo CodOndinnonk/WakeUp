@@ -5,7 +5,8 @@
         <item>Простой</item>
         <item>Математический</item>
     </string-array>
-    <string-array name="entry_valuesLoc">
+
+    <string-array name="entriesValuesLoc">
         <item>simple</item>
         <item>arithmetic</item>
     </string-array>

@@ -4,11 +4,14 @@ package com.wakeup;
     import android.app.Service;
     import android.content.Context;
     import android.content.Intent;
+    import android.content.SharedPreferences;
     import android.os.IBinder;
+    import android.preference.PreferenceManager;
     import android.util.Log;
 
 public class WakeLockService extends Service {
-
+    SharedPreferences sharedPreferences;
+    Intent dialogIntent;
     public static final String ID = "id";
     final String myLog = "myLog";
 
@@ -32,8 +35,18 @@ public class WakeLockService extends Service {
         @Override
         public int onStartCommand(Intent intent,int flags , int startId){
             int alarmId  = intent.getIntExtra(ID, 999);
-            Log.d(myLog,"WakeLockService onStartCommand alarmId = " + alarmId);
-            Intent dialogIntent = new Intent(this, LocActivitySimple.class);
+
+            // получаем SharedPreferences, которое работает с файлом настроек
+            sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
+            String kindOfScreenLoc = sharedPreferences.getString("listLocActivity", "non");
+
+            Log.d(myLog,"WakeLockService kindOfScreenLoc = " + kindOfScreenLoc);
+            if(kindOfScreenLoc.equals("simple")) {
+                dialogIntent = new Intent(this, LocActivitySimple.class);
+            }
+            if(kindOfScreenLoc.equals("arithmetic")) {
+                dialogIntent = new Intent(this, LocActivitySimple.class);
+            }
             //для запуска активити не из активити класса
             dialogIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             dialogIntent.putExtra(ID, alarmId);
