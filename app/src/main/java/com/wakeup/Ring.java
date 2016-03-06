@@ -21,7 +21,7 @@ public class Ring {
     public void start(Context context){
         mSoundPool = new SoundPool(1, AudioManager.STREAM_MUSIC, 0);
         mAssetManager = context.getAssets();
-        // получим идентификаторы
+        // РїРѕР»СѓС‡РёРј РёРґРµРЅС‚РёС„РёРєР°С‚РѕСЂС‹
         mRingtonSound = loadSound("b.mp3");
 
         // SLEEP 1 SECONDS HERE ...
@@ -48,7 +48,7 @@ public class Ring {
         try {
             afd = mAssetManager.openFd(fileName);
         } catch (IOException e) {
-            Log.d(myLog, "LocActivity loadSound ОШИБКА ЗАГРУЗКИ ФАЙЛА ");
+            Log.d(myLog, "LocActivity loadSound РћРЁРР‘РљРђ Р—РђР“Р РЈР—РљР Р¤РђР™Р›Рђ ");
             e.printStackTrace();
             return -1;
         }

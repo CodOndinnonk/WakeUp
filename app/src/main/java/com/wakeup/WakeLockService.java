@@ -42,11 +42,14 @@ public class WakeLockService extends Service {
 
             Log.d(myLog,"WakeLockService kindOfScreenLoc = " + kindOfScreenLoc);
             if(kindOfScreenLoc.equals("simple")) {
-                dialogIntent = new Intent(this, LocActivitySimple.class);
+          //      dialogIntent = new Intent(this, LocActivitySimple.class);
             }
             if(kindOfScreenLoc.equals("arithmetic")) {
-                dialogIntent = new Intent(this, LocActivitySimple.class);
+                dialogIntent = new Intent(this, LocActivityArithmetic.class);
             }
+
+            dialogIntent = new Intent(this, LocActivityArithmetic.class);//удалить эту строку, она для тестирования
+
             //для запуска активити не из активити класса
             dialogIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             dialogIntent.putExtra(ID, alarmId);

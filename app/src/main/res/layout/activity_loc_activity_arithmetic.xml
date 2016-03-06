@@ -9,4 +9,147 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="com.wakeup.LocActivityArithmetic">
 
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/showTaskFieldLocActivityArithmetic"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_marginTop="56dp"
+        android:text="30 + 48 ="
+        android:textSize="50dp"
+        android:layout_toLeftOf="@+id/button3ActivityArithmetic" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/fieldForAnswerLocActivityArithmetic"
+        android:layout_alignTop="@+id/showTaskFieldLocActivityArithmetic"
+        android:layout_alignBottom="@+id/showTaskFieldLocActivityArithmetic"
+        android:textSize="50dp"
+        android:layout_alignParentRight="true"
+        android:layout_toRightOf="@+id/showTaskFieldLocActivityArithmetic" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/to_off_arithmetic_loc"
+        android:id="@+id/textView"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:textSize="20dp" />
+
+    <Space
+        android:layout_width="20px"
+        android:layout_height="20px"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_marginLeft="37dp"
+        android:layout_marginBottom="41dp"
+        android:layout_alignRight="@+id/textView"
+        android:layout_below="@+id/showTaskFieldLocActivityArithmetic"
+        android:id="@+id/space" />
+
+    <Button
+        style="?android:attr/buttonStyleSmall"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text=" 1 "
+        android:id="@+id/button1ActivityArithmetic"
+        android:layout_below="@+id/showTaskFieldLocActivityArithmetic"
+        android:layout_alignLeft="@+id/space"
+        android:textSize="60dp" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text=" 2 "
+        android:id="@+id/button2ActivityArithmetic"
+        android:layout_below="@+id/showTaskFieldLocActivityArithmetic"
+        android:layout_toRightOf="@+id/button1ActivityArithmetic"
+        android:textSize="60dp" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text=" 3 "
+        android:id="@+id/button3ActivityArithmetic"
+        android:textSize="60dp"
+        android:layout_below="@+id/showTaskFieldLocActivityArithmetic"
+        android:layout_toRightOf="@+id/button2ActivityArithmetic" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text=" 4 "
+        android:id="@+id/button4ActivityArithmetic"
+        android:textSize="60dp"
+        android:layout_below="@+id/button1ActivityArithmetic"
+        android:layout_alignLeft="@+id/space" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text=" 5 "
+        android:id="@+id/button5ActivityArithmetic"
+        android:textSize="60dp"
+        android:layout_below="@+id/button2ActivityArithmetic"
+        android:layout_alignLeft="@+id/button2ActivityArithmetic" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text=" 6 "
+        android:id="@+id/button6ActivityArithmetic"
+        android:textSize="60dp"
+        android:layout_below="@+id/button3ActivityArithmetic"
+        android:layout_toRightOf="@+id/button2ActivityArithmetic" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text=" 7 "
+        android:id="@+id/button7ActivityArithmetic"
+        android:textSize="60dp"
+        android:layout_below="@+id/button4ActivityArithmetic"
+        android:layout_alignLeft="@+id/space" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text=" 8 "
+        android:id="@+id/button8ActivityArithmetic"
+        android:textSize="60dp"
+        android:layout_alignTop="@+id/button7ActivityArithmetic"
+        android:layout_alignLeft="@+id/button5ActivityArithmetic" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text=" 9 "
+        android:id="@+id/button9ActivityArithmetic"
+        android:textSize="60dp"
+        android:layout_alignTop="@+id/button8ActivityArithmetic"
+        android:layout_toRightOf="@+id/button8ActivityArithmetic" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text=" 0 "
+        android:id="@+id/button0ActivityArithmetic"
+        android:textSize="60dp"
+        android:layout_below="@+id/button7ActivityArithmetic"
+        android:layout_toLeftOf="@+id/button8ActivityArithmetic" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/buttondeleteActivityArithmetic"
+        android:textSize="40dp"
+        android:layout_below="@+id/button8ActivityArithmetic"
+        android:layout_alignLeft="@+id/button8ActivityArithmetic"
+        android:layout_alignBottom="@+id/button0ActivityArithmetic"
+        android:text="DELETE"
+        android:layout_alignRight="@+id/button9ActivityArithmetic" />
+
 </RelativeLayout>

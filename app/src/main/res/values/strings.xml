@@ -28,6 +28,7 @@
     <string name="delete_note_text">Удалить</string>
     <string name="settings">Настройки</string>
     <string name="loc">Экран отключения</string>
+    <string name="to_off_arithmetic_loc">Для отключения будильника решите пример</string>
 
 
 </resources>
