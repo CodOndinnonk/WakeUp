@@ -16,8 +16,8 @@ import java.util.List;
 
 public class AlarmService extends IntentService {
 
-    public static final String CREATE = "CREATE";
-    public static final String CANCEL = "CANCEL";
+
+    public static final String DOWHATNEED = "DOWHATNEED";
     final static String myLog = "myLog";
     private IntentFilter matcher;
     public static final String ID = "id";
@@ -31,8 +31,7 @@ public class AlarmService extends IntentService {
     public AlarmService() {
         super(null);
         matcher = new IntentFilter();
-        matcher.addAction(CREATE);
-        matcher.addAction(CANCEL);
+        matcher.addAction(DOWHATNEED);
 
     }
 
@@ -63,16 +62,19 @@ public class AlarmService extends IntentService {
             calendar.set(Calendar.MINUTE, alarm.get_minute());
             calendar.set(Calendar.SECOND, 00);
 
-            if (CREATE.equals(action)) {
-                if(calendar.getTimeInMillis() <= System.currentTimeMillis()){
-                    time = calendar.getTimeInMillis() + 86400000 ;// ставим будильник на следующие сутки, если время уже прошло
+            if (DOWHATNEED.equals(action)) {//вариант, когда программа смотрин на флаг активности будильника в БД
+                if (alarm.get_active() == 1) {//если стоит АКТИВЕН
+                    if (calendar.getTimeInMillis() <= System.currentTimeMillis()) {
+                        time = calendar.getTimeInMillis() + 86400000;// ставим будильник на следующие сутки, если время уже прошло
+                    } else {
+                        time = calendar.getTimeInMillis();
+                    }
+                    alarmManager.cancel(pendingIntent);//отключаем будильник
+                    alarmManager.set(AlarmManager.RTC_WAKEUP, time, pendingIntent);//ставим его заного
+                } else {//если стоит флаг НЕ АКТИВЕН
+                    alarmManager.cancel(pendingIntent);//отключаем будильник
                 }
-                else {time = calendar.getTimeInMillis();}
-                alarmManager.cancel(pendingIntent);
-                alarmManager.set(AlarmManager.RTC_WAKEUP, time, pendingIntent);
-                Log.d(myLog, "Время срабатывания = " + time);
-            } else if (CANCEL.equals(action)) {
-                alarmManager.cancel(pendingIntent);
+                Log.d(myLog, "Время срабатывания DOWHATNEED = " + time);
             }
         }
     }

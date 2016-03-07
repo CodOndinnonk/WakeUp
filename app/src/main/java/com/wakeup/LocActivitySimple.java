@@ -58,6 +58,7 @@ public class LocActivitySimple extends Activity   {
                 PendingIntent.FLAG_UPDATE_CURRENT);
         alarmManager.cancel(pendingIntent);
 
+
         ring = new Ring();
         ring.start(this);
 

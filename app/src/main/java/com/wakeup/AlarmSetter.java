@@ -13,7 +13,7 @@ public class AlarmSetter extends BroadcastReceiver {
     public void onReceive(Context context, Intent intent) {
         Log.d(myLog, "AlarmSetter onReceive 1 ");
         Intent service = new Intent(context, AlarmService.class);
-        service.setAction(AlarmService.CREATE);
+        service.setAction(AlarmService.DOWHATNEED);
         context.startService(service);
     }
 

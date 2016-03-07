@@ -27,6 +27,7 @@ public class LocActivityArithmetic extends Activity {
     Button btn1, btn2, btn3, btn4, btn5,  btn6, btn7, btn8, btn9, btn0, btnDel;
     String task, rezult, rightAnswer;
     Random random = new Random();
+    int alarmId;
 
 
     @Override
@@ -125,7 +126,7 @@ public class LocActivityArithmetic extends Activity {
         activity.getWindow().addFlags(WindowManager.LayoutParams.FLAG_DISMISS_KEYGUARD);
         activity.getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
 
-        int alarmId  = activity.getIntent().getIntExtra(ID, 999);
+        alarmId  = activity.getIntent().getIntExtra(ID, 999);
 
         onLight();
         //отменяем интент будильника, так как он уже сработал
@@ -135,11 +136,20 @@ public class LocActivityArithmetic extends Activity {
                 PendingIntent.FLAG_UPDATE_CURRENT);
         alarmManager.cancel(pendingIntent);
 
+
+
         setTask(100);
         ring = new Ring();
         ring.start(this);
 
     }
+
+    public void changeAlarmWork(int id){
+        DatabaseHandler db = new DatabaseHandler(this);//переменная для работы с БД
+        Alarm needAlarm = db.getAlarmById(id);
+        db.updateAlarm(new Alarm(needAlarm.getID(), needAlarm.get_hour(), needAlarm.get_minute(), 0, needAlarm.get_content(), needAlarm.get_everyDay(), needAlarm.get_Sound()));
+    }
+
 
     public void operateWithAnswer(String selectedButton){
         if(selectedButton.equals("del")){
@@ -196,8 +206,19 @@ public class LocActivityArithmetic extends Activity {
         int rezult = ring.stopSound();
         if(rezult == 1){//сработал метод остановки аудио
             offLight();
+            //изменение активности будильника на ВЫКЛЮЧЕН
+            changeAlarmWork(alarmId);
+            // перезапуск всех будильников
+            setComandToRemakeAlarms();
+
             finish();
         }
+    }
+
+    public void setComandToRemakeAlarms(){
+        Intent setAlarmIntent = new Intent(this, AlarmService.class);
+        setAlarmIntent.setAction(AlarmService.DOWHATNEED);
+        this.startService(setAlarmIntent);
     }
 
 

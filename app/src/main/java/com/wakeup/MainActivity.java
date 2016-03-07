@@ -126,13 +126,13 @@ public class MainActivity extends Activity {
                 DatabaseHandler db = new DatabaseHandler(this);
                 db.deleteAll();
                 Intent AlarmServiceOffAllDel = new Intent(this, AlarmService.class);
-                AlarmServiceOffAllDel.setAction(AlarmService.CANCEL);
+                AlarmServiceOffAllDel.setAction(AlarmService.DOWHATNEED);
                 this.startService(AlarmServiceOffAllDel);
                 return true;
 
             case R.id.offAll://вызов окна О ПРОГРАММЕ
                 Intent AlarmServiceOffAll = new Intent(this, AlarmService.class);
-                AlarmServiceOffAll.setAction(AlarmService.CANCEL);
+                AlarmServiceOffAll.setAction(AlarmService.DOWHATNEED);
                 this.startService(AlarmServiceOffAll);
                 return true;
 
@@ -174,7 +174,7 @@ public class MainActivity extends Activity {
 
     public void offAlarm(View view) {
         Intent myOff = new Intent(this, AlarmService.class);
-        myOff.setAction(AlarmService.CANCEL);
+        myOff.setAction(AlarmService.DOWHATNEED);
         this.startService(myOff);
 
     }

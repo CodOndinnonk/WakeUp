@@ -102,8 +102,17 @@ public class ShowAlarm extends Activity {
                "Изменения сохранены" , Toast.LENGTH_SHORT);
         mytoast.show();
 
+        setComandToRemakeAlarms();
         finish();
     }
+
+
+    public void setComandToRemakeAlarms(){
+        Intent setAlarmIntent = new Intent(this, AlarmService.class);
+        setAlarmIntent.setAction(AlarmService.DOWHATNEED);
+        this.startService(setAlarmIntent);
+    }
+
 
 
     public void save() {
@@ -125,10 +134,7 @@ public class ShowAlarm extends Activity {
              R.string.Toast_alarm_created, Toast.LENGTH_SHORT);
         mytoast.show();
 
-        Intent setAlarmIntent = new Intent(this, AlarmService.class);
-        setAlarmIntent.setAction(AlarmService.CREATE);
-        this.startService(setAlarmIntent);
-
+        setComandToRemakeAlarms();
         finish();//завершение активности
     }
 
@@ -171,6 +177,7 @@ public class ShowAlarm extends Activity {
         Toast mytoast = Toast.makeText(getApplicationContext(),
                 "Запись успешно удалена", Toast.LENGTH_SHORT);
         mytoast.show();
+        setComandToRemakeAlarms();
         finish();
     }
 
