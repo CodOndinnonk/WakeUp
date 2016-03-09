@@ -9,6 +9,7 @@ import android.content.res.AssetManager;
 import android.hardware.Camera;
 import android.media.SoundPool;
 import android.os.Bundle;
+import android.os.Vibrator;
 import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
@@ -18,7 +19,6 @@ import android.widget.TextView;
 import java.util.Random;
 
 public class LocActivityArithmetic extends Activity {
-    private Camera camera;
     final String myLog = "myLog";
     public static final String ID = "id";
     Ring ring;
@@ -28,6 +28,8 @@ public class LocActivityArithmetic extends Activity {
     String task, rezult, rightAnswer;
     Random random = new Random();
     int alarmId;
+    Vibration vibration;
+    Light light;
 
 
     @Override
@@ -48,7 +50,9 @@ public class LocActivityArithmetic extends Activity {
         btn8 = (Button)findViewById(R.id.button8ActivityArithmetic);
         btn9 = (Button)findViewById(R.id.button9ActivityArithmetic);
         btnDel = (Button)findViewById(R.id.buttondeleteActivityArithmetic);
-        camera = Camera.open();
+
+        vibration = new Vibration(this);
+        light = new Light();
         rezult = "";
 
         btn0.setOnClickListener(new View.OnClickListener() {
@@ -128,7 +132,7 @@ public class LocActivityArithmetic extends Activity {
 
         alarmId  = activity.getIntent().getIntExtra(ID, 999);
 
-        onLight();
+
         //отменяем интент будильника, так как он уже сработал
         AlarmManager alarmManager = (AlarmManager)getSystemService(Context.ALARM_SERVICE);
         Intent AlarmReceiverIntent = new Intent(this, AlarmReceiver.class);
@@ -141,7 +145,8 @@ public class LocActivityArithmetic extends Activity {
         setTask(100);
         ring = new Ring();
         ring.start(this);
-
+        light.onLight();
+        vibration.onVibration();
     }
 
     public void changeAlarmWork(int id){
@@ -170,7 +175,7 @@ public class LocActivityArithmetic extends Activity {
     public void setTask(int maxNumber){//число будет генерироваться от 0, до maxNumber
         int number1 = random.nextInt(maxNumber);
         int number2 = random.nextInt(maxNumber);
-        int sign = random.nextInt(1);//генерация числа для определения знака операции
+        int sign = random.nextInt(2);//генерация числа для определения знака операции
 
         if(sign==1){
             task = String.valueOf(number1) + " + " + String.valueOf(number2) + " = ";
@@ -189,23 +194,16 @@ public class LocActivityArithmetic extends Activity {
     }
 
 
-    public void onLight(){
-        Camera.Parameters parameters = camera.getParameters();
-        parameters.setFlashMode(Camera.Parameters.FLASH_MODE_TORCH);
-        camera.setParameters(parameters);
-        camera.startPreview();
-    }
-    public void offLight(){
-        Camera.Parameters parameters = camera.getParameters();
-        parameters.setFlashMode(Camera.Parameters.FLASH_MODE_OFF);
-        camera.setParameters(parameters);
-        camera.startPreview();
-    }
+
+
+
+
 
     public void stopAlarm() {
         int rezult = ring.stopSound();
         if(rezult == 1){//сработал метод остановки аудио
-            offLight();
+            light.offLight();
+            vibration.offVibration();
             //изменение активности будильника на ВЫКЛЮЧЕН
             changeAlarmWork(alarmId);
             // перезапуск всех будильников

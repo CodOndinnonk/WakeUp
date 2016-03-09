@@ -22,21 +22,22 @@ import java.io.IOException;
 
 
 public class LocActivitySimple extends Activity   {
-    private Camera camera;
     final String myLog = "myLog";
     public static final String ID = "id";
     TextView fieldForContent;
     Ring ring;
-
+    Vibration vibration;
+    Light light;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_loc_activity_simple);
-        camera = Camera.open();
         fieldForContent = (TextView)findViewById(R.id.showInfoFieldLocActivitySimple);
 
+        vibration = new Vibration(this);
+        light = new Light();
 
         //включение экрана
         Activity activity = this;
@@ -50,7 +51,7 @@ public class LocActivitySimple extends Activity   {
 
         setContent(alarmId);
 
-        onLight();
+
         //отменяем интент будильника, так как он уже сработал
         AlarmManager alarmManager = (AlarmManager)getSystemService(Context.ALARM_SERVICE);
         Intent AlarmReceiverIntent = new Intent(this, AlarmReceiver.class);
@@ -61,7 +62,8 @@ public class LocActivitySimple extends Activity   {
 
         ring = new Ring();
         ring.start(this);
-
+        light.onLight();
+        vibration.onVibration();
     }
 
 
@@ -72,23 +74,13 @@ public class LocActivitySimple extends Activity   {
         fieldForContent.setText(needAlarm.get_content());//заполняем поле информациее, взятой из сохраненной ранее запис
     }
 
-    public void onLight(){
-        Camera.Parameters parameters = camera.getParameters();
-        parameters.setFlashMode(Camera.Parameters.FLASH_MODE_TORCH);
-        camera.setParameters(parameters);
-        camera.startPreview();
-    }
-    public void offLight(){
-        Camera.Parameters parameters = camera.getParameters();
-        parameters.setFlashMode(Camera.Parameters.FLASH_MODE_OFF);
-        camera.setParameters(parameters);
-        camera.startPreview();
-    }
+
 
     public void stopAlarm(View view) {
         int rezult = ring.stopSound();
         if(rezult == 1){//сработал метод остановки аудио
-            offLight();
+            light.offLight();
+            vibration.offVibration();
             finish();
         }
     }
