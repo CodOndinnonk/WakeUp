@@ -56,6 +56,7 @@ public class MainActivity extends Activity {
                 startActivity(gotoShowNote);//запуск интента
             }
         });
+
     }
 
 

@@ -9,11 +9,14 @@ package com.wakeup;
     import android.preference.PreferenceManager;
     import android.util.Log;
 
+    import java.util.ArrayList;
+
 public class WakeLockService extends Service {
     SharedPreferences sharedPreferences;
     Intent dialogIntent;
     public static final String ID = "id";
     final String myLog = "myLog";
+    String[] namesOfLocActivities;
 
 
     private Context mContext;
@@ -36,19 +39,20 @@ public class WakeLockService extends Service {
         public int onStartCommand(Intent intent,int flags , int startId){
             int alarmId  = intent.getIntExtra(ID, 999);
 
+            //берем список возможных вариантов названий экранов блокировки из Strings, для дальнейшей проверки и  определения нужного экрана
+            namesOfLocActivities = getResources().getStringArray(R.array.entriesLoc);
+
             // получаем SharedPreferences, которое работает с файлом настроек
             sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
             String kindOfScreenLoc = sharedPreferences.getString("listLocActivity", "non");
 
             Log.d(myLog,"WakeLockService kindOfScreenLoc = " + kindOfScreenLoc);
-            if(kindOfScreenLoc.equals("simple")) {
-          //      dialogIntent = new Intent(this, LocActivitySimple.class);
+            if(kindOfScreenLoc.equals(namesOfLocActivities[0])) {//если выбран первый пункт - Простой экран
+                dialogIntent = new Intent(this, LocActivitySimple.class);
             }
-            if(kindOfScreenLoc.equals("arithmetic")) {
+            if(kindOfScreenLoc.equals(namesOfLocActivities[1])) {//если выбран второй пункт - Математический экран
                 dialogIntent = new Intent(this, LocActivityArithmetic.class);
             }
-
-            dialogIntent = new Intent(this, LocActivityArithmetic.class);//удалить эту строку, она для тестирования
 
             //для запуска активити не из активити класса
             dialogIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);

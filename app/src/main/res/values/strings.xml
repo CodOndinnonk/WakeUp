@@ -6,10 +6,7 @@
         <item>Математический</item>
     </string-array>
 
-    <string-array name="entriesValuesLoc">
-        <item>simple</item>
-        <item>arithmetic</item>
-    </string-array>
+
 
 
     <string name="app_name">WakeUp</string>
@@ -27,7 +24,7 @@
     <string name="edit_note_text">Редактировать</string>
     <string name="delete_note_text">Удалить</string>
     <string name="settings">Настройки</string>
-    <string name="loc">Экран отключения</string>
+    <string name="loc">Экран отключения будильника</string>
     <string name="to_off_arithmetic_loc">Для отключения будильника решите пример</string>
 
 
