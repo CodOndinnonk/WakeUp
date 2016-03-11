@@ -3,7 +3,7 @@ package com.wakeup;
 
 import android.content.Context;
 import android.os.Vibrator;
-import android.view.View;
+
 
 public class Vibration {//клас для вибрации
     Vibrator vibrator;

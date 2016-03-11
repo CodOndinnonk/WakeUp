@@ -3,7 +3,7 @@
     package="com.wakeup">
 
     <uses-permission android:name="android.permission.CAMERA" />
-    <uses-permission android:name="android.permission.VIBRATE"/>
+    <uses-permission android:name="android.permission.VIBRATE" />
 
     <uses-feature
         android:name="android.hardware.camera.flash"
@@ -25,7 +25,7 @@
         </activity>
         <activity
             android:name=".LocActivitySimple"
-            android:label="@string/title_activity_loc"></activity>
+            android:label="@string/title_activity_loc" />
 
         <receiver android:name=".AlarmSetter">
             <intent-filter>
@@ -42,11 +42,12 @@
 
         <activity
             android:name=".ShowAlarm"
-            android:label="@string/title_activity_show_alarm"></activity>
+            android:label="@string/title_activity_show_alarm" />
         <activity
             android:name=".PreferenceUser"
-            android:label=""></activity>
-        <activity android:name=".LocActivityArithmetic"></activity>
+            android:label="" />
+        <activity android:name=".LocActivityArithmetic" />
+        <activity android:name=".ShowContent"></activity>
     </application>
 
 </manifest>

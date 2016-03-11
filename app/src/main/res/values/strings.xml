@@ -7,8 +7,6 @@
     </string-array>
 
 
-
-
     <string name="app_name">WakeUp</string>
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
@@ -26,6 +24,7 @@
     <string name="settings">Настройки</string>
     <string name="loc">Экран отключения будильника</string>
     <string name="to_off_arithmetic_loc">Для отключения будильника решите пример</string>
+    <string name="close">Закрыть</string>
 
 
 </resources>

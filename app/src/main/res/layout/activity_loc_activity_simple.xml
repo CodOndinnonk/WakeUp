@@ -11,20 +11,9 @@
         android:layout_height="wrap_content"
         android:id="@+id/buttonStopAlarmLocActivitySimple"
         android:layout_alignParentLeft="true"
-        android:onClick="stopAlarm"
+        android:onClick="pushStopAlarmButton"
         android:textColor="@color/text_color_blue_light"
         android:text="off"
         android:layout_alignParentRight="true" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/showInfoFieldLocActivitySimple"
-        android:layout_below="@+id/buttonStopAlarmLocActivitySimple"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentRight="true"
-        android:textSize="20dp"
-        android:textColor="@color/text_color_blue_light" />
 
 </RelativeLayout>

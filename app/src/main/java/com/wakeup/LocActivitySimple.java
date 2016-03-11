@@ -21,35 +21,26 @@ import android.widget.TextView;
 import java.io.IOException;
 
 
-public class LocActivitySimple extends Activity   {
+public class LocActivitySimple extends Activity implements CommonForLocActivities   {
     final String myLog = "myLog";
     public static final String ID = "id";
-    TextView fieldForContent;
     Ring ring;
     Vibration vibration;
     Light light;
+    int alarmId;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_loc_activity_simple);
-        fieldForContent = (TextView)findViewById(R.id.showInfoFieldLocActivitySimple);
 
         vibration = new Vibration(this);
         light = new Light();
 
-        //включение экрана
-        Activity activity = this;
-        activity.getWindow().addFlags(WindowManager.LayoutParams.FLAG_SHOW_WHEN_LOCKED);
-        activity.getWindow().addFlags(WindowManager.LayoutParams.FLAG_TURN_SCREEN_ON);
-        activity.getWindow().addFlags(WindowManager.LayoutParams.FLAG_DISMISS_KEYGUARD);
-        activity.getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
-
-        int alarmId  = activity.getIntent().getIntExtra(ID, 999);
+        alarmId  = this.getIntent().getIntExtra(ID, 999);
         Log.d(myLog, "LocActivity onCreate alarmId = " + alarmId);
 
-        setContent(alarmId);
 
 
         //отменяем интент будильника, так как он уже сработал
@@ -59,38 +50,70 @@ public class LocActivitySimple extends Activity   {
                 PendingIntent.FLAG_UPDATE_CURRENT);
         alarmManager.cancel(pendingIntent);
 
-
+        makeWakeActivityFromSleep();
         ring = new Ring();
         ring.start(this);
         light.onLight();
         vibration.onVibration();
     }
 
-
-
-    public void setContent(int needId){
-        DatabaseHandler db = new DatabaseHandler(this);//переменная для работы с БД
-        Alarm needAlarm = db.getAlarmById(needId);//создаем обьект типа "запись" и зполняем его данными из необходимой нам записи, взятой по Id
-        fieldForContent.setText(needAlarm.get_content());//заполняем поле информациее, взятой из сохраненной ранее запис
+    public void makeWakeActivityFromSleep(){
+        //включение экрана
+        Activity activity = this;
+        activity.getWindow().addFlags(WindowManager.LayoutParams.FLAG_SHOW_WHEN_LOCKED);
+        activity.getWindow().addFlags(WindowManager.LayoutParams.FLAG_TURN_SCREEN_ON);
+        activity.getWindow().addFlags(WindowManager.LayoutParams.FLAG_DISMISS_KEYGUARD);
+        activity.getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
     }
 
 
-
-    public void stopAlarm(View view) {
+    public void pushStopAlarmButton(View view) {
+        stopAlarm();
+    }
+    @Override
+    public void stopAlarm() {
         int rezult = ring.stopSound();
         if(rezult == 1){//сработал метод остановки аудио
             light.offLight();
             vibration.offVibration();
+            //изменение активности будильника на ВЫКЛЮЧЕН
+            changeAlarmWork(alarmId);
+            // перезапуск всех будильников
+            setComandToRemakeAlarms();
+            goToShowContent();
             finish();
         }
     }
 
 
+    public void setComandToRemakeAlarms(){
+        Intent setAlarmIntent = new Intent(this, AlarmService.class);
+        setAlarmIntent.setAction(AlarmService.DOWHATNEED);
+        this.startService(setAlarmIntent);
+    }
 
-    private static long back_pressed;
+    public void goToShowContent(){
+        Intent goToShowContent = new Intent(this,ShowContent.class);
+        goToShowContent.putExtra(ID, alarmId);
+        startActivity(goToShowContent);
+    }
+
+    public void changeAlarmWork(int id){
+        DatabaseHandler db = new DatabaseHandler(this);//переменная для работы с БД
+        Alarm needAlarm = db.getAlarmById(id);
+        db.updateAlarm(new Alarm(needAlarm.getID(), needAlarm.get_hour(), needAlarm.get_minute(), 0, needAlarm.get_content(), needAlarm.get_everyDay(), needAlarm.get_Sound()));
+    }
+
+
+
     @Override
-    public void onBackPressed() {
+    public void onBackPressed() {//нажатие физической кнопки НАЗАД
 
+    }
+
+    @Override
+    protected void onUserLeaveHint() {//нажатие физической кнопки ДОМОЙ
+        super.onUserLeaveHint();
     }
 
 

@@ -7,6 +7,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.res.AssetManager;
 import android.hardware.Camera;
+import android.media.AudioManager;
 import android.media.SoundPool;
 import android.os.Bundle;
 import android.os.Vibrator;
@@ -18,7 +19,7 @@ import android.widget.TextView;
 
 import java.util.Random;
 
-public class LocActivityArithmetic extends Activity {
+public class LocActivityArithmetic extends Activity implements CommonForLocActivities {
     final String myLog = "myLog";
     public static final String ID = "id";
     Ring ring;
@@ -123,14 +124,7 @@ public class LocActivityArithmetic extends Activity {
         });
 
 
-        //включение экрана
-        Activity activity = this;
-        activity.getWindow().addFlags(WindowManager.LayoutParams.FLAG_SHOW_WHEN_LOCKED);
-        activity.getWindow().addFlags(WindowManager.LayoutParams.FLAG_TURN_SCREEN_ON);
-        activity.getWindow().addFlags(WindowManager.LayoutParams.FLAG_DISMISS_KEYGUARD);
-        activity.getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
-
-        alarmId  = activity.getIntent().getIntExtra(ID, 999);
+        alarmId  = this.getIntent().getIntExtra(ID, 999);
 
 
         //отменяем интент будильника, так как он уже сработал
@@ -141,13 +135,23 @@ public class LocActivityArithmetic extends Activity {
         alarmManager.cancel(pendingIntent);
 
 
-
+        makeWakeActivityFromSleep();
         setTask(100);
         ring = new Ring();
         ring.start(this);
         light.onLight();
         vibration.onVibration();
     }
+
+    public void makeWakeActivityFromSleep(){
+        //включение экрана
+        Activity activity = this;
+        activity.getWindow().addFlags(WindowManager.LayoutParams.FLAG_SHOW_WHEN_LOCKED);
+        activity.getWindow().addFlags(WindowManager.LayoutParams.FLAG_TURN_SCREEN_ON);
+        activity.getWindow().addFlags(WindowManager.LayoutParams.FLAG_DISMISS_KEYGUARD);
+        activity.getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
+    }
+
 
     public void changeAlarmWork(int id){
         DatabaseHandler db = new DatabaseHandler(this);//переменная для работы с БД
@@ -208,9 +212,15 @@ public class LocActivityArithmetic extends Activity {
             changeAlarmWork(alarmId);
             // перезапуск всех будильников
             setComandToRemakeAlarms();
-
+            goToShowContent();
             finish();
         }
+    }
+
+    public void goToShowContent(){
+        Intent goToShowContent = new Intent(this,ShowContent.class);
+        goToShowContent.putExtra(ID, alarmId);
+        startActivity(goToShowContent);
     }
 
     public void setComandToRemakeAlarms(){
@@ -221,10 +231,14 @@ public class LocActivityArithmetic extends Activity {
 
 
 
-    private static long back_pressed;
     @Override
-    public void onBackPressed() {
+    public void onBackPressed() {//нажатие физической кнопки НАЗАД
 
+    }
+
+    @Override
+    protected void onUserLeaveHint() {//нажатие физической кнопки ДОМОЙ
+        super.onUserLeaveHint();
     }
 
 
