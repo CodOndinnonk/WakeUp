@@ -1,0 +1,17 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools" tools:context=".MainActivity">
+    <item android:id="@+id/delAll"
+        android:title="Удалить все будильники"
+        android:orderInCategory="100"
+        android:showAsAction="never" />
+    <item android:id="@+id/offAll"
+        android:title="Выключить все будильники"
+        android:orderInCategory="100"
+        android:showAsAction="never" />
+    <item android:id="@+id/settings"
+        android:title="@string/settings"
+        android:orderInCategory="100"
+        android:showAsAction="never" />
+
+</menu>
+<!-- From: file:/C:/Users/Public/GitHub/WakeUp/app/src/main/res/menu/menu_main.xml -->
