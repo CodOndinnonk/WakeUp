@@ -53,8 +53,7 @@
             android:name="com.wakeup.PreferenceUser"
             android:label="" />
         <activity android:name="com.wakeup.LocActivityArithmetic" />
-        <activity android:name="com.wakeup.ShowContent" >
-        </activity>
+        <activity android:name="com.wakeup.ShowContent" />
     </application>
 
 </manifest>
