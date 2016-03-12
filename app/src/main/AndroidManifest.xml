@@ -47,7 +47,9 @@
             android:name=".PreferenceUser"
             android:label="" />
         <activity android:name=".LocActivityArithmetic" />
-        <activity android:name=".ShowContent"></activity>
+        <activity android:name=".ShowContent">
+
+        </activity>
     </application>
 
 </manifest>
