@@ -163,18 +163,12 @@ public class ShowAlarm extends Activity {
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
 
-        switch (id) {
-
-                case R.id.settings://вызов окна О ПРОГРАММЕ
-                Intent preferenceIntent = new Intent(this,PreferenceUser.class);
-                startActivity(preferenceIntent);
-                return true;
-
-            default:
-                return super.onOptionsItemSelected(item);
+        //noinspection SimplifiableIfStatement
+        if (id == R.id.action_settings) {
+            return true;
         }
 
-
+        return super.onOptionsItemSelected(item);
     }
 
     public void delete(View view) {

@@ -22,7 +22,7 @@ import java.util.ArrayList;
 public class PreferenceUser extends PreferenceActivity {
     ListPreference  listLoc;
     final String myLog = "myLog";
-    String[] namesOfLocActivities;
+
 
 
 
@@ -30,11 +30,9 @@ public class PreferenceUser extends PreferenceActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         addPreferencesFromResource(R.xml.preference);
-           Log.d(myLog, "PreferenceUser onCreate ");
            listLoc = (ListPreference)findPreference("listLocActivity");
-           namesOfLocActivities = getResources().getStringArray(R.array.entriesLoc);
 
-           chackForFirstStart();
+           setSumarys();
 
     }
 
@@ -46,17 +44,6 @@ public class PreferenceUser extends PreferenceActivity {
 
     public void setSumarys(){//задаем отображение выбраных пораметров
         listLoc.setSummary(listLoc.getValue());
-    }
-
-    public void chackForFirstStart(){//задаем отображение выбраных параметров
-        if(listLoc.getValue() == null){//если небыло выбрано настроек ранее, ставим дефолтовые значения
-            listLoc.setValue(namesOfLocActivities[0]);
-        }else {
-            setSumarys();
-        }
 
     }
-
-
-
 }
