@@ -42,7 +42,6 @@ public class LocActivitySimple extends Activity implements CommonForLocActivitie
         Log.d(myLog, "LocActivity onCreate alarmId = " + alarmId);
 
 
-
         //отменяем интент будильника, так как он уже сработал
         AlarmManager alarmManager = (AlarmManager)getSystemService(Context.ALARM_SERVICE);
         Intent AlarmReceiverIntent = new Intent(this, AlarmReceiver.class);
@@ -105,7 +104,6 @@ public class LocActivitySimple extends Activity implements CommonForLocActivitie
     }
 
 
-
     @Override
     public void onBackPressed() {//нажатие физической кнопки НАЗАД
 
@@ -114,6 +112,8 @@ public class LocActivitySimple extends Activity implements CommonForLocActivitie
     @Override
     protected void onUserLeaveHint() {//нажатие физической кнопки ДОМОЙ
         super.onUserLeaveHint();
+        Log.d(myLog, "нажали кнопку HOME ");
+
     }
 
 
