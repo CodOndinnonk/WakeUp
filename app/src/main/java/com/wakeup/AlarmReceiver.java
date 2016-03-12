@@ -1,18 +1,14 @@
 package com.wakeup;
 
 
-import android.app.Service;
+
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
-import android.hardware.Camera;
-import android.util.Log;
-import android.content.Context;
 
-import java.security.Provider;
+import android.util.Log;
 
 public class AlarmReceiver extends BroadcastReceiver {
-
     public static final String ID = "id";
     final String myLog = "myLog";
 

@@ -5,21 +5,15 @@ import android.app.AlarmManager;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
-import android.content.res.AssetManager;
-import android.hardware.Camera;
-import android.media.AudioManager;
-import android.media.SoundPool;
 import android.os.Bundle;
-import android.os.Vibrator;
 import android.util.Log;
 import android.view.View;
-import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.TextView;
 
 import java.util.Random;
 
-public class LocActivityArithmetic extends Activity implements CommonForLocActivities {
+public class LocActivityArithmetic extends Activity {
     final String myLog = "myLog";
     public static final String ID = "id";
     Ring ring;
@@ -31,12 +25,15 @@ public class LocActivityArithmetic extends Activity implements CommonForLocActiv
     int alarmId;
     Vibration vibration;
     Light light;
+    LocActivityHelper locActivityHelper;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_loc_activity_arithmetic);
+
+        alarmId  = this.getIntent().getIntExtra(ID, 999);
 
         showTaskField = (TextView)findViewById(R.id.showTaskFieldLocActivityArithmetic);
         enterAnswerField = (TextView)findViewById(R.id.fieldForAnswerLocActivityArithmetic);
@@ -54,6 +51,7 @@ public class LocActivityArithmetic extends Activity implements CommonForLocActiv
 
         vibration = new Vibration(this);
         light = new Light();
+        locActivityHelper = new LocActivityHelper(this,alarmId);
         rezult = "";
 
         btn0.setOnClickListener(new View.OnClickListener() {
@@ -123,10 +121,6 @@ public class LocActivityArithmetic extends Activity implements CommonForLocActiv
             }
         });
 
-
-        alarmId  = this.getIntent().getIntExtra(ID, 999);
-
-
         //отменяем интент будильника, так как он уже сработал
         AlarmManager alarmManager = (AlarmManager)getSystemService(Context.ALARM_SERVICE);
         Intent AlarmReceiverIntent = new Intent(this, AlarmReceiver.class);
@@ -134,8 +128,7 @@ public class LocActivityArithmetic extends Activity implements CommonForLocActiv
                 PendingIntent.FLAG_UPDATE_CURRENT);
         alarmManager.cancel(pendingIntent);
 
-
-        makeWakeActivityFromSleep();
+        locActivityHelper.makeWakeActivityFromSleep();
         setTask(100);
         ring = new Ring();
         ring.start(this);
@@ -143,21 +136,7 @@ public class LocActivityArithmetic extends Activity implements CommonForLocActiv
         vibration.onVibration();
     }
 
-    public void makeWakeActivityFromSleep(){
-        //включение экрана
-        Activity activity = this;
-        activity.getWindow().addFlags(WindowManager.LayoutParams.FLAG_SHOW_WHEN_LOCKED);
-        activity.getWindow().addFlags(WindowManager.LayoutParams.FLAG_TURN_SCREEN_ON);
-        activity.getWindow().addFlags(WindowManager.LayoutParams.FLAG_DISMISS_KEYGUARD);
-        activity.getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
-    }
 
-
-    public void changeAlarmWork(int id){
-        DatabaseHandler db = new DatabaseHandler(this);//переменная для работы с БД
-        Alarm needAlarm = db.getAlarmById(id);
-        db.updateAlarm(new Alarm(needAlarm.getID(), needAlarm.get_hour(), needAlarm.get_minute(), 0, needAlarm.get_content(), needAlarm.get_everyDay(), needAlarm.get_Sound()));
-    }
 
 
     public void operateWithAnswer(String selectedButton){
@@ -173,7 +152,6 @@ public class LocActivityArithmetic extends Activity implements CommonForLocActiv
          if(rezult.equals(rightAnswer)){
             stopAlarm();
         }
-
     }
 
     public void setTask(int maxNumber){//число будет генерироваться от 0, до maxNumber
@@ -209,26 +187,13 @@ public class LocActivityArithmetic extends Activity implements CommonForLocActiv
             light.offLight();
             vibration.offVibration();
             //изменение активности будильника на ВЫКЛЮЧЕН
-            changeAlarmWork(alarmId);
+            locActivityHelper.changeAlarmWork();
             // перезапуск всех будильников
-            setComandToRemakeAlarms();
-            goToShowContent();
+            locActivityHelper.setComandToRemakeAlarms();
+            locActivityHelper.goToShowContent();
             finish();
         }
     }
-
-    public void goToShowContent(){
-        Intent goToShowContent = new Intent(this,ShowContent.class);
-        goToShowContent.putExtra(ID, alarmId);
-        startActivity(goToShowContent);
-    }
-
-    public void setComandToRemakeAlarms(){
-        Intent setAlarmIntent = new Intent(this, AlarmService.class);
-        setAlarmIntent.setAction(AlarmService.DOWHATNEED);
-        this.startService(setAlarmIntent);
-    }
-
 
 
     @Override

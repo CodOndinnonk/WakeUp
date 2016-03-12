@@ -2,14 +2,14 @@ package com.wakeup;
 
 
     import android.app.Service;
-    import android.content.Context;
+
     import android.content.Intent;
     import android.content.SharedPreferences;
     import android.os.IBinder;
     import android.preference.PreferenceManager;
     import android.util.Log;
 
-    import java.util.ArrayList;
+
 
 public class WakeLockService extends Service {
     SharedPreferences sharedPreferences;
@@ -19,10 +19,6 @@ public class WakeLockService extends Service {
     String[] namesOfLocActivities;
 
 
-    private Context mContext;
-    /*extends method (non-Javadoc)
-     * @see android.app.Service#onBind(android.content.Intent)
-     */
     @Override
     public IBinder onBind(Intent intent) {
         return null;
@@ -66,8 +62,8 @@ public class WakeLockService extends Service {
 
 
         @Override
-        public void onDestroy()
-        {super.onDestroy();
+        public void onDestroy(){
+            super.onDestroy();
         }
 
 }

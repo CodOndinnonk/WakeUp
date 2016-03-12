@@ -7,7 +7,7 @@ import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
-import android.content.SharedPreferences;
+
 import android.util.Log;
 
 import java.util.ArrayList;
@@ -15,8 +15,6 @@ import java.util.Calendar;
 import java.util.List;
 
 public class AlarmService extends IntentService {
-
-
     public static final String DOWHATNEED = "DOWHATNEED";
     final static String myLog = "myLog";
     private IntentFilter matcher;
@@ -32,7 +30,6 @@ public class AlarmService extends IntentService {
         super(null);
         matcher = new IntentFilter();
         matcher.addAction(DOWHATNEED);
-
     }
 
     @Override

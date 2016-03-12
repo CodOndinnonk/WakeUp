@@ -3,7 +3,7 @@ package com.wakeup;
 
 import android.hardware.Camera;
 
-import java.security.Policy;
+
 
 public class Light {
     private Camera camera;

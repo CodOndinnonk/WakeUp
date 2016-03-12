@@ -2,7 +2,6 @@ package com.wakeup;
 
 
 public class Alarm {
-
     int _id;
     int _hour;
     int _minute;

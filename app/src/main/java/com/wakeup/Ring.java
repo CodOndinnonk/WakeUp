@@ -17,7 +17,6 @@ public class Ring {
     private AssetManager mAssetManager;
     private int mRingtonSound;
     private float volume;
-
     final String myLog = "myLog";
 
     public void start(Context context){
@@ -27,7 +26,6 @@ public class Ring {
         mRingtonSound = loadSound("b.mp3");
         volume = (float) 0.2;
 
-
                 // SLEEP 1 SECONDS HERE ...
         Handler handler = new Handler();
         handler.postDelayed(new Runnable() {
@@ -35,7 +33,6 @@ public class Ring {
                 playSound(mRingtonSound, volume);
             }
         }, 500);
-
     }
 
 

@@ -1,7 +1,6 @@
 package com.wakeup;
 
 public class ListModel {
-
     private  String Time="";
     private  String everyDay = "";
     private  int Id=0;//поле со значением необходимого ID, используется при методе set

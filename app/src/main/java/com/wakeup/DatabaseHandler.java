@@ -11,9 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class DatabaseHandler extends SQLiteOpenHelper {
-
     final String myLog = "myLog";
-
     private static final int DATABASE_VERSION = 1;//текущая версия БД
     private static final String DATABASE_NAME = "Alarms_database.db";//название файла с БД
     private static final String TABLE_NOTES = "Alarms";//название таблицы
@@ -28,16 +26,9 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 
 
 
-
-
-
-
-
     public DatabaseHandler(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
     }
-
-
 
 
 
@@ -50,10 +41,6 @@ public class DatabaseHandler extends SQLiteOpenHelper {
                 + ")";
         db.execSQL(CREATE_NOTES_TABLE);
     }
-
-
-
-
 
 
 
@@ -86,8 +73,6 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 
 
 
-
-
     public Alarm getAlarmById(int Id) {//берем запись по Id, необходимое нам Id передается с другой активности
         SQLiteDatabase db = this.getReadableDatabase();//формат работы с БД
         //переменная, хранящая найденую запись
@@ -102,9 +87,6 @@ public class DatabaseHandler extends SQLiteOpenHelper {
                 cursor.getInt(6));
         return alarm;//возвращаум активности, которая запрашивала обьект с заполненными полями(тоесть найденую запись)
     }
-
-
-
 
 
 

@@ -2,24 +2,16 @@ package com.wakeup;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.ContextMenu;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.DatePicker;
-import android.widget.EditText;
 import android.widget.ListView;
-import android.widget.SimpleAdapter;
-import android.widget.TimePicker;
-import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 
 public class MainActivity extends Activity {
@@ -28,10 +20,7 @@ public class MainActivity extends Activity {
     BoxAdapter boxAdapter;
     private static final int menu_edit = 1;
     private static final int menu_del = 2;
-
-
     final String myLog = "myLog";
-
     final String WRITE_HOURS = "HOURS";
     final String WRITE_MINUTE = "MINUTE";
 
@@ -56,7 +45,6 @@ public class MainActivity extends Activity {
                 startActivity(gotoShowNote);//запуск интента
             }
         });
-
     }
 
 
@@ -76,7 +64,6 @@ public class MainActivity extends Activity {
             listOfAlarms.add(new Alarm(cn.getID(), cn.get_hour(), cn.get_minute(), cn.get_active(), cn.get_content(),
                     cn.get_everyDay(), cn.get_Sound()));
         }
-
     }
 
 
@@ -164,7 +151,6 @@ public class MainActivity extends Activity {
         goToAdd.putExtra("needId", -1);//показывает, какой тип активити отображать, если больше -1, то это редактирование
         //а так это создание
         startActivity(goToAdd);
-
     }
 
 
@@ -177,7 +163,6 @@ public class MainActivity extends Activity {
         Intent myOff = new Intent(this, AlarmService.class);
         myOff.setAction(AlarmService.DOWHATNEED);
         this.startService(myOff);
-
     }
 
 
