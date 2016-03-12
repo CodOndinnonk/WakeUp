@@ -1,0 +1,83 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
+    android:layout_height="match_parent" android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    android:paddingBottom="@dimen/activity_vertical_margin" tools:context="com.wakeup.ShowAlarm"
+    android:background="@drawable/b">
+
+    <TimePicker
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/timePickerShowAlarm"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:importantForAccessibility="@android:integer/status_bar_notification_info_maxnum"
+        android:visibility="visible"
+        android:background="#ffc8c8c8" />
+
+    <CheckBox
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/contentToSpeach"
+        android:id="@+id/everydayCheckBoxShowAlarm"
+        android:layout_below="@+id/timePickerShowAlarm"
+        android:checked="false"
+        android:layout_marginTop="10dp"
+        android:textSize="25dp"
+        android:textColor="@color/text_color_blue_light" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/content"
+        android:id="@+id/infoFieldContextShowAlarm"
+        android:layout_below="@+id/everydayCheckBoxShowAlarm"
+        android:layout_alignParentLeft="true"
+        android:textSize="25dp"
+        android:layout_marginTop="10dp"
+        android:textColor="@color/text_color_blue_light" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/contentEnterFieldShowAlarm"
+        android:layout_below="@+id/infoFieldContextShowAlarm"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="true"
+        android:layout_above="@+id/buttonLeftShowAlarm"
+        android:textSize="20dp" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/create"
+        android:id="@+id/buttonLeftShowAlarm"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:textSize="20dp"
+        android:onClick="save_Create"
+        android:textColor="@color/text_color_blue_light" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/cancel"
+        android:id="@+id/buttonCancelShowAlarm"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:textSize="20dp"
+        android:onClick="cancel"
+        android:textColor="@color/text_color_blue_light" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Удалить"
+        android:id="@+id/buttonDeleteShowAlarm"
+        android:textColor="@color/text_color_blue_light"
+        android:onClick="delete"
+        android:layout_below="@+id/contentEnterFieldShowAlarm"
+        android:layout_centerHorizontal="true" />
+</RelativeLayout>
+<!-- From: file:/C:/Users/Public/GitHub/WakeUp/app/src/main/res/layout/activity_show_alarm.xml -->
