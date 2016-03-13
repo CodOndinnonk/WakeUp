@@ -6,10 +6,17 @@
     <ListPreference
         android:entries="@array/entriesLoc"
         android:entryValues="@array/entriesLoc"
-        android:key="listLocActivity"
+        android:key="@string/keyListLocActivity"
         android:title="@string/loc"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content">
     </ListPreference>
+
+    <CheckBoxPreference
+        android:key="@string/keyProverbCheckBox"
+        android:summaryOff="@string/descripnionOffProverb"
+        android:summaryOn="@string/descripnionOnProverb"
+        android:title="@string/proverbCheckBox">
+    </CheckBoxPreference>
 
 </PreferenceScreen>

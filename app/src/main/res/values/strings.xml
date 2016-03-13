@@ -25,6 +25,13 @@
     <string name="loc">Экран отключения будильника</string>
     <string name="to_off_arithmetic_loc">Для отключения будильника решите пример</string>
     <string name="close">Закрыть</string>
+    <string name="descripnionOnProverb">Включено отображение высказаваний</string>
+    <string name="descripnionOffProverb">Выключено отображение высказаваний</string>
+    <string name="keyListLocActivity">listLocActivity</string>
+    <string name="proverbCheckBox">Высказывания после отключения будильника</string>
+    <string name="keyProverbCheckBox">proverbCheckBox</string>
+    <string name="alarmAlreadyExisted">Будильник на заданное время уже существует</string>
+    <string name="changesSaved">Изменения сохранены</string>
 
 
 </resources>

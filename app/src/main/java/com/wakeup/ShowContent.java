@@ -11,12 +11,18 @@ import android.widget.TextView;
 public class ShowContent extends Activity {
     final String myLog = "myLog";
     public static final String ID = "id";
+    public static final String IS_CONTENT = "isContent";
+    public static final String IS_PROVERB = "isProverb";
     int alarmId;
     TextView showContent;
     TextView showProverb;
     LinearLayout topFieldWithContent;
+    LinearLayout bottomFieldWithContent;
     DatabaseHandler db;
     Alarm needAlarm;
+    boolean isContent;
+    boolean isProverb;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,9 +30,12 @@ public class ShowContent extends Activity {
         setContentView(R.layout.activity_show_content);
 
         alarmId  = this.getIntent().getIntExtra(ID, 999);
+        isContent = this.getIntent().getBooleanExtra(IS_CONTENT,false);
+        isProverb = this.getIntent().getBooleanExtra(IS_PROVERB,false);
         showContent = (TextView)findViewById(R.id.showContentFieldShowContent);
         showProverb = (TextView)findViewById(R.id.showProverdShowContent);
         topFieldWithContent = (LinearLayout)findViewById(R.id.topSpaceShowContent);
+        bottomFieldWithContent = (LinearLayout)findViewById(R.id.downSpaceShowContent);
         db = new DatabaseHandler(this);//переменная для работы с БД
 
         takeAlarm(alarmId);
@@ -47,12 +56,14 @@ public class ShowContent extends Activity {
 
 
     public void setContent(){
-        if(needAlarm.get_content().length() > 0) {
+        if(isContent) {
             showContent.setText(needAlarm.get_content());//заполняем поле информациее, взятой из сохраненной ранее запис
         }else {
             topFieldWithContent.setVisibility(View.INVISIBLE);
         }
     }
+
+
 
 
     public void takeAlarm(int needId){
@@ -61,9 +72,14 @@ public class ShowContent extends Activity {
 
 
     public void setProverb(){
-        String textForTest = "В следующем примере мы снижаем громкость медиапроигрывателя, когда он временно теряет аудиофокус, " +
-                "а затем возвращает громкость на прежний уровень,когда фокус возвращается.";
-        showProverb.setText(textForTest);
+        if(isProverb) {
+            String textForTest = "В следующем примере мы снижаем громкость медиапроигрывателя, когда он временно теряет аудиофокус, " +
+                    "а затем возвращает громкость на прежний уровень,когда фокус возвращается.";
+            showProverb.setText(textForTest);
+        }else {
+            bottomFieldWithContent.setVisibility(View.INVISIBLE);
+        }
+
     }
 
 

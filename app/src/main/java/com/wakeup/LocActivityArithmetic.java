@@ -20,7 +20,7 @@ public class LocActivityArithmetic extends Activity {
     TextView showTaskField;
     TextView enterAnswerField;
     Button btn1, btn2, btn3, btn4, btn5,  btn6, btn7, btn8, btn9, btn0, btnDel;
-    String task, rezult, rightAnswer;
+    String task, result, rightAnswer;
     Random random = new Random();
     int alarmId;
     Vibration vibration;
@@ -52,7 +52,7 @@ public class LocActivityArithmetic extends Activity {
         vibration = new Vibration(this);
         light = new Light();
         locActivityHelper = new LocActivityHelper(this,alarmId);
-        rezult = "";
+        result = "";
 
         btn0.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -140,16 +140,17 @@ public class LocActivityArithmetic extends Activity {
 
 
     public void operateWithAnswer(String selectedButton){
+        ring.pauseSoundForSeconds(2);
         if(selectedButton.equals("del")){
-            if(rezult.length()>0) {
+            if(result.length()>0) {
                 Log.d(myLog,"delete");
-                rezult = rezult.substring(0, rezult.length() - 1);//удаляем последний символ
+                result = result.substring(0, result.length() - 1);//удаляем последний символ
             }
         }else{
-            rezult += selectedButton;
+            result += selectedButton;
         }
-            enterAnswerField.setText(rezult);
-         if(rezult.equals(rightAnswer)){
+            enterAnswerField.setText(result);
+         if(result.equals(rightAnswer)){
             stopAlarm();
         }
     }

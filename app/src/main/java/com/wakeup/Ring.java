@@ -11,6 +11,7 @@ import android.util.Log;
 
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 public class Ring {
     private SoundPool mSoundPool;
@@ -18,6 +19,7 @@ public class Ring {
     private int mRingtonSound;
     private float volume;
     final String myLog = "myLog";
+
 
     public void start(Context context){
         mSoundPool = new SoundPool(1, AudioManager.STREAM_NOTIFICATION, 0);
@@ -67,6 +69,16 @@ public class Ring {
     public int stopSound() {
         mSoundPool.stop(mRingtonSound);
         return 1 ;
+    }
+
+    public void pauseSoundForSeconds(int secondsPause){
+        mSoundPool.pause(mRingtonSound);
+
+        Handler handler = new Handler();
+        handler.postDelayed(new Runnable() {
+            public void run() {
+                mSoundPool.resume(mRingtonSound);            }
+        }, secondsPause*1000);
     }
 
     public void pauseSound(){

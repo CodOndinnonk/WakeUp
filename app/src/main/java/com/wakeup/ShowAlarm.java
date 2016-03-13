@@ -16,6 +16,9 @@ import android.widget.EditText;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
+import java.util.ArrayList;
+import java.util.List;
+
 
 public class ShowAlarm extends Activity {
     final String myLog = "myLog";
@@ -27,6 +30,7 @@ public class ShowAlarm extends Activity {
     boolean isEdit = false;
     Button deleteButton;
     DatabaseHandler db;
+    ArrayList<Alarm> alarms = new ArrayList<Alarm>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,6 +43,7 @@ public class ShowAlarm extends Activity {
         contextEnterField = (EditText)findViewById(R.id.contentEnterFieldShowAlarm);
         leftButton = (Button)findViewById(R.id.buttonLeftShowAlarm);
         db = new DatabaseHandler(this);//переменная для работы с БД
+        fillData();
 
         detectKindOfActivity();
         }
@@ -55,7 +60,6 @@ public class ShowAlarm extends Activity {
     }
 
     public void takeAlarm(int needId){
-        DatabaseHandler db = new DatabaseHandler(this);//переменная для работы с БД
         Alarm needAlarm = db.getAlarmById(needId);//создаем обьект типа "запись" и зполняем его данными из необходимой нам записи, взятой по Id
         timeSetter.setCurrentHour(needAlarm.get_hour());
         timeSetter.setCurrentMinute(needAlarm.get_minute());
@@ -96,14 +100,22 @@ public class ShowAlarm extends Activity {
         Log.d(myLog, "Повтор ежедневно = " + isEveryday);
         Log.d(myLog, "Установленное время ЧАСЫ = " + setTimeHours);
         Log.d(myLog, "Установленное время МИНУТЫ = " + setTimeMinute);
-        db.updateAlarm(new Alarm(needId, setTimeHours, setTimeMinute, isActive, strContent, everyDay, soundNumber));
+        int resultOfExistance = checkForExistanceAlarm(new Alarm(needId, setTimeHours, setTimeMinute, isActive, strContent, everyDay, soundNumber));
 
-        Toast mytoast = Toast.makeText(getApplicationContext(),
-               "Изменения сохранены" , Toast.LENGTH_SHORT);
-        mytoast.show();
+        if(resultOfExistance == 0) {
+            db.updateAlarm(new Alarm(needId, setTimeHours, setTimeMinute, isActive, strContent, everyDay, soundNumber));
 
-        setComandToRemakeAlarms();
-        finish();
+            Toast mytoast = Toast.makeText(getApplicationContext(),
+                    R.string.changesSaved, Toast.LENGTH_SHORT);
+            mytoast.show();
+
+            setComandToRemakeAlarms();
+            finish();
+        }else {
+            Toast mytoast = Toast.makeText(getApplicationContext(),
+                    R.string.alarmAlreadyExisted, Toast.LENGTH_SHORT);
+            mytoast.show();
+        }
     }
 
 
@@ -128,16 +140,44 @@ public class ShowAlarm extends Activity {
         Log.d(myLog, "Повтор ежедневно = " + isEveryday);
         Log.d(myLog, "Установленное время ЧАСЫ = " + setTimeHours);
         Log.d(myLog, "Установленное время МИНУТЫ = " + setTimeMinute);
-        db.addAlarm(new Alarm(setTimeHours, setTimeMinute, isActive, strContent, everyDay, soundNumber));
+        int resultOfExistance = checkForExistanceAlarm(new Alarm(setTimeHours, setTimeMinute, isActive, strContent, everyDay, soundNumber));
 
-        Toast mytoast = Toast.makeText(getApplicationContext(),
-             R.string.Toast_alarm_created, Toast.LENGTH_SHORT);
-        mytoast.show();
+        if(resultOfExistance == 0) {
+            db.addAlarm(new Alarm(setTimeHours, setTimeMinute, isActive, strContent, everyDay, soundNumber));
 
-        setComandToRemakeAlarms();
-        finish();//завершение активности
+            Toast mytoast = Toast.makeText(getApplicationContext(),
+                    R.string.Toast_alarm_created, Toast.LENGTH_SHORT);
+            mytoast.show();
+
+            setComandToRemakeAlarms();
+            finish();//завершение активности
+        }else {
+            Toast mytoast = Toast.makeText(getApplicationContext(),
+                    R.string.alarmAlreadyExisted, Toast.LENGTH_SHORT);
+            mytoast.show();
+        }
     }
 
+    void fillData() {
+        List<Alarm> listGetAlarms = db.getAllAlarms();//создание списка обьектов типа "запись" и заполнения его значениями всех записей взятых из БД
+
+        for (Alarm cn : listGetAlarms) {//проходим про каждому обьекту списка
+            alarms.add(new Alarm(cn.getID(), cn.get_hour(), cn.get_minute(), cn.get_active(), cn.get_content(),
+                    cn.get_everyDay(), cn.get_Sound()));
+        }
+    }
+
+
+    public int checkForExistanceAlarm(Alarm creatingAlarm){//передаем сюда созданный только что будильник, для проверки сходства с созданными ранеее
+        for (Alarm cn : alarms) {//проходим про каждому обьекту списка
+                if(creatingAlarm.get_hour() == cn.get_hour()){
+                    if(creatingAlarm.get_minute() == cn.get_minute()){
+                        return 1;//отказ, так как будильник на это время уже существует
+                    }
+                }
+             }
+        return 0;//разрешено, будильника с данным временем нет
+}
 
 
 
