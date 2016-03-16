@@ -3,6 +3,7 @@ package com.wakeup;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.ContextMenu;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -20,10 +21,10 @@ public class MainActivity extends Activity {
     BoxAdapter boxAdapter;
     private static final int menu_edit = 1;
     private static final int menu_del = 2;
-    final String myLog = "myLog";
+    final String myLog = "myLog1";
     final String WRITE_HOURS = "HOURS";
     final String WRITE_MINUTE = "MINUTE";
-
+    DatabaseHandler db;
 
 
 
@@ -32,19 +33,10 @@ public class MainActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        db = new DatabaseHandler(this);//переменная для работы с БД
         lvMain = (ListView)findViewById(R.id.listViewMainActivity);
-        prepareList();
-        registerForContextMenu(lvMain);
 
-        lvMain.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Alarm note = boxAdapter.getNote(position);
-                Intent gotoShowNote = new Intent(MainActivity.this, ShowAlarm.class);//создание интента
-                gotoShowNote.putExtra("needId", note.getID());//передаем в следующий интент параметр, хранящий номер Id нужной нам записи
-                startActivity(gotoShowNote);//запуск интента
-            }
-        });
+        prepareList();
     }
 
 
@@ -57,7 +49,6 @@ public class MainActivity extends Activity {
 
     // генерируем данные для адаптера
     void fillData() {
-        DatabaseHandler db = new DatabaseHandler(this);//переменная для работы с БД
         List<Alarm> listGetAllAlarms = db.getAllAlarms();//создание списка обьектов типа "запись" и заполнения его значениями всех записей взятых из БД
 
         for (Alarm cn : listGetAllAlarms) {//проходим про каждому обьекту списка
@@ -68,8 +59,22 @@ public class MainActivity extends Activity {
 
 
 
+public void pushOffOn(int active, int position){
+
+    Alarm needAlarm = listOfAlarms.get(position);
+    db.updateAlarm(new Alarm(needAlarm.getID(), needAlarm.get_hour(), needAlarm.get_minute(), active, needAlarm.get_content(), needAlarm.get_everyDay(), needAlarm.get_Sound()));
+   // setComandToRemakeAlarms();
+}
+
+    public void setComandToRemakeAlarms(){
+        Intent setAlarmIntent = new Intent(this, AlarmService.class);
+        setAlarmIntent.setAction(AlarmService.DOWHATNEED);
+        this.startService(setAlarmIntent);
+    }
+
 
     public void resetList(){
+
         listOfAlarms.clear();
         fillData();
         boxAdapter.notifyDataSetChanged();
@@ -79,6 +84,7 @@ public class MainActivity extends Activity {
 
     @Override
     protected void onRestart() {//при запуске Активности(возобнавлении ее работы)
+
         super.onRestart();
         resetList();
     }
@@ -86,8 +92,9 @@ public class MainActivity extends Activity {
 
     @Override
     protected void onResume() {//при запуске Активности(возобнавлении ее работы)
+
         super.onResume();
-        resetList();
+     //   resetList();
     }
 
 
@@ -139,6 +146,7 @@ public class MainActivity extends Activity {
     public void onCreateContextMenu(ContextMenu menu, View v,
                                     ContextMenu.ContextMenuInfo menuInfo) {
         super.onCreateContextMenu(menu, v, menuInfo);
+        Log.d(myLog, " MainActivity onCreateContextMenu");
         menu.add(0, menu_edit, 0, R.string.edit_note_text);
         menu.add(0, menu_del, 0, R.string.delete_note_text);
     }
@@ -166,6 +174,7 @@ public class MainActivity extends Activity {
     }
 
 
+
    /*
     public void edit(View view) {Log.d(myLog, "MainActivity edit 1 ");
         int getIdInput = Integer.valueOf(putID.getText().toString());
@@ -183,31 +192,21 @@ public class MainActivity extends Activity {
                     "Введен не существующий будильник ", Toast.LENGTH_LONG);
             mytoast.show();
         }
-
     }
-
-
     public void startAlarm(View view) {
         Log.d(myLog, "MainActivity startAlarm 1 ");
-
         int setTimeHours = setTime.getCurrentHour();
         int setTimeMinute = setTime.getCurrentMinute();
-
         Log.d(myLog, "Установленное время ЧАСЫ = " + setTimeHours);
         Log.d(myLog, "Установленное время МИНУТЫ = " + setTimeMinute);
-
         SharedPreferences.Editor editor = mSettings.edit();// вызов обьекта editor для измненения параметров настроек
         editor.putInt(WRITE_HOURS, setTimeHours);
         editor.putInt(WRITE_MINUTE, setTimeMinute);
         editor.apply();// метод, сохраняющий добавленные данные
-
         Intent my = new Intent(this, AlarmService.class);
         my.setAction(AlarmService.CREATE);
         this.startService(my);
-
     }
-
-
 */
 
 

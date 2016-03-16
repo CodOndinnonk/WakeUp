@@ -6,6 +6,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
+import android.util.Log;
 import android.view.WindowManager;
 
 public class LocActivityHelper {
@@ -13,6 +14,7 @@ public class LocActivityHelper {
     public static final String ID = "id";
     public static final String IS_CONTENT = "isContent";
     public static final String IS_PROVERB = "isProverb";
+    final String myLog = "myLog";
     int alarmId;
     SharedPreferences sharedPreferences;
     boolean isProverb;
@@ -23,6 +25,7 @@ public class LocActivityHelper {
         alarmId = alarmIdGet;
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
         isProverb = sharedPreferences.getBoolean("proverbCheckBox", true);
+        getNeedAlarm();
     }
 
     public void makeWakeActivityFromSleep(){
@@ -34,11 +37,8 @@ public class LocActivityHelper {
         activity.getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
     }
 
-    public void setComandToRemakeAlarms(){
-        Intent setAlarmIntent = new Intent(context, AlarmService.class);
-        setAlarmIntent.setAction(AlarmService.DOWHATNEED);
-        context.startService(setAlarmIntent);
-    }
+
+
 
     public void chackForProperties(boolean isContent, boolean isProverb){
         Intent goToShowContent = new Intent(context,ShowContent.class);
@@ -47,6 +47,13 @@ public class LocActivityHelper {
         goToShowContent.putExtra(IS_PROVERB, isProverb);
         context.startActivity(goToShowContent);
     }
+
+    public void getNeedAlarm(){
+        DatabaseHandler db = new DatabaseHandler(context);
+        needAlarm = db.getAlarmById(alarmId);
+    }
+
+
 
     public void goToShowContent(){
         if(needAlarm.get_content().length() > 0){//если в будильнике есть заметка
@@ -57,11 +64,7 @@ public class LocActivityHelper {
         }
     }
 
-    public void changeAlarmWork(){
-        DatabaseHandler db = new DatabaseHandler(context);//переменная для работы с БД
-        needAlarm = db.getAlarmById(alarmId);
-        db.updateAlarm(new Alarm(needAlarm.getID(), needAlarm.get_hour(), needAlarm.get_minute(), 0, needAlarm.get_content(), needAlarm.get_everyDay(), needAlarm.get_Sound()));
-    }
+
 
 
 

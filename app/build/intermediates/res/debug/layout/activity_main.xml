@@ -7,24 +7,14 @@
     android:background="@drawable/b">
 
 
-    <DigitalClock
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/textClockMainActivity"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentLeft="true"
-        android:textSize="50sp"
-        android:gravity="center"
-        android:layout_toLeftOf="@+id/buttonAddAlarm"
-        android:textColor="@color/text_color_blue_light" />
+
 
     <ListView
-        android:id="@+id/listViewMainActivity"
-        android:layout_width="fill_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:clickable="true"
-        android:layout_below="@+id/textClockMainActivity"
-        android:layout_alignParentLeft="true" />
+        android:id="@+id/listViewMainActivity"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/button" />
 
     <Button
         android:layout_width="wrap_content"
@@ -34,8 +24,18 @@
         android:background="@android:drawable/ic_menu_add"
         android:layout_above="@+id/listViewMainActivity"
         android:layout_alignRight="@+id/listViewMainActivity"
+        android:textColor="@color/text_color_blue_light"
+        android:layout_alignParentTop="true" />
+
+    <Button
+        style="?android:attr/buttonStyleSmall"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="New Button"
+        android:id="@+id/button"
         android:layout_alignParentTop="true"
-        android:textColor="@color/text_color_blue_light" />
+        android:layout_alignParentLeft="true"
+        android:onClick="goToTest" />
 
 </RelativeLayout>
 <!-- From: file:/C:/Users/Public/GitHub/WakeUp/app/src/main/res/layout/activity_main.xml -->

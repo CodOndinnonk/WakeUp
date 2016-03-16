@@ -17,7 +17,7 @@ public class LocActivitySimple extends Activity {
     Light light;
     int alarmId;
     LocActivityHelper locActivityHelper;
-
+    ResetAlarmState resetAlarmState;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,9 +27,11 @@ public class LocActivitySimple extends Activity {
         alarmId  = this.getIntent().getIntExtra(ID, 999);
         Log.d(myLog, "LocActivity onCreate alarmId = " + alarmId);
 
+
         vibration = new Vibration(this);
         light = new Light();
         locActivityHelper = new LocActivityHelper(this,alarmId);
+        resetAlarmState = new ResetAlarmState(this);
 
         //отменяем интент будильника, так как он уже сработал
         AlarmManager alarmManager = (AlarmManager)getSystemService(Context.ALARM_SERVICE);
@@ -54,9 +56,9 @@ public class LocActivitySimple extends Activity {
             light.offLight();
             vibration.offVibration();
             //изменение активности будильника на ВЫКЛЮЧЕН
-            locActivityHelper.changeAlarmWork();
+            resetAlarmState.changeAlarmWork(alarmId);
             // перезапуск всех будильников
-            locActivityHelper.setComandToRemakeAlarms();
+            resetAlarmState.setComandToRemakeAlarms();
             locActivityHelper.goToShowContent();
             finish();
         }

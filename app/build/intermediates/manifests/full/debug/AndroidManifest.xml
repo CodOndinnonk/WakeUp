@@ -61,8 +61,8 @@
             android:screenOrientation="portrait" />
         <activity
             android:name="com.wakeup.ShowContent"
-            android:screenOrientation="portrait" >
-        </activity>
+            android:screenOrientation="portrait" />
+        <activity android:name="com.wakeup.Main2Activity" />
     </application>
 
 </manifest>

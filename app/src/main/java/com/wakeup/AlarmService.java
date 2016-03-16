@@ -44,8 +44,9 @@ public class AlarmService extends IntentService {
     private void execute(String action) {
         fillData();
         AlarmManager alarmManager = (AlarmManager)getSystemService(Context.ALARM_SERVICE);
-        long time = 0;
+
         for (Alarm alarm : alarms) {
+            long time = 0;
             Intent intentForAlarmreceiver = new Intent(this, AlarmReceiver.class);
             intentForAlarmreceiver.putExtra(ID, alarm.getID());
             intentForAlarmreceiver.putExtra(TIME_HOUR, alarm.get_hour());
@@ -71,7 +72,7 @@ public class AlarmService extends IntentService {
                 } else {//если стоит флаг НЕ АКТИВЕН
                     alarmManager.cancel(pendingIntent);//отключаем будильник
                 }
-                Log.d(myLog, "Время срабатывания DOWHATNEED = " + time);
+                Log.d(myLog, "Время срабатывания " + alarm.getID() + " DOWHATNEED = " + time);
             }
         }
     }
@@ -86,7 +87,6 @@ public class AlarmService extends IntentService {
             alarms.add(new Alarm(cn.getID(), cn.get_hour(), cn.get_minute(), cn.get_active(), cn.get_content(),
                     cn.get_everyDay(), cn.get_Sound()));
         }
-
     }
 
 

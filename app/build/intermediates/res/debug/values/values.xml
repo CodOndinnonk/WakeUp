@@ -30,6 +30,7 @@
     <string name="descripnionOffProverb">Выключено отображение высказаваний</string>
     <string name="descripnionOnProverb">Включено отображение высказаваний</string>
     <string name="edit_note_text">Редактировать</string>
+    <string name="everyday">Ежедневно</string>
     <string name="everydayText">Повторять ежедневно</string>
     <string name="hello_world">Hello world!</string>
     <string name="keyListLocActivity">listLocActivity</string>

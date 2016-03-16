@@ -97,9 +97,9 @@ public class ShowAlarm extends Activity {
         } else {
             everyDay = 0;
         }
-        Log.d(myLog, "Повтор ежедневно = " + isEveryday);
-        Log.d(myLog, "Установленное время ЧАСЫ = " + setTimeHours);
-        Log.d(myLog, "Установленное время МИНУТЫ = " + setTimeMinute);
+ //       Log.d(myLog, "Повтор ежедневно = " + isEveryday);
+   //     Log.d(myLog, "Установленное время ЧАСЫ = " + setTimeHours);
+     //   Log.d(myLog, "Установленное время МИНУТЫ = " + setTimeMinute);
         int resultOfExistance = checkForExistanceAlarm(new Alarm(needId, setTimeHours, setTimeMinute, isActive, strContent, everyDay, soundNumber));
 
         if(resultOfExistance == 0) {
@@ -137,9 +137,9 @@ public class ShowAlarm extends Activity {
         int soundNumber = 1;
         if(isEveryday==true){everyDay = 1 ;}else {everyDay = 0;}
 
-        Log.d(myLog, "Повтор ежедневно = " + isEveryday);
-        Log.d(myLog, "Установленное время ЧАСЫ = " + setTimeHours);
-        Log.d(myLog, "Установленное время МИНУТЫ = " + setTimeMinute);
+     //   Log.d(myLog, "Повтор ежедневно = " + isEveryday);
+       // Log.d(myLog, "Установленное время ЧАСЫ = " + setTimeHours);
+      //  Log.d(myLog, "Установленное время МИНУТЫ = " + setTimeMinute);
         int resultOfExistance = checkForExistanceAlarm(new Alarm(setTimeHours, setTimeMinute, isActive, strContent, everyDay, soundNumber));
 
         if(resultOfExistance == 0) {

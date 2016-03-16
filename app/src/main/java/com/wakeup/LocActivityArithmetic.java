@@ -26,6 +26,7 @@ public class LocActivityArithmetic extends Activity {
     Vibration vibration;
     Light light;
     LocActivityHelper locActivityHelper;
+    ResetAlarmState resetAlarmState;
 
 
     @Override
@@ -52,6 +53,7 @@ public class LocActivityArithmetic extends Activity {
         vibration = new Vibration(this);
         light = new Light();
         locActivityHelper = new LocActivityHelper(this,alarmId);
+        resetAlarmState = new ResetAlarmState(this);
         result = "";
 
         btn0.setOnClickListener(new View.OnClickListener() {
@@ -188,9 +190,9 @@ public class LocActivityArithmetic extends Activity {
             light.offLight();
             vibration.offVibration();
             //изменение активности будильника на ВЫКЛЮЧЕН
-            locActivityHelper.changeAlarmWork();
+            resetAlarmState.changeAlarmWork(alarmId);
             // перезапуск всех будильников
-            locActivityHelper.setComandToRemakeAlarms();
+            resetAlarmState.setComandToRemakeAlarms();
             locActivityHelper.goToShowContent();
             finish();
         }

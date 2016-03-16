@@ -27,7 +27,8 @@ public final class R {
         public static final int ic_launcher=0x7f020002;
     }
     public static final class id {
-        public static final int bottomnPanelShowContent=0x7f0b001f;
+        public static final int bottomnPanelShowContent=0x7f0b0020;
+        public static final int button=0x7f0b0011;
         public static final int button0ActivityArithmetic=0x7f0b000d;
         public static final int button1ActivityArithmetic=0x7f0b0005;
         public static final int button2ActivityArithmetic=0x7f0b0006;
@@ -38,33 +39,33 @@ public final class R {
         public static final int button7ActivityArithmetic=0x7f0b000a;
         public static final int button8ActivityArithmetic=0x7f0b000b;
         public static final int button9ActivityArithmetic=0x7f0b000c;
-        public static final int buttonAddAlarm=0x7f0b0011;
+        public static final int buttonAddAlarm=0x7f0b0012;
         public static final int buttonCancelShowAlarm=0x7f0b0018;
-        public static final int buttonCloseShowAlarm=0x7f0b0020;
+        public static final int buttonCloseShowAlarm=0x7f0b0021;
         public static final int buttonDeleteShowAlarm=0x7f0b0019;
         public static final int buttonLeftShowAlarm=0x7f0b0017;
-        public static final int buttonOffOn=0x7f0b0023;
-        public static final int buttonShareShowContent=0x7f0b0021;
+        public static final int buttonOffOnTabitem=0x7f0b0024;
+        public static final int buttonShareShowContent=0x7f0b0022;
         public static final int buttonStopAlarmLocActivitySimple=0x7f0b000f;
         public static final int buttondeleteActivityArithmetic=0x7f0b000e;
         public static final int contentEnterFieldShowAlarm=0x7f0b0016;
-        public static final int delAll=0x7f0b0025;
-        public static final int downSpaceShowContent=0x7f0b001d;
+        public static final int delAll=0x7f0b0026;
+        public static final int downSpaceShowContent=0x7f0b001e;
         public static final int everydayCheckBoxShowAlarm=0x7f0b0014;
         public static final int fieldForAnswerLocActivityArithmetic=0x7f0b0002;
         public static final int infoFieldContextShowAlarm=0x7f0b0015;
-        public static final int listViewMainActivity=0x7f0b0012;
-        public static final int offAll=0x7f0b0026;
-        public static final int settings=0x7f0b0027;
-        public static final int showContentFieldShowContent=0x7f0b001c;
-        public static final int showProverdShowContent=0x7f0b001e;
+        public static final int listViewMainActivity=0x7f0b0010;
+        public static final int offAll=0x7f0b0027;
+        public static final int scrollView=0x7f0b001c;
+        public static final int settings=0x7f0b0028;
+        public static final int showContentFieldShowContent=0x7f0b001d;
+        public static final int showProverdShowContent=0x7f0b001f;
         public static final int showTaskFieldLocActivityArithmetic=0x7f0b0000;
         public static final int space=0x7f0b0004;
-        public static final int textClockMainActivity=0x7f0b0010;
-        public static final int textEveryday=0x7f0b0024;
+        public static final int textEverydayTabitem=0x7f0b0025;
         public static final int textInfoShowContent=0x7f0b001b;
+        public static final int textTimeTabitem=0x7f0b0023;
         public static final int textView=0x7f0b0003;
-        public static final int textime=0x7f0b0022;
         public static final int timePickerShowAlarm=0x7f0b0013;
         public static final int topSpaceShowContent=0x7f0b001a;
     }
@@ -96,17 +97,18 @@ public final class R {
         public static final int descripnionOffProverb=0x7f08000b;
         public static final int descripnionOnProverb=0x7f08000c;
         public static final int edit_note_text=0x7f08000d;
-        public static final int everydayText=0x7f08000e;
-        public static final int hello_world=0x7f08000f;
-        public static final int keyListLocActivity=0x7f080010;
-        public static final int keyProverbCheckBox=0x7f080011;
-        public static final int loc=0x7f080012;
-        public static final int proverbCheckBox=0x7f080013;
-        public static final int save=0x7f080014;
-        public static final int settings=0x7f080015;
-        public static final int title_activity_loc=0x7f080016;
-        public static final int title_activity_show_alarm=0x7f080017;
-        public static final int to_off_arithmetic_loc=0x7f080018;
+        public static final int everyday=0x7f08000e;
+        public static final int everydayText=0x7f08000f;
+        public static final int hello_world=0x7f080010;
+        public static final int keyListLocActivity=0x7f080011;
+        public static final int keyProverbCheckBox=0x7f080012;
+        public static final int loc=0x7f080013;
+        public static final int proverbCheckBox=0x7f080014;
+        public static final int save=0x7f080015;
+        public static final int settings=0x7f080016;
+        public static final int title_activity_loc=0x7f080017;
+        public static final int title_activity_show_alarm=0x7f080018;
+        public static final int to_off_arithmetic_loc=0x7f080019;
     }
     public static final class style {
         /**  Customize your theme here. 

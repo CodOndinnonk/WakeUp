@@ -25,10 +25,18 @@
             android:text="@string/content"
             android:id="@+id/textInfoShowContent" />
 
-        <TextView
+        <ScrollView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:id="@+id/showContentFieldShowContent" />
+            android:id="@+id/scrollView" >
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:id="@+id/showContentFieldShowContent"
+                />
+        </ScrollView>
+
     </LinearLayout>
 
     <LinearLayout
@@ -41,7 +49,8 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="244dp"
-            android:id="@+id/showProverdShowContent" />
+            android:id="@+id/showProverdShowContent"
+          />
 
     </LinearLayout>
 

@@ -7,37 +7,36 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/textime"
+        android:id="@+id/textTimeTabitem"
         android:singleLine="true"
         android:text="time"
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
-        android:layout_alignBottom="@+id/buttonOffOn"
+        android:layout_alignBottom="@+id/buttonOffOnTabitem"
         android:textSize="30dp"
         android:gravity="left|center"
         android:textColor="@color/text_color_blue_light"
         android:maxWidth="30dp"
-        android:layout_toLeftOf="@+id/textEveryday" />
+        android:layout_toLeftOf="@+id/textEverydayTabitem" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="everyday"
-        android:id="@+id/textEveryday"
+        android:id="@+id/textEverydayTabitem"
         android:textColor="@color/text_color_blue_light"
         android:layout_alignParentTop="true"
-        android:layout_toLeftOf="@+id/buttonOffOn"
+        android:layout_toLeftOf="@+id/buttonOffOnTabitem"
         android:layout_marginRight="45dp" />
 
-    <ToggleButton
+    <Switch
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="New ToggleButton"
-        android:id="@+id/buttonOffOn"
-        android:layout_below="@+id/textEveryday"
-        android:layout_alignParentRight="true"
-        android:checked="false"
+        android:id="@+id/buttonOffOnTabitem"
+        android:checked="true"
         android:background="@android:drawable/toast_frame"
-        android:textColor="#ff1cff21" />
+        android:textColor="#ff1cff21"
+        android:layout_below="@+id/textEverydayTabitem"
+        android:layout_alignParentRight="true" />
 
 </RelativeLayout>
