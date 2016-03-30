@@ -9,17 +9,17 @@ package com.wakeup;
 
 public final class R {
     public static final class array {
-        public static final int entriesLoc=0x7f050000;
+        public static final int entriesLoc=0x7f060000;
     }
     public static final class attr {
     }
     public static final class color {
-        public static final int red=0x7f060000;
-        public static final int text_color_blue_light=0x7f060001;
+        public static final int red=0x7f070000;
+        public static final int text_color_blue_light=0x7f070001;
     }
     public static final class dimen {
-        public static final int activity_horizontal_margin=0x7f070000;
-        public static final int activity_vertical_margin=0x7f070001;
+        public static final int activity_horizontal_margin=0x7f050000;
+        public static final int activity_vertical_margin=0x7f050001;
     }
     public static final class drawable {
         public static final int a=0x7f020000;
@@ -28,7 +28,6 @@ public final class R {
     }
     public static final class id {
         public static final int bottomnPanelShowContent=0x7f0b0020;
-        public static final int button=0x7f0b0011;
         public static final int button0ActivityArithmetic=0x7f0b000d;
         public static final int button1ActivityArithmetic=0x7f0b0005;
         public static final int button2ActivityArithmetic=0x7f0b0006;
@@ -39,7 +38,7 @@ public final class R {
         public static final int button7ActivityArithmetic=0x7f0b000a;
         public static final int button8ActivityArithmetic=0x7f0b000b;
         public static final int button9ActivityArithmetic=0x7f0b000c;
-        public static final int buttonAddAlarm=0x7f0b0012;
+        public static final int buttonAddAlarm=0x7f0b0011;
         public static final int buttonCancelShowAlarm=0x7f0b0018;
         public static final int buttonCloseShowAlarm=0x7f0b0021;
         public static final int buttonDeleteShowAlarm=0x7f0b0019;
@@ -50,11 +49,12 @@ public final class R {
         public static final int buttondeleteActivityArithmetic=0x7f0b000e;
         public static final int contentEnterFieldShowAlarm=0x7f0b0016;
         public static final int delAll=0x7f0b0026;
+        public static final int digitalClock=0x7f0b0010;
         public static final int downSpaceShowContent=0x7f0b001e;
         public static final int everydayCheckBoxShowAlarm=0x7f0b0014;
         public static final int fieldForAnswerLocActivityArithmetic=0x7f0b0002;
         public static final int infoFieldContextShowAlarm=0x7f0b0015;
-        public static final int listViewMainActivity=0x7f0b0010;
+        public static final int listViewMainActivity=0x7f0b0012;
         public static final int offAll=0x7f0b0027;
         public static final int scrollView=0x7f0b001c;
         public static final int settings=0x7f0b0028;

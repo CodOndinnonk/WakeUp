@@ -17,7 +17,7 @@ import android.widget.Switch;
 import android.widget.TextView;
 
 
-public class BoxAdapter extends BaseAdapter {
+public class BoxAdapter extends BaseAdapter implements View.OnClickListener {
     Context context;
     LayoutInflater lInflater;
     ArrayList<Alarm> objects;
@@ -56,6 +56,7 @@ public class BoxAdapter extends BaseAdapter {
     // пункт списка
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
+        Log.d(myLog, "getView");
         // используем созданные, но не используемые view
         View view = convertView;
         if (view == null) {
@@ -85,9 +86,11 @@ public class BoxAdapter extends BaseAdapter {
 
         Switch offNoButton = (Switch) view.findViewById(R.id.buttonOffOnTabitem);
         // присваиваем кнопке обработчик
-        offNoButton.setOnCheckedChangeListener(myButtonChangList);
+        offNoButton.setOnClickListener(myButtonClickList);
         // пишем позицию
         offNoButton.setTag(position);
+
+
 
         return view;
     }
@@ -96,6 +99,27 @@ public class BoxAdapter extends BaseAdapter {
     Alarm getAlarm(int position) {
         return ((Alarm) getItem(position));
     }
+
+
+
+
+
+
+    View.OnClickListener myButtonClickList = new View.OnClickListener() {
+        @Override
+        public void onClick(View view) {
+            Log.d(myLog, "ID нажатого будильника " +getAlarm(Integer.valueOf(view.getTag().toString())).getID());
+            Alarm needAlarm = getAlarm(Integer.valueOf(view.getTag().toString()));
+            if(needAlarm.get_active() == 1){
+                needAlarm.set_active(0);
+            }else {
+                needAlarm.set_active(1);
+            }
+            resetAlarmState.changeAlarmWork(needAlarm);
+            resetAlarmState.setComandToRemakeAlarms();
+        }
+    };
+
 
 
 
@@ -115,4 +139,8 @@ public class BoxAdapter extends BaseAdapter {
     };
 
 
+    @Override
+    public void onClick(View view) {
+        Log.d(myLog, "onClick");
+    }
 }

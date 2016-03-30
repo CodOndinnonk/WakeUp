@@ -37,6 +37,19 @@ public class MainActivity extends Activity {
         lvMain = (ListView)findViewById(R.id.listViewMainActivity);
 
         prepareList();
+
+
+        lvMain.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Log.d(myLog, " MainActivity onItemClick");
+                Alarm alarm = boxAdapter.getAlarm(position);
+
+
+                }
+        });
+
+        registerForContextMenu(lvMain);
     }
 
 
@@ -152,6 +165,24 @@ public void pushOffOn(int active, int position){
     }
 
 
+    @Override
+    public boolean onContextItemSelected(MenuItem item) {
+        // получаем инфу о пункте списка
+        AdapterView.AdapterContextMenuInfo acmi = (AdapterView.AdapterContextMenuInfo) item.getMenuInfo();
+        Alarm note = boxAdapter.getAlarm((int)boxAdapter.getItemId(acmi.position));
+
+        switch (item.getItemId()) {
+            case menu_edit://вызов окна О ПРОГРАММЕ
+                return true;
+
+            case menu_del://вызов окна О ПРОГРАММЕ
+                return true;
+
+            default:
+                return super.onContextItemSelected(item);
+        }
+    }
+
 
 
     public void addAlarm(View view) {
@@ -171,6 +202,10 @@ public void pushOffOn(int active, int position){
         Intent myOff = new Intent(this, AlarmService.class);
         myOff.setAction(AlarmService.DOWHATNEED);
         this.startService(myOff);
+    }
+
+    public void onCL(View view) {
+        Log.d(myLog, " MainActivity onCL");
     }
 
 
