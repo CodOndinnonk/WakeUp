@@ -25,6 +25,7 @@ public class AlarmService extends IntentService {
     public static final String TONE = "alarmTone";
     public static final String ACTION_ALARM_CHANGED = "android.intent.action.ALARM_CHANGED";
     ArrayList<Alarm> alarms = new ArrayList<Alarm>();
+    ArrayList<String> repetDaysList;
 
     public AlarmService() {
         super(null);
@@ -56,10 +57,34 @@ public class AlarmService extends IntentService {
                     PendingIntent.FLAG_UPDATE_CURRENT);
 
             Calendar calendar = Calendar.getInstance();
+
+            Log.d(myLog, " alarm.get_repetDays() = "+alarm.get_repetDays());
+            Log.d(myLog, "alarm.get_repetDays().charAt(0)) = "+alarm.get_repetDays().charAt(0));
+            Log.d(myLog, " Integer.valueOf(alarm.get_repetDays().charAt(0)) = "+Integer.decode(String.valueOf(alarm.get_repetDays().charAt(0))));
+
+
+            Log.d(myLog, "1");
+
+            if((Integer.decode(String.valueOf(alarm.get_repetDays().charAt(0))) > 0) && (!(alarm.get_repetDays().equals("100")))) {
+                Log.d(myLog, "2");
+                repetDaysList = splitLine(alarm.get_repetDays());// получаем массив с днями
+                int t = -1;// переменная для подсчета необходимого дня из списка
+                int i = -1;// переменная, указывающая на день (позицию в массиве), который следующий для срабатывания
+
+                if((calendar.getTime().getHours() < alarm.get_hour()) && (calendar.getTime().getHours() < alarm.get_minute())){
+                    //ничего не меняем в будильнике, так как оно еще не сработал в нужное время
+                }else {
+                    while (t < 0){
+                        i++;
+                        t = Integer.valueOf(repetDaysList.get(i)) - calendar.getTime().getDay();
+                    }
+                }
+                calendar.set(Calendar.DAY_OF_WEEK, Integer.valueOf(repetDaysList.get(i)));
+            }
             calendar.set(Calendar.HOUR_OF_DAY, alarm.get_hour());
             calendar.set(Calendar.MINUTE, alarm.get_minute());
             calendar.set(Calendar.SECOND, 00);
-
+            Log.d(myLog, "3");
             if (DOWHATNEED.equals(action)) {//вариант, когда программа смотрин на флаг активности будильника в БД
                 if (alarm.get_active() == 1) {//если стоит АКТИВЕН
                     if (calendar.getTimeInMillis() <= System.currentTimeMillis()) {
@@ -79,13 +104,22 @@ public class AlarmService extends IntentService {
 
 
 
+    public ArrayList<String> splitLine(String lineForSplit){
+        ArrayList<String> readyList = new ArrayList<String>();
+            for (String splitWord : lineForSplit.split(" ")) {
+                readyList.add(splitWord);
+            }
+        return readyList;
+    }
+
+
     void fillData() {
         DatabaseHandler db = new DatabaseHandler(this);//переменная для работы с БД
         List<Alarm> listGetAlarms = db.getAllAlarms();//создание списка обьектов типа "запись" и заполнения его значениями всех записей взятых из БД
 
         for (Alarm cn : listGetAlarms) {//проходим про каждому обьекту списка
             alarms.add(new Alarm(cn.getID(), cn.get_hour(), cn.get_minute(), cn.get_active(), cn.get_content(),
-                    cn.get_everyDay(), cn.get_Sound()));
+                    cn.get_everyDay(), cn.get_Sound(), cn.get_repetDays()));
         }
     }
 

@@ -4,6 +4,7 @@ import android.app.Activity;
 
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
@@ -17,6 +18,8 @@ import android.widget.TimePicker;
 import android.widget.Toast;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 
@@ -31,6 +34,9 @@ public class ShowAlarm extends Activity {
     Button deleteButton;
     DatabaseHandler db;
     ArrayList<Alarm> alarms = new ArrayList<Alarm>();
+    ArrayList<Integer> repetDaysList;
+    String repetDays = "";
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,6 +49,7 @@ public class ShowAlarm extends Activity {
         contextEnterField = (EditText)findViewById(R.id.contentEnterFieldShowAlarm);
         leftButton = (Button)findViewById(R.id.buttonLeftShowAlarm);
         db = new DatabaseHandler(this);//переменная для работы с БД
+        repetDaysList = new ArrayList<Integer>();
         fillData();
 
         detectKindOfActivity();
@@ -92,18 +99,35 @@ public class ShowAlarm extends Activity {
         String strContent = contextEnterField.getText().toString();
         int isActive = 1;
         int soundNumber = 1;
+
         if (isEveryday == true) {
             everyDay = 1;
         } else {
             everyDay = 0;
         }
+
+        // соритруем нащ список с днеями по возростанию
+        Collections.sort(repetDaysList, new Comparator<Integer>() {
+            public int compare(Integer o1, Integer o2) {
+                return o1.compareTo(o2);
+            }
+        });
+//создаем строку с днями
+        for(int i=0; i<repetDaysList.size();i++){
+            repetDays += repetDaysList.get(i).toString() + " ";
+        }
+
+        if(repetDaysList.size() == 0){
+            repetDays = "0";
+        }
+
  //       Log.d(myLog, "Повтор ежедневно = " + isEveryday);
    //     Log.d(myLog, "Установленное время ЧАСЫ = " + setTimeHours);
      //   Log.d(myLog, "Установленное время МИНУТЫ = " + setTimeMinute);
-        int resultOfExistance = checkForExistanceAlarm(new Alarm(needId, setTimeHours, setTimeMinute, isActive, strContent, everyDay, soundNumber));
+        int resultOfExistance = checkForExistanceAlarm(new Alarm(needId, setTimeHours, setTimeMinute, isActive, strContent, everyDay, soundNumber, repetDays));
 
         if(resultOfExistance == 0) {
-            db.updateAlarm(new Alarm(needId, setTimeHours, setTimeMinute, isActive, strContent, everyDay, soundNumber));
+            db.updateAlarm(new Alarm(needId, setTimeHours, setTimeMinute, isActive, strContent, everyDay, soundNumber, repetDays));
 
             Toast mytoast = Toast.makeText(getApplicationContext(),
                     R.string.changesSaved, Toast.LENGTH_SHORT);
@@ -137,13 +161,27 @@ public class ShowAlarm extends Activity {
         int soundNumber = 1;
         if(isEveryday==true){everyDay = 1 ;}else {everyDay = 0;}
 
+// соритруем нащ список с днеями по возростанию
+        Collections.sort(repetDaysList, new Comparator<Integer>() {
+            public int compare(Integer o1, Integer o2) {
+                return o1.compareTo(o2);
+            }
+        });
+//создаем строку с днями
+        for(int i=0; i<repetDaysList.size();i++){
+            repetDays += repetDaysList.get(i).toString() + " ";
+        }
+
+        if(repetDaysList.size() == 0){
+            repetDays = "0";
+        }
      //   Log.d(myLog, "Повтор ежедневно = " + isEveryday);
        // Log.d(myLog, "Установленное время ЧАСЫ = " + setTimeHours);
       //  Log.d(myLog, "Установленное время МИНУТЫ = " + setTimeMinute);
-        int resultOfExistance = checkForExistanceAlarm(new Alarm(setTimeHours, setTimeMinute, isActive, strContent, everyDay, soundNumber));
+        int resultOfExistance = checkForExistanceAlarm(new Alarm(setTimeHours, setTimeMinute, isActive, strContent, everyDay, soundNumber, repetDays));
 
         if(resultOfExistance == 0) {
-            db.addAlarm(new Alarm(setTimeHours, setTimeMinute, isActive, strContent, everyDay, soundNumber));
+            db.addAlarm(new Alarm(setTimeHours, setTimeMinute, isActive, strContent, everyDay, soundNumber, repetDays));
 
             Toast mytoast = Toast.makeText(getApplicationContext(),
                     R.string.Toast_alarm_created, Toast.LENGTH_SHORT);
@@ -163,7 +201,7 @@ public class ShowAlarm extends Activity {
 
         for (Alarm cn : listGetAlarms) {//проходим про каждому обьекту списка
             alarms.add(new Alarm(cn.getID(), cn.get_hour(), cn.get_minute(), cn.get_active(), cn.get_content(),
-                    cn.get_everyDay(), cn.get_Sound()));
+                    cn.get_everyDay(), cn.get_Sound(), cn.get_repetDays()));
         }
     }
 
@@ -219,7 +257,7 @@ public class ShowAlarm extends Activity {
 
     public void delete(View view) {
         Alarm needNote = db.getAlarmById(needId);//создаем обьект ЗАПИСЬ и заполняем его значениями из записи взятой по нужному нам ID
-        db.deleteAlarm(new Alarm(needNote.getID(), needNote.get_hour(), needNote.get_minute(), needNote.get_active(), needNote.get_content(),needNote.get_everyDay(), needNote.get_Sound()));//запускаем метод "удаление" и передаем обьект ЗАПИСЬ со всеми полями
+        db.deleteAlarm(new Alarm(needNote.getID(), needNote.get_hour(), needNote.get_minute(), needNote.get_active(), needNote.get_content(),needNote.get_everyDay(), needNote.get_Sound(), needNote.get_repetDays()));//запускаем метод "удаление" и передаем обьект ЗАПИСЬ со всеми полями
         Toast mytoast = Toast.makeText(getApplicationContext(),
                 "Запись успешно удалена", Toast.LENGTH_SHORT);
         mytoast.show();
@@ -228,6 +266,102 @@ public class ShowAlarm extends Activity {
     }
 
 
+    public void cl1(View view) {
+        int day = 1;
+        if(repetDaysList.contains(day)){
+            view.setBackgroundColor(Color.TRANSPARENT);
+            repetDaysList.remove(day);
 
+        }else {
+            repetDaysList.add(day);
+            view.setBackgroundColor(Color.GREEN);
+        }
+
+    }
+
+    public void cl2(View view) {
+        int day = 2;
+        if(repetDaysList.contains(day)){
+            view.setBackgroundColor(Color.TRANSPARENT);
+            repetDaysList.remove(day);
+
+        }else {
+            repetDaysList.add(day);
+            view.setBackgroundColor(Color.GREEN);
+        }
+    }
+
+    public void cl3(View view) {
+        int day = 3;
+        if(repetDaysList.contains(day)){
+            view.setBackgroundColor(Color.TRANSPARENT);
+            repetDaysList.remove(day);
+
+        }else {
+            repetDaysList.add(day);
+            view.setBackgroundColor(Color.GREEN);
+        }
+    }
+
+    public void cl4(View view) {
+        int day = 4;
+        if(repetDaysList.contains(day)){
+            view.setBackgroundColor(Color.TRANSPARENT);
+            repetDaysList.remove(day);
+
+        }else {
+            repetDaysList.add(day);
+            view.setBackgroundColor(Color.GREEN);
+        }
+    }
+
+    public void cl5(View view) {
+
+        int day = 5;
+        if(repetDaysList.contains(day)){
+            view.setBackgroundColor(Color.TRANSPARENT);
+            repetDaysList.remove(day);
+
+        }else {
+            repetDaysList.add(day);
+            view.setBackgroundColor(Color.GREEN);
+        }
+    }
+
+    public void cl6(View view) {
+        int day = 6;
+        if(repetDaysList.contains(day)){
+            view.setBackgroundColor(Color.TRANSPARENT);
+            repetDaysList.remove(day);
+
+        }else {
+            repetDaysList.add(day);
+            view.setBackgroundColor(Color.GREEN);
+        }
+    }
+
+    public void cl7(View view) {
+        int day = 7;
+        if(repetDaysList.contains(day)){
+            view.setBackgroundColor(Color.TRANSPARENT);
+            repetDaysList.remove(day);
+
+        }else {
+            repetDaysList.add(day);
+            view.setBackgroundColor(Color.GREEN);
+        }
+    }
+
+    public void cl100(View view) {
+        int day = 7;
+        if(repetDaysList.contains(day)){
+            view.setBackgroundColor(Color.TRANSPARENT);
+            repetDaysList.clear();
+
+        }else {
+            repetDaysList.add(day);
+            view.setBackgroundColor(Color.GREEN);
+        }
+    }
 
 }

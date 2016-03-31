@@ -22,6 +22,8 @@ public class DatabaseHandler extends SQLiteOpenHelper {
     private static final String KEY_CONTENT = "content";//название поля date
     private static final String KEY_EVERYDAY = "everyday";//название поля keyword
     private static final String KEY_SOUND = "sound";//название поля keyword
+    private static final String KEY_REPETDAYS = "repetDays";//название поля keyword
+
 
 
 
@@ -37,7 +39,8 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         //создание строки, содержащей команда для создания БД
         String CREATE_NOTES_TABLE = "CREATE TABLE " + TABLE_NOTES + "("
                 + KEY_ID + " INTEGER PRIMARY KEY,"  + KEY_HOUR + " INTEGER," + KEY_MINUTE + " INTEGER,"
-                + KEY_ACTIVE + " INTEGER," + KEY_CONTENT + " TEXT,"  + KEY_EVERYDAY + " INTEGER," + KEY_SOUND+ " INTEGER"
+                + KEY_ACTIVE + " INTEGER," + KEY_CONTENT + " TEXT,"  + KEY_EVERYDAY + " INTEGER," + KEY_SOUND + " INTEGER,"
+                + KEY_REPETDAYS + " TEXT"
                 + ")";
         db.execSQL(CREATE_NOTES_TABLE);
     }
@@ -66,6 +69,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         values.put(KEY_CONTENT, alarm.get_content());//заполнение поля информацией, извлеченной из соответствующего поля записи, переданной из другой активности
         values.put(KEY_EVERYDAY, alarm.get_everyDay());
         values.put(KEY_SOUND, alarm.get_Sound());
+        values.put(KEY_REPETDAYS, alarm.get_repetDays());
         db.insert(TABLE_NOTES, null, values);//добавление в таблицу щаблона, заполненного ранее
         db.close();//закрытие БД
     }
@@ -77,14 +81,14 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getReadableDatabase();//формат работы с БД
         //переменная, хранящая найденую запись
         Cursor cursor = db.query(TABLE_NOTES, new String[] { KEY_ID, KEY_HOUR,
-                        KEY_MINUTE, KEY_ACTIVE, KEY_CONTENT, KEY_EVERYDAY, KEY_SOUND },  KEY_ID + "=?",
+                        KEY_MINUTE, KEY_ACTIVE, KEY_CONTENT, KEY_EVERYDAY, KEY_SOUND, KEY_REPETDAYS },  KEY_ID + "=?",
                 new String[] { String.valueOf(Id) }, null, null, null, null);
         if (cursor != null){
             cursor.moveToFirst();
         }
 //создание обьекта ЗАПИСЬ и заполняем его данными из найденной ранее записи
         Alarm alarm = new Alarm(cursor.getInt(0), cursor.getInt(1), cursor.getInt(2), cursor.getInt(3), cursor.getString(4), cursor.getInt(5),
-                cursor.getInt(6));
+                cursor.getInt(6), cursor.getString(7));
         return alarm;//возвращаум активности, которая запрашивала обьект с заполненными полями(тоесть найденую запись)
     }
 
@@ -106,6 +110,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
                 alarm.set_content(cursor.getString(4));//заполнение поля, данными взятыми из БД
                 alarm.set_everyDay(cursor.getInt(5));
                 alarm.set_Sound(cursor.getInt(6));
+                alarm.set_repetDays(cursor.getString(7));
                 contactList.add(alarm);//добавление обьекта в список
             } while (cursor.moveToNext());// пока есть следующая запись
         }
@@ -126,6 +131,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         values.put(KEY_CONTENT, alarm.get_content());//заполнение поля информацией, извлеченной из соответствующего поля записи, переданной из другой активности
         values.put(KEY_EVERYDAY, alarm.get_everyDay());
         values.put(KEY_SOUND, alarm.get_Sound());
+        values.put(KEY_REPETDAYS, alarm.get_repetDays());
         return db.update(TABLE_NOTES, values, KEY_ID + " = ?",
                 new String[] { String.valueOf(alarm.getID()) });
     }

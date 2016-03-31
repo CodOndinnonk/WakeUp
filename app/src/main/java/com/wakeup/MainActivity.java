@@ -36,6 +36,8 @@ public class MainActivity extends Activity {
         db = new DatabaseHandler(this);//переменная для работы с БД
         lvMain = (ListView)findViewById(R.id.listViewMainActivity);
 
+
+
         prepareList();
 
 
@@ -66,7 +68,7 @@ public class MainActivity extends Activity {
 
         for (Alarm cn : listGetAllAlarms) {//проходим про каждому обьекту списка
             listOfAlarms.add(new Alarm(cn.getID(), cn.get_hour(), cn.get_minute(), cn.get_active(), cn.get_content(),
-                    cn.get_everyDay(), cn.get_Sound()));
+                    cn.get_everyDay(), cn.get_Sound(), cn.get_repetDays()));
         }
     }
 
@@ -75,7 +77,7 @@ public class MainActivity extends Activity {
 public void pushOffOn(int active, int position){
 
     Alarm needAlarm = listOfAlarms.get(position);
-    db.updateAlarm(new Alarm(needAlarm.getID(), needAlarm.get_hour(), needAlarm.get_minute(), active, needAlarm.get_content(), needAlarm.get_everyDay(), needAlarm.get_Sound()));
+    db.updateAlarm(new Alarm(needAlarm.getID(), needAlarm.get_hour(), needAlarm.get_minute(), active, needAlarm.get_content(), needAlarm.get_everyDay(), needAlarm.get_Sound(), needAlarm.get_repetDays()));
    // setComandToRemakeAlarms();
 }
 
@@ -158,7 +160,6 @@ public void pushOffOn(int active, int position){
     @Override
     public void onCreateContextMenu(ContextMenu menu, View v,
                                     ContextMenu.ContextMenuInfo menuInfo) {
-        super.onCreateContextMenu(menu, v, menuInfo);
         Log.d(myLog, " MainActivity onCreateContextMenu");
         menu.add(0, menu_edit, 0, R.string.edit_note_text);
         menu.add(0, menu_del, 0, R.string.delete_note_text);

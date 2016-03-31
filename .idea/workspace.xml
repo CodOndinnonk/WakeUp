@@ -7,7 +7,7 @@
   </component>
   <component name="AndroidLogFilters">
     <option name="TOOL_WINDOW_CUSTOM_FILTER" value="myLog" />
-    <option name="TOOL_WINDOW_CONFIGURED_FILTER" value="No Filters" />
+    <option name="TOOL_WINDOW_CONFIGURED_FILTER" value="Show only selected application" />
   </component>
   <component name="ChangeListManager">
     <list default="true" id="23d8eaff-1791-4451-b05c-cf6d07e67666" name="Default" comment="" />
@@ -37,50 +37,86 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="BoxAdapter.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/wakeup/BoxAdapter.java">
+      <file leaf-file-name="ResetAlarmState.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/wakeup/ResetAlarmState.java">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="18" column="0" selection-start-line="18" selection-start-column="0" selection-end-line="18" selection-end-column="0" />
+              <caret line="34" column="0" selection-start-line="34" selection-start-column="0" selection-end-line="34" selection-end-column="0" />
               <folding>
-                <element signature="imports" expanded="true" />
-                <element signature="e#2239#2256#0" expanded="true" />
-                <element signature="e#3231#3803#0" expanded="true" />
-                <element signature="e#3802#3803#0" expanded="true" />
-                <element signature="e#3857#4489#0" expanded="true" />
-                <element signature="e#4488#4489#0" expanded="true" />
-                <element signature="e#4542#4543#0" expanded="true" />
-                <element signature="e#4581#4582#0" expanded="true" />
+                <element signature="e#207#208#0" expanded="true" />
+                <element signature="e#243#244#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="activity_main.xml" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_main.xml">
-          <provider editor-type-id="android-designer">
-            <state />
-          </provider>
+      <file leaf-file-name="MainActivity.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/wakeup/MainActivity.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-7.0">
-              <caret line="47" column="12" selection-start-line="47" selection-start-column="12" selection-end-line="47" selection-end-column="12" />
+            <state vertical-scroll-proportion="0.0">
+              <caret line="39" column="0" selection-start-line="39" selection-start-column="0" selection-end-line="39" selection-end-column="0" />
+              <folding>
+                <element signature="imports" expanded="true" />
+                <element signature="e#483#490#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="BoxAdapter.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/wakeup/BoxAdapter.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="36" column="0" selection-start-line="36" selection-start-column="0" selection-end-line="36" selection-end-column="0" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="MainActivity.java" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/wakeup/MainActivity.java">
+      <file leaf-file-name="AlarmService.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/wakeup/AlarmService.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-0.3385965">
-              <caret line="38" column="22" selection-start-line="38" selection-start-column="8" selection-end-line="38" selection-end-column="22" />
+            <state vertical-scroll-proportion="2.7894738">
+              <caret line="126" column="0" selection-start-line="126" selection-start-column="0" selection-end-line="126" selection-end-column="0" />
+              <folding>
+                <element signature="e#4742#4750#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="activity_show_alarm.xml" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_show_alarm.xml">
+          <provider editor-type-id="android-designer">
+            <state />
+          </provider>
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="-12.896552">
+              <caret line="145" column="27" selection-start-line="145" selection-start-column="27" selection-end-line="145" selection-end-column="27" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="ShowAlarm.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/wakeup/ShowAlarm.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="37" column="25" selection-start-line="37" selection-start-column="25" selection-end-line="37" selection-end-column="25" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="e#483#490#0" expanded="true" />
-                <element signature="e#1116#1422#0" expanded="true" />
-                <element signature="e#1421#1422#0" expanded="true" />
-                <element signature="e#6179#6180#0" expanded="true" />
-                <element signature="e#6229#6230#0" expanded="true" />
+                <element signature="e#922#929#0" expanded="true" />
+                <element signature="e#2801#2814#0" expanded="true" />
+                <element signature="e#3597#3746#0" expanded="true" />
+                <element signature="e#3745#3746#0" expanded="true" />
+                <element signature="e#4600#4621#0" expanded="true" />
+                <element signature="e#4838#4866#0" expanded="true" />
+                <element signature="e#5657#5806#0" expanded="true" />
+                <element signature="e#5805#5806#0" expanded="true" />
+                <element signature="e#6640#6668#0" expanded="true" />
+                <element signature="e#6908#6936#0" expanded="true" />
+                <element signature="e#8060#8061#0" expanded="true" />
+                <element signature="e#8084#8085#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -1615,8 +1651,6 @@
         <option value="$PROJECT_DIR$/app/src/main/res/menu/menu_show_alarm.xml" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/wakeup/CommonForLocActivities.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/wakeup/AlarmReceiver.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/wakeup/Alarm.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/wakeup/DatabaseHandler.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/wakeup/Light.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/wakeup/ListModel.java" />
         <option value="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" />
@@ -1629,18 +1663,21 @@
         <option value="$PROJECT_DIR$/app/src/main/res/values/strings.xml" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/tabitem.xml" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/wakeup/MyListAdapter.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/wakeup/ShowAlarm.java" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/activity_main2.xml" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/wakeup/Main2Activity.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/wakeup/LocActivityArithmetic.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/wakeup/LocActivityHelper.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/wakeup/AlarmService.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/wakeup/AlarmSetter.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/wakeup/LocActivitySimple.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/wakeup/ResetAlarmState.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/wakeup/BoxAdapter.java" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/activity_main.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/wakeup/BoxAdapter.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/wakeup/MainActivity.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/wakeup/Alarm.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/wakeup/ResetAlarmState.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/wakeup/DatabaseHandler.java" />
+        <option value="$PROJECT_DIR$/app/src/main/res/layout/activity_show_alarm.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/wakeup/ShowAlarm.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/wakeup/AlarmService.java" />
       </list>
     </option>
   </component>
@@ -2102,11 +2139,20 @@
     </task>
     <servers />
   </component>
+  <component name="TodoView">
+    <todo-panel id="selected-file">
+      <is-autoscroll-to-source value="true" />
+    </todo-panel>
+    <todo-panel id="all">
+      <are-packages-shown value="true" />
+      <is-autoscroll-to-source value="true" />
+    </todo-panel>
+  </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1382" height="754" extended-state="1" />
+    <frame x="-8" y="-8" width="1382" height="754" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32943144" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32943144" sideWeight="0.5" order="12" side_tool="false" content_ui="tabs" />
       <window_info id="Build Variants" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Palette&#9;" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
@@ -2114,21 +2160,22 @@
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3180272" sideWeight="0.5060514" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Android Monitor" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33779263" sideWeight="0.49394855" order="9" side_tool="false" content_ui="tabs" />
+      <window_info id="Android Monitor" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.64882946" sideWeight="0.49394855" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32980332" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32608697" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32943144" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
       <window_info id="Captures" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Gradle Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32993197" sideWeight="0.5" order="13" side_tool="true" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.24886535" sideWeight="0.4888889" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32998326" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Gradle" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Android Model" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="true" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.24886535" sideWeight="0.51111114" order="5" side_tool="true" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.39966556" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
@@ -2136,7 +2183,6 @@
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Documentation" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="FLOATING" visible="false" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" x="92" y="92" width="1182" height="554" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32998326" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
     </layout>
   </component>
   <component name="Vcs.Log.UiProperties">
@@ -2152,7 +2198,7 @@
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
-      <option name="time" value="7" />
+      <option name="time" value="13" />
     </breakpoint-manager>
     <watches-manager />
   </component>
@@ -2162,10 +2208,10 @@
         <state vertical-scroll-proportion="0.0">
           <caret line="168" column="0" selection-start-line="168" selection-start-column="0" selection-end-line="168" selection-end-column="0" />
           <folding>
-            <element signature="e#1266#1267#0" expanded="true" />
-            <element signature="e#1297#1298#0" expanded="true" />
-            <element signature="e#3128#3129#0" expanded="true" />
-            <element signature="e#3178#3179#0" expanded="true" />
+            <element signature="e#1268#1269#0" expanded="false" />
+            <element signature="e#1299#1300#0" expanded="false" />
+            <element signature="e#3130#3131#0" expanded="false" />
+            <element signature="e#3180#3181#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -2224,10 +2270,10 @@
         <state vertical-scroll-proportion="0.0">
           <caret line="116" column="57" selection-start-line="116" selection-start-column="57" selection-end-line="116" selection-end-column="57" />
           <folding>
-            <element signature="e#1266#1267#0" expanded="true" />
-            <element signature="e#1297#1298#0" expanded="true" />
-            <element signature="e#3128#3129#0" expanded="true" />
-            <element signature="e#3178#3179#0" expanded="true" />
+            <element signature="e#1268#1269#0" expanded="false" />
+            <element signature="e#1299#1300#0" expanded="false" />
+            <element signature="e#3130#3131#0" expanded="false" />
+            <element signature="e#3180#3181#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -2314,10 +2360,10 @@
         <state vertical-scroll-proportion="0.0">
           <caret line="88" column="0" selection-start-line="88" selection-start-column="0" selection-end-line="88" selection-end-column="0" />
           <folding>
-            <element signature="e#1266#1267#0" expanded="true" />
-            <element signature="e#1297#1298#0" expanded="true" />
-            <element signature="e#3128#3129#0" expanded="true" />
-            <element signature="e#3178#3179#0" expanded="true" />
+            <element signature="e#1268#1269#0" expanded="false" />
+            <element signature="e#1299#1300#0" expanded="false" />
+            <element signature="e#3130#3131#0" expanded="false" />
+            <element signature="e#3180#3181#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -2432,66 +2478,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/wakeup/Alarm.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="3" column="13" selection-start-line="3" selection-start-column="13" selection-end-line="3" selection-end-column="13" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/wakeup/AlarmReceiver.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.6357143">
-          <caret line="27" column="0" selection-start-line="27" selection-start-column="0" selection-end-line="27" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/wakeup/AlarmService.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="2.2767856">
-          <caret line="89" column="0" selection-start-line="89" selection-start-column="0" selection-end-line="89" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/wakeup/AlarmSetter.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.4857143">
-          <caret line="19" column="0" selection-start-line="19" selection-start-column="0" selection-end-line="19" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/wakeup/DatabaseHandler.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.030357143">
-          <caret line="91" column="0" selection-start-line="91" selection-start-column="0" selection-end-line="91" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/wakeup/Light.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.2125">
           <caret line="7" column="13" selection-start-line="7" selection-start-column="13" selection-end-line="7" selection-end-column="13" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/wakeup/LocActivityArithmetic.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.18035714">
-          <caret line="192" column="51" selection-start-line="192" selection-start-column="44" selection-end-line="192" selection-end-column="51" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/wakeup/LocActivityHelper.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-1.0339285">
-          <caret line="10" column="0" selection-start-line="10" selection-start-column="0" selection-end-line="10" selection-end-column="0" />
           <folding />
         </state>
       </provider>
@@ -2501,26 +2491,6 @@
         <state vertical-scroll-proportion="0.27321428">
           <caret line="67" column="0" selection-start-line="67" selection-start-column="0" selection-end-line="67" selection-end-column="0" />
           <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/wakeup/ResetAlarmState.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.2125">
-          <caret line="13" column="0" selection-start-line="13" selection-start-column="0" selection-end-line="13" selection-end-column="0" />
-          <folding>
-            <element signature="e#207#208#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/wakeup/ShowAlarm.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.030357143">
-          <caret line="75" column="0" selection-start-line="75" selection-start-column="0" selection-end-line="75" selection-end-column="0" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -2540,45 +2510,134 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/wakeup/BoxAdapter.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="18" column="0" selection-start-line="18" selection-start-column="0" selection-end-line="18" selection-end-column="0" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#2239#2256#0" expanded="true" />
-            <element signature="e#3231#3803#0" expanded="true" />
-            <element signature="e#3802#3803#0" expanded="true" />
-            <element signature="e#3857#4489#0" expanded="true" />
-            <element signature="e#4488#4489#0" expanded="true" />
-            <element signature="e#4542#4543#0" expanded="true" />
-            <element signature="e#4581#4582#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_main.xml">
       <provider editor-type-id="android-designer">
         <state />
       </provider>
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-7.0">
+        <state vertical-scroll-proportion="-13.965517">
           <caret line="47" column="12" selection-start-line="47" selection-start-column="12" selection-end-line="47" selection-end-column="12" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/wakeup/AlarmReceiver.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.6421053">
+          <caret line="27" column="0" selection-start-line="27" selection-start-column="0" selection-end-line="27" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/wakeup/AlarmSetter.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.47719297">
+          <caret line="19" column="0" selection-start-line="19" selection-start-column="0" selection-end-line="19" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/wakeup/LocActivityArithmetic.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="3.7578948">
+          <caret line="192" column="51" selection-start-line="192" selection-start-column="44" selection-end-line="192" selection-end-column="51" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/wakeup/LocActivityHelper.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-0.6403509">
+          <caret line="22" column="64" selection-start-line="22" selection-start-column="64" selection-end-line="22" selection-end-column="64" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/wakeup/Alarm.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.79122806">
+          <caret line="105" column="36" selection-start-line="105" selection-start-column="36" selection-end-line="105" selection-end-column="36" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/wakeup/DatabaseHandler.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-0.40175438">
+          <caret line="141" column="0" selection-start-line="141" selection-start-column="0" selection-end-line="141" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/wakeup/ResetAlarmState.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="34" column="0" selection-start-line="34" selection-start-column="0" selection-end-line="34" selection-end-column="0" />
+          <folding>
+            <element signature="e#207#208#0" expanded="true" />
+            <element signature="e#243#244#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_show_alarm.xml">
+      <provider editor-type-id="android-designer">
+        <state />
+      </provider>
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-12.896552">
+          <caret line="145" column="27" selection-start-line="145" selection-start-column="27" selection-end-line="145" selection-end-column="27" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/wakeup/MainActivity.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-0.3385965">
-          <caret line="38" column="22" selection-start-line="38" selection-start-column="8" selection-end-line="38" selection-end-column="22" />
+        <state vertical-scroll-proportion="0.0">
+          <caret line="39" column="0" selection-start-line="39" selection-start-column="0" selection-end-line="39" selection-end-column="0" />
           <folding>
             <element signature="imports" expanded="true" />
             <element signature="e#483#490#0" expanded="true" />
-            <element signature="e#1116#1422#0" expanded="true" />
-            <element signature="e#1421#1422#0" expanded="true" />
-            <element signature="e#6179#6180#0" expanded="true" />
-            <element signature="e#6229#6230#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/wakeup/BoxAdapter.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="36" column="0" selection-start-line="36" selection-start-column="0" selection-end-line="36" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/wakeup/ShowAlarm.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="37" column="25" selection-start-line="37" selection-start-column="25" selection-end-line="37" selection-end-column="25" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#922#929#0" expanded="true" />
+            <element signature="e#2801#2814#0" expanded="true" />
+            <element signature="e#3597#3746#0" expanded="true" />
+            <element signature="e#3745#3746#0" expanded="true" />
+            <element signature="e#4600#4621#0" expanded="true" />
+            <element signature="e#4838#4866#0" expanded="true" />
+            <element signature="e#5657#5806#0" expanded="true" />
+            <element signature="e#5805#5806#0" expanded="true" />
+            <element signature="e#6640#6668#0" expanded="true" />
+            <element signature="e#6908#6936#0" expanded="true" />
+            <element signature="e#8060#8061#0" expanded="true" />
+            <element signature="e#8084#8085#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/wakeup/AlarmService.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="2.7894738">
+          <caret line="126" column="0" selection-start-line="126" selection-start-column="0" selection-end-line="126" selection-end-column="0" />
+          <folding>
+            <element signature="e#4742#4750#0" expanded="true" />
           </folding>
         </state>
       </provider>

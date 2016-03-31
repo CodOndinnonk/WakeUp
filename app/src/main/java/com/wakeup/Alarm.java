@@ -1,6 +1,8 @@
 package com.wakeup;
 
 
+import java.util.ArrayList;
+
 public class Alarm {
     int _id;
     int _hour;
@@ -9,11 +11,12 @@ public class Alarm {
     String _content;
     int _everyDay;
     int _sound;
+    String _repetDays;
 
     public Alarm(){
     }
 
-    public Alarm(int id, int hour, int minute,  int active, String content, int everyDay, int sound){
+    public Alarm(int id, int hour, int minute,  int active, String content, int everyDay, int sound, String repetDays){
 
         this._id = id;
         this._hour = hour;
@@ -22,10 +25,11 @@ public class Alarm {
         this._content = content;
         this._everyDay = everyDay;
         this._sound = sound;
+        this._repetDays = repetDays;
 
     }
 
-    public Alarm(int hour, int minute,  int active, String content, int everyDay, int sound){
+    public Alarm(int hour, int minute,  int active, String content, int everyDay, int sound, String repetDays){
 
         this._hour = hour;
         this._minute = minute;
@@ -33,6 +37,7 @@ public class Alarm {
         this._content = content;
         this._everyDay = everyDay;
         this._sound = sound;
+        this._repetDays = repetDays;
 
     }
 
@@ -94,7 +99,11 @@ public class Alarm {
         return _content;
     }
 
+    public String get_repetDays() {
+        return _repetDays;
+    }
 
-
-
+    public void set_repetDays(String _repetDays) {
+        this._repetDays = _repetDays;
+    }
 }

@@ -33,6 +33,8 @@ public class BoxAdapter extends BaseAdapter implements View.OnClickListener {
         resetAlarmState = new ResetAlarmState(context);
         lInflater = (LayoutInflater) context
                 .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+
+
     }
 
     // кол-во элементов
