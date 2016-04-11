@@ -10,6 +10,7 @@ import android.content.IntentFilter;
 
 import android.util.Log;
 
+import java.nio.CharBuffer;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
@@ -45,6 +46,7 @@ public class AlarmService extends IntentService {
     private void execute(String action) {
         fillData();
         AlarmManager alarmManager = (AlarmManager)getSystemService(Context.ALARM_SERVICE);
+        int numberOfDays = 0;
 
         for (Alarm alarm : alarms) {
             long time = 0;
@@ -57,41 +59,92 @@ public class AlarmService extends IntentService {
                     PendingIntent.FLAG_UPDATE_CURRENT);
 
             Calendar calendar = Calendar.getInstance();
+            calendar.setFirstDayOfWeek(Calendar.MONDAY);
 
-            Log.d(myLog, " alarm.get_repetDays() = "+alarm.get_repetDays());
-            Log.d(myLog, "alarm.get_repetDays().charAt(0)) = "+alarm.get_repetDays().charAt(0));
-            Log.d(myLog, " Integer.valueOf(alarm.get_repetDays().charAt(0)) = "+Integer.decode(String.valueOf(alarm.get_repetDays().charAt(0))));
+            Log.d(myLog, " строка повтора по дням = " + alarm.get_repetDays());
+            Log.d(myLog, " первый элемент строки = " + Integer.decode(String.valueOf(alarm.get_repetDays().charAt(0))));
+            Log.d(myLog, " активность будильника = " + alarm.get_active());
 
 
-            Log.d(myLog, "1");
-
-            if((Integer.decode(String.valueOf(alarm.get_repetDays().charAt(0))) > 0) && (!(alarm.get_repetDays().equals("100")))) {
-                Log.d(myLog, "2");
-                repetDaysList = splitLine(alarm.get_repetDays());// получаем массив с днями
-                int t = -1;// переменная для подсчета необходимого дня из списка
-                int i = -1;// переменная, указывающая на день (позицию в массиве), который следующий для срабатывания
-
-                if((calendar.getTime().getHours() < alarm.get_hour()) && (calendar.getTime().getHours() < alarm.get_minute())){
-                    //ничего не меняем в будильнике, так как оно еще не сработал в нужное время
-                }else {
-                    while (t < 0){
-                        i++;
-                        t = Integer.valueOf(repetDaysList.get(i)) - calendar.getTime().getDay();
-                    }
-                }
-                calendar.set(Calendar.DAY_OF_WEEK, Integer.valueOf(repetDaysList.get(i)));
-            }
             calendar.set(Calendar.HOUR_OF_DAY, alarm.get_hour());
             calendar.set(Calendar.MINUTE, alarm.get_minute());
             calendar.set(Calendar.SECOND, 00);
-            Log.d(myLog, "3");
+
+            Log.d(myLog, " после установки времени календаря ");
+
+
+            if ((Integer.decode(String.valueOf(alarm.get_repetDays().charAt(0))) > 0) && (!(alarm.get_repetDays().equals("100")))) {
+                     repetDaysList = splitLine(alarm.get_repetDays());// получаем массив с днями
+                    int t = -1;// переменная для подсчета необходимого дня из списка
+                    int i = -1;// переменная, указывающая на день (позицию в массиве), который следующий для срабатывания
+
+                    if ((calendar.getTime().getHours() < alarm.get_hour()) && (calendar.getTime().getHours() < alarm.get_minute())) {
+                        //ничего не меняем в будильнике, так как оно еще не сработал в нужное время
+
+                    } else {
+
+                        while (t < 0) {
+                            i++;
+                            if (i < repetDaysList.size()) {// если список еще не закончен
+                                t = Integer.decode(repetDaysList.get(i)) - calendar.getTime().getDay();
+                            } else {// если прошли по всему списку, и эти дни недели уже прошли, то выбираем первый пункт списка - первый день в неделе для срабатывания
+                                i = 0;
+                                break;
+                            }
+                        }
+                    }
+
+                if(calendar.getTime().getDay() == Integer.decode(repetDaysList.get(i))) {
+
+                    if (calendar.getTimeInMillis() < System.currentTimeMillis()) {// ставим будильник на следующую неделю
+                        if(i++ <= repetDaysList.size()){
+                            i++;
+                        }else {
+
+                        }
+                        numberOfDays =  - calendar.getTime().getDay() + Integer.decode(repetDaysList.get(i));
+                        Log.d(myLog, " numberOfDays = - " + calendar.getTime().getDay() + " + " + Integer.decode(repetDaysList.get(i)) + " = " + numberOfDays);
+
+                    } else {
+                    }
+                }else if(calendar.getTime().getDay() < Integer.decode(repetDaysList.get(i))){
+                        numberOfDays =  - calendar.getTime().getDay() + Integer.decode(repetDaysList.get(i));
+                        Log.d(myLog, " numberOfDays = - " + calendar.getTime().getDay() + " + " + Integer.decode(repetDaysList.get(i)) + " = " + numberOfDays);
+
+                    }else {
+                        numberOfDays = 7 - calendar.getTime().getDay() + Integer.decode(repetDaysList.get(i));
+                        Log.d(myLog, " numberOfDays = 7 - " + calendar.getTime().getDay() + " + " + Integer.decode(repetDaysList.get(i)) + " = " + numberOfDays);
+
+                    }
+
+
+                    Log.d(myLog, "calendar.getTime().getDay() = " + calendar.getTime().getDay());
+
+
+            }
+
+
+
             if (DOWHATNEED.equals(action)) {//вариант, когда программа смотрин на флаг активности будильника в БД
                 if (alarm.get_active() == 1) {//если стоит АКТИВЕН
-                    if (calendar.getTimeInMillis() <= System.currentTimeMillis()) {
-                        time = calendar.getTimeInMillis() + 86400000;// ставим будильник на следующие сутки, если время уже прошло
-                    } else {
-                        time = calendar.getTimeInMillis();
+                    if(Integer.decode(String.valueOf(alarm.get_repetDays().charAt(0))) > 0){// если стоит повтор по дням
+                            Log.d(myLog, " numberOfDays = " + numberOfDays);
+                            Log.d(myLog, " ДО умножения дата = " + calendar.getTime().getDate() + " месяц = " + calendar.getTime().getMonth());
+                            time = calendar.getTimeInMillis() + 86400000 * numberOfDays;// ставим будильник на следующие сутки, если время уже прошло
+                            calendar.setTimeInMillis(time);
+                            Log.d(myLog, " ПОВТОРЯЮЩИЙСЯ будильник дата = " + calendar.getTime().getDate() + " месяц = " + calendar.getTime().getMonth());
+
+                    }else {
+                        if (calendar.getTimeInMillis() < System.currentTimeMillis()) {
+                            time = calendar.getTimeInMillis() + 86400000 ;// ставим будильник на следующие сутки, если время уже прошло
+                        } else {
+                            time = calendar.getTimeInMillis();
+                        }
+                        calendar.setTimeInMillis(time);
+                        Log.d(myLog, " ОБЫЧНЫЙ будильник дата = "+calendar.getTime().getDate()+" месяц = "+calendar.getTime().getMonth());
+
                     }
+
                     alarmManager.cancel(pendingIntent);//отключаем будильник
                     alarmManager.set(AlarmManager.RTC_WAKEUP, time, pendingIntent);//ставим его заного
                 } else {//если стоит флаг НЕ АКТИВЕН
@@ -101,6 +154,7 @@ public class AlarmService extends IntentService {
             }
         }
     }
+
 
 
 

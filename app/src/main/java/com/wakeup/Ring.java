@@ -22,7 +22,8 @@ public class Ring {
 
 
     public void start(Context context){
-        mSoundPool = new SoundPool(1, AudioManager.STREAM_NOTIFICATION, 0);
+     //   mSoundPool = new SoundPool(1, AudioManager.STREAM_NOTIFICATION, 0);
+        mSoundPool = new SoundPool(1, AudioManager.STREAM_MUSIC, 0);// для тестирования, потом заменить на верхнюю
         mAssetManager = context.getAssets();
         // получим идентификаторы
         mRingtonSound = loadSound("b.mp3");

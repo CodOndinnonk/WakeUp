@@ -29,6 +29,7 @@ public class LocActivityHelper {
     }
 
     public void makeWakeActivityFromSleep(){
+        Log.d(myLog, "LocActivityHelper makeWakeActivityFromSleep");
         //включение экрана
         Activity activity = (Activity) context;
         activity.getWindow().addFlags(WindowManager.LayoutParams.FLAG_SHOW_WHEN_LOCKED);
