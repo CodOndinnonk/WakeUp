@@ -124,7 +124,7 @@ public class BoxAdapter extends BaseAdapter implements View.OnClickListener {
 
 
 
-
+/*
     OnCheckedChangeListener myButtonChangList = new OnCheckedChangeListener() {
         public void onCheckedChanged(CompoundButton buttonView,
                                      boolean isChecked) {
@@ -140,7 +140,7 @@ public class BoxAdapter extends BaseAdapter implements View.OnClickListener {
         }
     };
 
-
+*/
     @Override
     public void onClick(View view) {
         Log.d(myLog, "onClick");

@@ -3,6 +3,7 @@ package com.wakeup;
 
 import android.hardware.Camera;
 
+import java.io.IOException;
 
 
 public class Light {
@@ -11,8 +12,12 @@ public class Light {
     boolean activeFlash;
 
 
-    public Light(){
-        camera = Camera.open();
+    public Light()  {
+        try {
+            camera = Camera.open();
+        }catch (Exception e){
+
+        }
         parameters = camera.getParameters();
     }
 
@@ -45,6 +50,7 @@ public class Light {
         parameters.setFlashMode(Camera.Parameters.FLASH_MODE_OFF);
         camera.setParameters(parameters);
         camera.startPreview();
+        camera.release();
         activeFlash = false;
     }
 

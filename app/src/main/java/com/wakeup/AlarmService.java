@@ -70,7 +70,7 @@ public class AlarmService extends IntentService {
             calendar.set(Calendar.MINUTE, alarm.get_minute());
             calendar.set(Calendar.SECOND, 00);
 
-            Log.d(myLog, " после установки времени календаря ");
+
 
 
             if ((Integer.decode(String.valueOf(alarm.get_repetDays().charAt(0))) > 0) && (!(alarm.get_repetDays().equals("100")))) {
@@ -94,15 +94,20 @@ public class AlarmService extends IntentService {
                         }
                     }
 
+
+
                 if(calendar.getTime().getDay() == Integer.decode(repetDaysList.get(i))) {
 
                     if (calendar.getTimeInMillis() < System.currentTimeMillis()) {// ставим будильник на следующую неделю
-                        if(i++ <= repetDaysList.size()){
-                            i++;
+                        if(i + 1 < repetDaysList.size()){
+                            i+= i + 1;
+                            numberOfDays =  - calendar.getTime().getDay() + Integer.decode(repetDaysList.get(i));
+
                         }else {
+                            i = 0;
+                            numberOfDays = 7 - calendar.getTime().getDay() + Integer.decode(repetDaysList.get(i));
 
                         }
-                        numberOfDays =  - calendar.getTime().getDay() + Integer.decode(repetDaysList.get(i));
                         Log.d(myLog, " numberOfDays = - " + calendar.getTime().getDay() + " + " + Integer.decode(repetDaysList.get(i)) + " = " + numberOfDays);
 
                     } else {

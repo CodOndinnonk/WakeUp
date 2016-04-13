@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent" android:layout_height="match_parent"
-    android:clickable="true"
-    android:paddingLeft="15dp">
+    android:paddingLeft="15dp"
+    android:focusable="false"
+    android:focusableInTouchMode="false">
 
     <TextView
         android:layout_width="match_parent"
@@ -17,12 +18,16 @@
         android:gravity="left|center"
         android:textColor="@color/text_color_blue_light"
         android:maxWidth="30dp"
+        android:focusable="false"
+        android:focusableInTouchMode="false"
         android:layout_toLeftOf="@+id/textEverydayTabitem" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="everyday"
+        android:focusable="false"
+        android:focusableInTouchMode="false"
         android:id="@+id/textEverydayTabitem"
         android:textColor="@color/text_color_blue_light"
         android:layout_alignParentTop="true"
@@ -34,6 +39,8 @@
         android:layout_height="wrap_content"
         android:id="@+id/buttonOffOnTabitem"
         android:checked="true"
+        android:focusable="false"
+        android:focusableInTouchMode="false"
         android:background="@android:drawable/toast_frame"
         android:textColor="#ff1cff21"
         android:layout_below="@+id/textEverydayTabitem"

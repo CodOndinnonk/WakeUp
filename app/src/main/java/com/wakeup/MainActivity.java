@@ -9,7 +9,9 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.DigitalClock;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -28,6 +30,7 @@ public class MainActivity extends Activity {
 
 
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -38,9 +41,22 @@ public class MainActivity extends Activity {
 
 
 
+
         prepareList();
 
+    /*    lvMain.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                Toast.makeText(MainActivity.this,"12",Toast.LENGTH_LONG).show();
+            }
 
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+        });
+
+*/
         lvMain.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -50,6 +66,7 @@ public class MainActivity extends Activity {
 
                 }
         });
+
 
         registerForContextMenu(lvMain);
     }
@@ -191,6 +208,7 @@ public void pushOffOn(int active, int position){
         goToAdd.putExtra("needId", -1);//показывает, какой тип активити отображать, если больше -1, то это редактирование
         //а так это создание
         startActivity(goToAdd);
+
     }
 
 
