@@ -29,35 +29,35 @@ public class LocActivitySimple extends Activity {
 
 
         vibration = new Vibration(this);
-        Log.d(myLog, "LocActivitySimple 1");
+
         light = new Light();
-        Log.d(myLog, "LocActivitySimple 2");
+
         locActivityHelper = new LocActivityHelper(this,alarmId);
-        Log.d(myLog, "LocActivitySimple 3");
+
         resetAlarmState = new ResetAlarmState(this);
-        Log.d(myLog, "LocActivitySimple 4");
+
 
         //отменяем интент будильника, так как он уже сработал
         AlarmManager alarmManager = (AlarmManager)getSystemService(Context.ALARM_SERVICE);
-        Log.d(myLog, "LocActivitySimple 5");
+
         Intent AlarmReceiverIntent = new Intent(this, AlarmReceiver.class);
-        Log.d(myLog, "LocActivitySimple 6");
+
         PendingIntent pendingIntent = PendingIntent.getBroadcast(this, 0, AlarmReceiverIntent,
                 PendingIntent.FLAG_UPDATE_CURRENT);
-        Log.d(myLog, "LocActivitySimple 7");
+
         alarmManager.cancel(pendingIntent);
-        Log.d(myLog, "LocActivitySimple 8");
+
 
         locActivityHelper.makeWakeActivityFromSleep();
-        Log.d(myLog, "LocActivitySimple 9");
+
         ring = new Ring();
-        Log.d(myLog, "LocActivitySimple 10");
+
         ring.start(this);
-        Log.d(myLog, "LocActivitySimple 11");
+
         light.onLight();
-        Log.d(myLog, "LocActivitySimple 12");
+
         vibration.onVibration();
-        Log.d(myLog, "LocActivitySimple 13");
+
     }
 
 

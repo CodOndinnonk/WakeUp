@@ -62,7 +62,7 @@ public class MainActivity extends Activity {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Log.d(myLog, " MainActivity onItemClick");
                 Alarm alarm = boxAdapter.getAlarm(position);
-
+    edit(alarm.getID());
 
                 }
         });
@@ -229,24 +229,18 @@ public void pushOffOn(int active, int position){
 
 
 
-   /*
-    public void edit(View view) {Log.d(myLog, "MainActivity edit 1 ");
-        int getIdInput = Integer.valueOf(putID.getText().toString());
-        Log.d(myLog, "getIdInput =  " + getIdInput);
-        Log.d(myLog, " lastAlarmId =  " + lastAlarmId);
-        if(getIdInput-1 < lastAlarmId){
-            Log.d(myLog, "MainActivity edit 2 ");
+
+    public void edit(int id) {
+        Log.d(myLog, "MainActivity edit 1 ");
+
             Intent goToAdd = new Intent(this, ShowAlarm.class);
-            goToAdd.putExtra("needId", getIdInput  );
+            goToAdd.putExtra("needId", id  );
             startActivity(goToAdd);
-            Log.d(myLog, "MainActivity edit 3 ");
-        }else {
-            Log.d(myLog, "MainActivity edit 4 ");
-            Toast mytoast = Toast.makeText(getApplicationContext(),
-                    "Введен не существующий будильник ", Toast.LENGTH_LONG);
-            mytoast.show();
-        }
+
     }
+
+
+    /*
     public void startAlarm(View view) {
         Log.d(myLog, "MainActivity startAlarm 1 ");
         int setTimeHours = setTime.getCurrentHour();

@@ -267,7 +267,7 @@ public class ShowAlarm extends Activity {
 
 
     public void cl1(View view) {
-        int day = 1;
+        Integer day = 1;
         if(repetDaysList.contains(day)){
             view.setBackgroundColor(Color.TRANSPARENT);
             repetDaysList.remove(day);
@@ -280,7 +280,7 @@ public class ShowAlarm extends Activity {
     }
 
     public void cl2(View view) {
-        int day = 2;
+        Integer day = 2;
         if(repetDaysList.contains(day)){
             view.setBackgroundColor(Color.TRANSPARENT);
             repetDaysList.remove(day);
@@ -292,7 +292,7 @@ public class ShowAlarm extends Activity {
     }
 
     public void cl3(View view) {
-        int day = 3;
+        Integer day = 3;
         if(repetDaysList.contains(day)){
             view.setBackgroundColor(Color.TRANSPARENT);
             repetDaysList.remove(day);
@@ -304,7 +304,7 @@ public class ShowAlarm extends Activity {
     }
 
     public void cl4(View view) {
-        int day = 4;
+        Integer day = 4;
         if(repetDaysList.contains(day)){
             view.setBackgroundColor(Color.TRANSPARENT);
             repetDaysList.remove(day);
@@ -317,7 +317,7 @@ public class ShowAlarm extends Activity {
 
     public void cl5(View view) {
 
-        int day = 5;
+        Integer day = 5;
         if(repetDaysList.contains(day)){
             view.setBackgroundColor(Color.TRANSPARENT);
             repetDaysList.remove(day);
@@ -329,7 +329,7 @@ public class ShowAlarm extends Activity {
     }
 
     public void cl6(View view) {
-        int day = 6;
+        Integer day = 6;
         if(repetDaysList.contains(day)){
             view.setBackgroundColor(Color.TRANSPARENT);
             repetDaysList.remove(day);
@@ -341,7 +341,7 @@ public class ShowAlarm extends Activity {
     }
 
     public void cl7(View view) {
-        int day = 7;
+        Integer day = 7;
         if(repetDaysList.contains(day)){
             view.setBackgroundColor(Color.TRANSPARENT);
             repetDaysList.remove(day);
@@ -353,7 +353,7 @@ public class ShowAlarm extends Activity {
     }
 
     public void cl100(View view) {
-        int day = 7;
+        Integer day = 7;
         if(repetDaysList.contains(day)){
             view.setBackgroundColor(Color.TRANSPARENT);
             repetDaysList.clear();

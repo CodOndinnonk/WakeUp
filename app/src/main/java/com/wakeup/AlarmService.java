@@ -49,6 +49,7 @@ public class AlarmService extends IntentService {
         int numberOfDays = 0;
 
         for (Alarm alarm : alarms) {
+            numberOfDays = 0;
             long time = 0;
             Intent intentForAlarmreceiver = new Intent(this, AlarmReceiver.class);
             intentForAlarmreceiver.putExtra(ID, alarm.getID());
