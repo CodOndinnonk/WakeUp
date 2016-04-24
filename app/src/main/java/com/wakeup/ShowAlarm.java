@@ -152,19 +152,32 @@ public class ShowAlarm extends Activity {
                 return o1.compareTo(o2);
             }
         });
+
+
+        if(repetDaysList.size() == 0){
+            repetDays = "0";
+        }else {// если есть больше одного дня повтора, то удаляем 0 вначале списка
+            if(repetDaysList.get(0).equals(0)){// если первая цифра повтора 0
+                Log.d(myLog,"ДО repetDaysList.get(0) "+repetDaysList.get(0));
+                repetDaysList.remove(0);
+                Log.d(myLog, "ПОСЛЕ repetDaysList.get(0) " + repetDaysList.get(0));
+
+            }
+        }
         //создаем строку с днями
         for(int i=0; i<repetDaysList.size();i++){
             repetDays += repetDaysList.get(i).toString() + " ";
         }
 
-        if(repetDaysList.size() == 0){
-            repetDays = "0";
-        }
+
+
+
 
         int resultOfExistance = checkForExistanceAlarm(new Alarm(needId, setTimeHours, setTimeMinute, isActive, strContent,
                 soundNumber, repetDays));
 
         if(resultOfExistance == 0) {
+            Log.d(myLog,"ОБНОВЛЕНИЕ будильник "+repetDays);
             db.updateAlarm(new Alarm(needId, setTimeHours, setTimeMinute, isActive, strContent, soundNumber, repetDays));
 
             Toast mytoast = Toast.makeText(getApplicationContext(),
@@ -204,7 +217,6 @@ public class ShowAlarm extends Activity {
         });
         //создаем строку с днями
         for(int i=0; i<repetDaysList.size();i++){
-
             repetDays += repetDaysList.get(i).toString() + " ";
         }
 

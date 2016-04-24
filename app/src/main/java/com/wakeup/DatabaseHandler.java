@@ -69,7 +69,6 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         values.put(KEY_CONTENT, alarm.get_content());//заполнение поля информацией, извлеченной из соответствующего поля записи, переданной из другой активности
         values.put(KEY_SOUND, alarm.get_Sound());
         values.put(KEY_REPETDAYS, alarm.get_repetDays());
-
         db.insert(TABLE_NOTES, null, values);//добавление в таблицу щаблона, заполненного ранее
         db.close();//закрытие БД
     }
@@ -89,6 +88,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 //создание обьекта ЗАПИСЬ и заполняем его данными из найденной ранее записи
         Alarm alarm = new Alarm(cursor.getInt(0), cursor.getInt(1), cursor.getInt(2), cursor.getInt(3), cursor.getString(4),
                 cursor.getInt(5), cursor.getString(6));
+
         return alarm;//возвращаум активности, которая запрашивала обьект с заполненными полями(тоесть найденую запись)
     }
 
@@ -103,14 +103,13 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         if (cursor.moveToFirst()) {
             do {//делаем,
                 Alarm alarm = new Alarm();//создание обьекта ЗАПИСЬ
-                alarm.setID(Integer.parseInt(cursor.getString(0)));//заполнение поля, данными взятыми из БД
+                alarm.setID(cursor.getInt(0));//заполнение поля, данными взятыми из БД
                 alarm.set_hour(cursor.getInt(1));//заполнение поля, данными взятыми из БД
                 alarm.set_minute(cursor.getInt(2));//заполнение поля, данными взятыми из БД
                 alarm.set_active(cursor.getInt(3));//заполнение поля, данными взятыми из БД
                 alarm.set_content(cursor.getString(4));//заполнение поля, данными взятыми из БД
                 alarm.set_Sound(cursor.getInt(5));
                 alarm.set_repetDays(cursor.getString(6));
-
                 contactList.add(alarm);//добавление обьекта в список
             } while (cursor.moveToNext());// пока есть следующая запись
         }
