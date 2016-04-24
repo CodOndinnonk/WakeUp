@@ -9,33 +9,30 @@ public class Alarm {
     int _minute;
     int _active;
     String _content;
-    int _everyDay;
     int _sound;
     String _repetDays;
 
     public Alarm(){
     }
 
-    public Alarm(int id, int hour, int minute,  int active, String content, int everyDay, int sound, String repetDays){
+    public Alarm(int id, int hour, int minute,  int active, String content, int sound, String repetDays){
 
         this._id = id;
         this._hour = hour;
         this._minute = minute;
         this._active = active;
         this._content = content;
-        this._everyDay = everyDay;
         this._sound = sound;
         this._repetDays = repetDays;
 
     }
 
-    public Alarm(int hour, int minute,  int active, String content, int everyDay, int sound, String repetDays){
+    public Alarm(int hour, int minute,  int active, String content, int sound, String repetDays){
 
         this._hour = hour;
         this._minute = minute;
         this._active = active;
         this._content = content;
-        this._everyDay = everyDay;
         this._sound = sound;
         this._repetDays = repetDays;
 
@@ -67,16 +64,8 @@ public class Alarm {
         this._content = _content;
     }
 
-    public void set_everyDay(int _everyDay) {
-        this._everyDay = _everyDay;
-    }
-
     public void set_Sound(int sound) {
         this._sound = sound;
-    }
-
-    public int get_everyDay() {
-        return _everyDay;
     }
 
     public int get_Sound() {

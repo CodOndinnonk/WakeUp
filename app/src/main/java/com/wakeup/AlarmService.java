@@ -10,7 +10,7 @@ import android.content.IntentFilter;
 
 import android.util.Log;
 
-import java.nio.CharBuffer;
+
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
@@ -66,13 +66,9 @@ public class AlarmService extends IntentService {
             Log.d(myLog, " первый элемент строки = " + Integer.decode(String.valueOf(alarm.get_repetDays().charAt(0))));
             Log.d(myLog, " активность будильника = " + alarm.get_active());
 
-
             calendar.set(Calendar.HOUR_OF_DAY, alarm.get_hour());
             calendar.set(Calendar.MINUTE, alarm.get_minute());
             calendar.set(Calendar.SECOND, 00);
-
-
-
 
             if ((Integer.decode(String.valueOf(alarm.get_repetDays().charAt(0))) > 0) && (!(alarm.get_repetDays().equals("100")))) {
                      repetDaysList = splitLine(alarm.get_repetDays());// получаем массив с днями
@@ -81,7 +77,6 @@ public class AlarmService extends IntentService {
 
                     if ((calendar.getTime().getHours() < alarm.get_hour()) && (calendar.getTime().getHours() < alarm.get_minute())) {
                         //ничего не меняем в будильнике, так как оно еще не сработал в нужное время
-
                     } else {
 
                         while (t < 0) {
@@ -95,41 +90,27 @@ public class AlarmService extends IntentService {
                         }
                     }
 
-
-
                 if(calendar.getTime().getDay() == Integer.decode(repetDaysList.get(i))) {
-
                     if (calendar.getTimeInMillis() < System.currentTimeMillis()) {// ставим будильник на следующую неделю
                         if(i + 1 < repetDaysList.size()){
                             i+= i + 1;
                             numberOfDays =  - calendar.getTime().getDay() + Integer.decode(repetDaysList.get(i));
-
                         }else {
                             i = 0;
                             numberOfDays = 7 - calendar.getTime().getDay() + Integer.decode(repetDaysList.get(i));
-
                         }
                         Log.d(myLog, " numberOfDays = - " + calendar.getTime().getDay() + " + " + Integer.decode(repetDaysList.get(i)) + " = " + numberOfDays);
-
                     } else {
                     }
                 }else if(calendar.getTime().getDay() < Integer.decode(repetDaysList.get(i))){
                         numberOfDays =  - calendar.getTime().getDay() + Integer.decode(repetDaysList.get(i));
                         Log.d(myLog, " numberOfDays = - " + calendar.getTime().getDay() + " + " + Integer.decode(repetDaysList.get(i)) + " = " + numberOfDays);
-
                     }else {
                         numberOfDays = 7 - calendar.getTime().getDay() + Integer.decode(repetDaysList.get(i));
                         Log.d(myLog, " numberOfDays = 7 - " + calendar.getTime().getDay() + " + " + Integer.decode(repetDaysList.get(i)) + " = " + numberOfDays);
-
                     }
-
-
                     Log.d(myLog, "calendar.getTime().getDay() = " + calendar.getTime().getDay());
-
-
             }
-
-
 
             if (DOWHATNEED.equals(action)) {//вариант, когда программа смотрин на флаг активности будильника в БД
                 if (alarm.get_active() == 1) {//если стоит АКТИВЕН
@@ -139,7 +120,6 @@ public class AlarmService extends IntentService {
                             time = calendar.getTimeInMillis() + 86400000 * numberOfDays;// ставим будильник на следующие сутки, если время уже прошло
                             calendar.setTimeInMillis(time);
                             Log.d(myLog, " ПОВТОРЯЮЩИЙСЯ будильник дата = " + calendar.getTime().getDate() + " месяц = " + calendar.getTime().getMonth());
-
                     }else {
                         if (calendar.getTimeInMillis() < System.currentTimeMillis()) {
                             time = calendar.getTimeInMillis() + 86400000 ;// ставим будильник на следующие сутки, если время уже прошло
@@ -148,7 +128,6 @@ public class AlarmService extends IntentService {
                         }
                         calendar.setTimeInMillis(time);
                         Log.d(myLog, " ОБЫЧНЫЙ будильник дата = "+calendar.getTime().getDate()+" месяц = "+calendar.getTime().getMonth());
-
                     }
 
                     alarmManager.cancel(pendingIntent);//отключаем будильник
@@ -179,7 +158,7 @@ public class AlarmService extends IntentService {
 
         for (Alarm cn : listGetAlarms) {//проходим про каждому обьекту списка
             alarms.add(new Alarm(cn.getID(), cn.get_hour(), cn.get_minute(), cn.get_active(), cn.get_content(),
-                    cn.get_everyDay(), cn.get_Sound(), cn.get_repetDays()));
+                    cn.get_Sound(), cn.get_repetDays()));
         }
     }
 

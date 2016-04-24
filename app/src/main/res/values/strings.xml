@@ -33,6 +33,7 @@
     <string name="alarmAlreadyExisted">Будильник на заданное время уже существует</string>
     <string name="changesSaved">Изменения сохранены</string>
     <string name="everyday">Ежедневно</string>
+    <string name="alarmDeleted">Будильник удален</string>
 
 
 </resources>

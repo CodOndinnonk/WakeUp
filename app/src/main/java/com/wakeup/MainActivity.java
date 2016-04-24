@@ -9,7 +9,6 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.DigitalClock;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -39,34 +38,16 @@ public class MainActivity extends Activity {
         db = new DatabaseHandler(this);//переменная для работы с БД
         lvMain = (ListView)findViewById(R.id.listViewMainActivity);
 
-
-
-
         prepareList();
 
-    /*    lvMain.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                Toast.makeText(MainActivity.this,"12",Toast.LENGTH_LONG).show();
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> adapterView) {
-
-            }
-        });
-
-*/
         lvMain.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Log.d(myLog, " MainActivity onItemClick");
                 Alarm alarm = boxAdapter.getAlarm(position);
-    edit(alarm.getID());
-
+                editAlarm(alarm.getID());
                 }
         });
-
 
         registerForContextMenu(lvMain);
     }
@@ -85,18 +66,11 @@ public class MainActivity extends Activity {
 
         for (Alarm cn : listGetAllAlarms) {//проходим про каждому обьекту списка
             listOfAlarms.add(new Alarm(cn.getID(), cn.get_hour(), cn.get_minute(), cn.get_active(), cn.get_content(),
-                    cn.get_everyDay(), cn.get_Sound(), cn.get_repetDays()));
+                     cn.get_Sound(), cn.get_repetDays()));
         }
     }
 
 
-
-public void pushOffOn(int active, int position){
-
-    Alarm needAlarm = listOfAlarms.get(position);
-    db.updateAlarm(new Alarm(needAlarm.getID(), needAlarm.get_hour(), needAlarm.get_minute(), active, needAlarm.get_content(), needAlarm.get_everyDay(), needAlarm.get_Sound(), needAlarm.get_repetDays()));
-   // setComandToRemakeAlarms();
-}
 
     public void setComandToRemakeAlarms(){
         Intent setAlarmIntent = new Intent(this, AlarmService.class);
@@ -106,7 +80,6 @@ public void pushOffOn(int active, int position){
 
 
     public void resetList(){
-
         listOfAlarms.clear();
         fillData();
         boxAdapter.notifyDataSetChanged();
@@ -116,7 +89,6 @@ public void pushOffOn(int active, int position){
 
     @Override
     protected void onRestart() {//при запуске Активности(возобнавлении ее работы)
-
         super.onRestart();
         resetList();
     }
@@ -124,9 +96,8 @@ public void pushOffOn(int active, int position){
 
     @Override
     protected void onResume() {//при запуске Активности(возобнавлении ее работы)
-
         super.onResume();
-     //   resetList();
+       resetList();
     }
 
 
@@ -187,13 +158,15 @@ public void pushOffOn(int active, int position){
     public boolean onContextItemSelected(MenuItem item) {
         // получаем инфу о пункте списка
         AdapterView.AdapterContextMenuInfo acmi = (AdapterView.AdapterContextMenuInfo) item.getMenuInfo();
-        Alarm note = boxAdapter.getAlarm((int)boxAdapter.getItemId(acmi.position));
+        Alarm alarm = boxAdapter.getAlarm((int)boxAdapter.getItemId(acmi.position));
 
         switch (item.getItemId()) {
             case menu_edit://вызов окна О ПРОГРАММЕ
+                editAlarm(alarm.getID());
                 return true;
 
             case menu_del://вызов окна О ПРОГРАММЕ
+                deleteAlarm(alarm.getID());
                 return true;
 
             default:
@@ -214,48 +187,24 @@ public void pushOffOn(int active, int position){
 
 
 
-
-
-
-    public void offAlarm(View view) {
-        Intent myOff = new Intent(this, AlarmService.class);
-        myOff.setAction(AlarmService.DOWHATNEED);
-        this.startService(myOff);
-    }
-
-    public void onCL(View view) {
-        Log.d(myLog, " MainActivity onCL");
-    }
-
-
-
-
-    public void edit(int id) {
-        Log.d(myLog, "MainActivity edit 1 ");
-
+    public void editAlarm(int id) {
             Intent goToAdd = new Intent(this, ShowAlarm.class);
             goToAdd.putExtra("needId", id  );
             startActivity(goToAdd);
-
     }
 
-
-    /*
-    public void startAlarm(View view) {
-        Log.d(myLog, "MainActivity startAlarm 1 ");
-        int setTimeHours = setTime.getCurrentHour();
-        int setTimeMinute = setTime.getCurrentMinute();
-        Log.d(myLog, "Установленное время ЧАСЫ = " + setTimeHours);
-        Log.d(myLog, "Установленное время МИНУТЫ = " + setTimeMinute);
-        SharedPreferences.Editor editor = mSettings.edit();// вызов обьекта editor для измненения параметров настроек
-        editor.putInt(WRITE_HOURS, setTimeHours);
-        editor.putInt(WRITE_MINUTE, setTimeMinute);
-        editor.apply();// метод, сохраняющий добавленные данные
-        Intent my = new Intent(this, AlarmService.class);
-        my.setAction(AlarmService.CREATE);
-        this.startService(my);
+    public void deleteAlarm(int id) {
+        Alarm needNote = db.getAlarmById(id);//создаем обьект ЗАПИСЬ и заполняем его значениями из записи взятой по нужному нам ID
+        db.deleteAlarm(new Alarm(needNote.getID(), needNote.get_hour(),
+                needNote.get_minute(), needNote.get_active(), needNote.get_content(),
+                needNote.get_Sound(), needNote.get_repetDays()));//запускаем метод "удаление" и передаем обьект ЗАПИСЬ со всеми полями
+        Toast mytoast = Toast.makeText(getApplicationContext(),
+                R.string.alarmDeleted, Toast.LENGTH_SHORT);
+        mytoast.show();
+        setComandToRemakeAlarms();
+        resetList();
     }
-*/
+
 
 
 }

@@ -10,14 +10,11 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 
 
-import android.widget.CompoundButton;
-import android.widget.CompoundButton.OnCheckedChangeListener;
-
 import android.widget.Switch;
 import android.widget.TextView;
 
 
-public class BoxAdapter extends BaseAdapter implements View.OnClickListener {
+public class BoxAdapter extends BaseAdapter  {
     Context context;
     LayoutInflater lInflater;
     ArrayList<Alarm> objects;
@@ -68,20 +65,15 @@ public class BoxAdapter extends BaseAdapter implements View.OnClickListener {
         Alarm alarmByPosition = getAlarm(position);
 
         // заполняем View в пункте списка данными из будильника
-        if(alarmByPosition.get_minute() < 10){
+        if (alarmByPosition.get_minute() < 10) {
             ((TextView) view.findViewById(R.id.textTimeTabitem)).setText(alarmByPosition.get_hour() + ":0" + alarmByPosition.get_minute());
-        }else {
+        } else {
             ((TextView) view.findViewById(R.id.textTimeTabitem)).setText(alarmByPosition.get_hour() + ":" + alarmByPosition.get_minute());
         }
-        if(alarmByPosition.get_everyDay() == 1) {
-            ((TextView) view.findViewById(R.id.textEverydayTabitem)).setText(R.string.everyday);
-        }else {
-            ((TextView) view.findViewById(R.id.textEverydayTabitem)).setText("");
-        }
-        if(alarmByPosition.get_active() == 1) {
+        if (alarmByPosition.get_active() == 1) {
             ((Switch) view.findViewById(R.id.buttonOffOnTabitem)).setChecked(true);
             ((Switch) view.findViewById(R.id.buttonOffOnTabitem)).setTextColor(Color.GREEN);
-        }else {
+        } else {
             ((Switch) view.findViewById(R.id.buttonOffOnTabitem)).setChecked(false);
             ((Switch) view.findViewById(R.id.buttonOffOnTabitem)).setTextColor(Color.RED);
         }
@@ -92,8 +84,6 @@ public class BoxAdapter extends BaseAdapter implements View.OnClickListener {
         // пишем позицию
         offNoButton.setTag(position);
 
-
-
         return view;
     }
 
@@ -103,18 +93,14 @@ public class BoxAdapter extends BaseAdapter implements View.OnClickListener {
     }
 
 
-
-
-
-
     View.OnClickListener myButtonClickList = new View.OnClickListener() {
         @Override
         public void onClick(View view) {
-            Log.d(myLog, "ID нажатого будильника " +getAlarm(Integer.valueOf(view.getTag().toString())).getID());
+            Log.d(myLog, "ID нажатого будильника " + getAlarm(Integer.valueOf(view.getTag().toString())).getID());
             Alarm needAlarm = getAlarm(Integer.valueOf(view.getTag().toString()));
-            if(needAlarm.get_active() == 1){
+            if (needAlarm.get_active() == 1) {
                 needAlarm.set_active(0);
-            }else {
+            } else {
                 needAlarm.set_active(1);
             }
             resetAlarmState.changeAlarmWork(needAlarm);
@@ -123,26 +109,5 @@ public class BoxAdapter extends BaseAdapter implements View.OnClickListener {
     };
 
 
-
-/*
-    OnCheckedChangeListener myButtonChangList = new OnCheckedChangeListener() {
-        public void onCheckedChanged(CompoundButton buttonView,
-                                     boolean isChecked) {
-            Log.d(myLog, "ID нажатого будильника " +getAlarm(Integer.valueOf(buttonView.getTag().toString())).getID());
-            Alarm needAlarm = getAlarm(Integer.valueOf(buttonView.getTag().toString()));
-            if(isChecked){
-                needAlarm.set_active(1);
-            }else {
-                needAlarm.set_active(0);
-            }
-            resetAlarmState.changeAlarmWork(needAlarm);
-            resetAlarmState.setComandToRemakeAlarms();
-        }
-    };
-
-*/
-    @Override
-    public void onClick(View view) {
-        Log.d(myLog, "onClick");
-    }
 }
+

@@ -3,7 +3,7 @@ package com.wakeup;
 
 import android.hardware.Camera;
 
-import java.io.IOException;
+
 
 
 public class Light {
