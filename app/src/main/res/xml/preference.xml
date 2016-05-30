@@ -19,4 +19,20 @@
         android:title="@string/proverbCheckBox">
     </CheckBoxPreference>
 
+    <CheckBoxPreference
+        android:key="@string/keyDelay"
+        android:summaryOff="@string/offDelayDescription"
+        android:summaryOn="@string/onDelayDescription"
+        android:title="@string/delay">
+    </CheckBoxPreference>
+
+    <EditTextPreference
+        android:key="@string/keySetDelay"
+        android:title="@string/timeDelay"
+        android:dependency="@string/keyDelay">
+    </EditTextPreference>
+
+
+
+
 </PreferenceScreen>

@@ -34,6 +34,13 @@
     <string name="changesSaved">Изменения сохранены</string>
     <string name="everyday">Ежедневно</string>
     <string name="alarmDeleted">Будильник удален</string>
+    <string name="delay">Интервал повтора</string>
+    <string name="offDelayDescription">Повтор будильника выключен</string>
+    <string name="onDelayDescription">Повтор будильника включен</string>
+    <string name="timeDelay">Длительность интервала</string>
+    <string name="keySetDelay">setDelay</string>
+    <string name="keyDelay">Delay</string>
+
 
 
 </resources>

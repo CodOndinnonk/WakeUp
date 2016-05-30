@@ -113,8 +113,6 @@ public class ShowAlarm extends Activity {
             Button button7 = (Button)findViewById(R.id.button7);
             button7.setBackgroundColor(Color.GREEN);
         }
-
-
     }
 
 
@@ -154,30 +152,31 @@ public class ShowAlarm extends Activity {
         });
 
 
-        if(repetDaysList.size() == 0){
-            repetDays = "0";
-        }else {// если есть больше одного дня повтора, то удаляем 0 вначале списка
+         if(repetDaysList.size() != 0){// если есть больше одного дня повтора, то удаляем 0 вначале списка
             if(repetDaysList.get(0).equals(0)){// если первая цифра повтора 0
-                Log.d(myLog,"ДО repetDaysList.get(0) "+repetDaysList.get(0));
+                Log.d(myLog,"ДО repetDaysList.get(0) = "+repetDaysList.get(0));
                 repetDaysList.remove(0);
-                Log.d(myLog, "ПОСЛЕ repetDaysList.get(0) " + repetDaysList.get(0));
-
             }
         }
-        //создаем строку с днями
-        for(int i=0; i<repetDaysList.size();i++){
-            repetDays += repetDaysList.get(i).toString() + " ";
+
+        if(repetDaysList.size() == 0){
+            repetDays = "0";
         }
 
 
-
+        //создаем строку с днями
+        if(repetDaysList.size() != 0) {// если массив с днями не пустой, то строим строку с его значениями, если же пустой, то остается значение строки = 0
+            for (int i = 0; i < repetDaysList.size(); i++) {
+                repetDays += repetDaysList.get(i).toString() + " ";
+            }
+        }
 
 
         int resultOfExistance = checkForExistanceAlarm(new Alarm(needId, setTimeHours, setTimeMinute, isActive, strContent,
                 soundNumber, repetDays));
 
         if(resultOfExistance == 0) {
-            Log.d(myLog,"ОБНОВЛЕНИЕ будильник "+repetDays);
+            Log.d(myLog,"ОБНОВЛЕНИЕ будильника (повтор по) = " + repetDays);
             db.updateAlarm(new Alarm(needId, setTimeHours, setTimeMinute, isActive, strContent, soundNumber, repetDays));
 
             Toast mytoast = Toast.makeText(getApplicationContext(),

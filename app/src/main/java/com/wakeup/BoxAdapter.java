@@ -55,7 +55,7 @@ public class BoxAdapter extends BaseAdapter  {
     // пункт списка
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        Log.d(myLog, "getView");
+
         // используем созданные, но не используемые view
         View view = convertView;
         if (view == null) {
@@ -96,7 +96,7 @@ public class BoxAdapter extends BaseAdapter  {
     View.OnClickListener myButtonClickList = new View.OnClickListener() {
         @Override
         public void onClick(View view) {
-            Log.d(myLog, "ID нажатого будильника " + getAlarm(Integer.valueOf(view.getTag().toString())).getID());
+        //    Log.d(myLog, "ID нажатого будильника " + getAlarm(Integer.valueOf(view.getTag().toString())).getID());
             Alarm needAlarm = getAlarm(Integer.valueOf(view.getTag().toString()));
             if (needAlarm.get_active() == 1) {
                 needAlarm.set_active(0);
