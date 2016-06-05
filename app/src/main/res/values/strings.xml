@@ -37,7 +37,7 @@
     <string name="delay">Интервал повтора</string>
     <string name="offDelayDescription">Повтор будильника выключен</string>
     <string name="onDelayDescription">Повтор будильника включен</string>
-    <string name="timeDelay">Длительность интервала</string>
+    <string name="timeDelay">Длительность интервала (мин)</string>
     <string name="keySetDelay">setDelay</string>
     <string name="keyDelay">Delay</string>
 

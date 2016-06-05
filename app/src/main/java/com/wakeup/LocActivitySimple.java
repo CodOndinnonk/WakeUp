@@ -5,7 +5,9 @@ import android.app.AlarmManager;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.View;
 
@@ -18,6 +20,7 @@ public class LocActivitySimple extends Activity {
     int alarmId;
     LocActivityHelper locActivityHelper;
     ResetAlarmState resetAlarmState;
+    SharedPreferences sharedPreferences;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,6 +39,7 @@ public class LocActivitySimple extends Activity {
 
         resetAlarmState = new ResetAlarmState(this);
 
+        sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
 
         //отменяем интент будильника, так как он уже сработал
         AlarmManager alarmManager = (AlarmManager)getSystemService(Context.ALARM_SERVICE);
@@ -95,5 +99,22 @@ public class LocActivitySimple extends Activity {
     }
 
 
+    public void delay(View view) {
+        if (sharedPreferences.getBoolean("Delay", false)) {
+            Log.d(myLog, "LocActivity delay");
+            int rezult = ring.stopSound();
+            if (rezult == 1) {//сработал метод остановки аудио
+                light.offLight();
+                vibration.offVibration();
+                //изменение активности будильника на ВЫКЛЮЧЕН
+                resetAlarmState.makeAlarmDelay(alarmId);
+                // перезапуск всех будильников
+                resetAlarmState.setComandToRemakeAlarms();
+                finish();
+            }
+        }else {
+                Log.d(myLog, "Отложение не включено");
+            }
+    }
 
 }

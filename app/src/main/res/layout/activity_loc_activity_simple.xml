@@ -16,4 +16,14 @@
         android:text="off"
         android:layout_alignParentRight="true" />
 
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="delay"
+        android:id="@+id/button"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentLeft="true"
+        android:onClick="delay" />
+
 </RelativeLayout>
