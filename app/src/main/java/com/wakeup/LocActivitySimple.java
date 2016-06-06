@@ -82,6 +82,23 @@ public class LocActivitySimple extends Activity {
         }
     }
 
+    public void delay(View view) {
+        if (sharedPreferences.getBoolean("Delay", false)) {
+            Log.d(myLog, "LocActivity delay");
+            int rezult = ring.stopSound();
+            if (rezult == 1) {//сработал метод остановки аудио
+                light.offLight();
+                vibration.offVibration();
+                //изменение активности будильника на ВЫКЛЮЧЕН
+                resetAlarmState.makeAlarmDelay(alarmId);
+                // перезапуск всех будильников
+                resetAlarmState.setComandToRemakeAlarms();
+                finish();
+            }
+        }else {
+            Log.d(myLog, "Отложение не включено");
+        }
+    }
 
 
 
@@ -99,22 +116,6 @@ public class LocActivitySimple extends Activity {
     }
 
 
-    public void delay(View view) {
-        if (sharedPreferences.getBoolean("Delay", false)) {
-            Log.d(myLog, "LocActivity delay");
-            int rezult = ring.stopSound();
-            if (rezult == 1) {//сработал метод остановки аудио
-                light.offLight();
-                vibration.offVibration();
-                //изменение активности будильника на ВЫКЛЮЧЕН
-                resetAlarmState.makeAlarmDelay(alarmId);
-                // перезапуск всех будильников
-                resetAlarmState.setComandToRemakeAlarms();
-                finish();
-            }
-        }else {
-                Log.d(myLog, "Отложение не включено");
-            }
-    }
+
 
 }

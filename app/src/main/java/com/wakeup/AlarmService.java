@@ -51,12 +51,12 @@ public class AlarmService extends IntentService {
         for (Alarm alarm : alarms) {
             numberOfDays = 0;
             long time = 0;
-            Intent intentForAlarmreceiver = new Intent(this, AlarmReceiver.class);
-            intentForAlarmreceiver.putExtra(ID, alarm.getID());
-            intentForAlarmreceiver.putExtra(TIME_HOUR, alarm.get_hour());
-            intentForAlarmreceiver.putExtra(TIME_MINUTE, alarm.get_minute());
+            Intent intentForAlarmReceiver = new Intent(this, AlarmReceiver.class);
+            intentForAlarmReceiver.putExtra(ID, alarm.getID());
+            intentForAlarmReceiver.putExtra(TIME_HOUR, alarm.get_delayHour());
+            intentForAlarmReceiver.putExtra(TIME_MINUTE, alarm.get_delayMinute());
 
-            PendingIntent pendingIntent = PendingIntent.getBroadcast(this, (int) alarm.getID(), intentForAlarmreceiver,
+            PendingIntent pendingIntent = PendingIntent.getBroadcast(this, (int) alarm.getID(), intentForAlarmReceiver,
                     PendingIntent.FLAG_UPDATE_CURRENT);
 
             Calendar calendar = Calendar.getInstance();
@@ -66,8 +66,8 @@ public class AlarmService extends IntentService {
             Log.d(myLog, " первый элемент строки = " + Integer.decode(String.valueOf(alarm.get_repetDays().charAt(0))));
             Log.d(myLog, " активность будильника = " + alarm.get_active());
 
-            calendar.set(Calendar.HOUR_OF_DAY, alarm.get_hour());
-            calendar.set(Calendar.MINUTE, alarm.get_minute());
+            calendar.set(Calendar.HOUR_OF_DAY, alarm.get_delayHour());
+            calendar.set(Calendar.MINUTE, alarm.get_delayMinute());
             calendar.set(Calendar.SECOND, 00);
 
             if ((Integer.decode(String.valueOf(alarm.get_repetDays().charAt(0))) > 0) && (!(alarm.get_repetDays().equals("100")))) {
@@ -141,8 +141,6 @@ public class AlarmService extends IntentService {
     }
 
 
-
-
     public ArrayList<String> splitLine(String lineForSplit){
         ArrayList<String> readyList = new ArrayList<String>();
             for (String splitWord : lineForSplit.split(" ")) {
@@ -157,7 +155,7 @@ public class AlarmService extends IntentService {
         List<Alarm> listGetAlarms = db.getAllAlarms();//создание списка обьектов типа "запись" и заполнения его значениями всех записей взятых из БД
 
         for (Alarm cn : listGetAlarms) {//проходим про каждому обьекту списка
-            alarms.add(new Alarm(cn.getID(), cn.get_hour(), cn.get_minute(), cn.get_active(), cn.get_content(),
+            alarms.add(new Alarm(cn.getID(), cn.get_hour(), cn.get_minute(), cn.get_delayHour(), cn.get_delayMinute(), cn.get_active(), cn.get_content(),
                     cn.get_Sound(), cn.get_repetDays()));
         }
     }

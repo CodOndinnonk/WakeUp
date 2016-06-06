@@ -19,6 +19,8 @@ public class DatabaseHandler extends SQLiteOpenHelper {
     private static final String KEY_ID = "id";//название поля id
     private static final String KEY_HOUR = "hour";//название поля date
     private static final String KEY_MINUTE = "minute";//название поля date
+    private static final String KEY_DELAY_HOUR = "delayHour";//название поля date
+    private static final String KEY_DELAY_MINUTE = "dealyMinute";//название поля date
     private static final String KEY_ACTIVE = "active";//название поля date
     private static final String KEY_CONTENT = "content";//название поля date
     private static final String KEY_SOUND = "sound";//название поля keyword
@@ -39,6 +41,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         //создание строки, содержащей команда для создания БД
         String CREATE_NOTES_TABLE = "CREATE TABLE " + TABLE_NOTES + "("
                 + KEY_ID + " INTEGER PRIMARY KEY,"  + KEY_HOUR + " INTEGER," + KEY_MINUTE + " INTEGER,"
+                + KEY_DELAY_HOUR + " INTEGER," + KEY_DELAY_MINUTE + " INTEGER,"
                 + KEY_ACTIVE + " INTEGER," + KEY_CONTENT + " TEXT,"  + KEY_SOUND + " INTEGER,"
                 + KEY_REPETDAYS + " TEXT"
                 + ")";
@@ -65,6 +68,8 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         ContentValues values = new ContentValues();//создание переменной, позволяющей создать шаблот "записи" и заполниять его для добавления в БД
         values.put(KEY_HOUR, alarm.get_hour());
         values.put(KEY_MINUTE, alarm.get_minute());//заполнение поля информацией, извлеченной из соответствующего поля записи, переданной из другой активности
+        values.put(KEY_DELAY_HOUR, alarm.get_delayHour());
+        values.put(KEY_DELAY_MINUTE, alarm.get_delayMinute());//заполнение поля информацией, извлеченной из соответствующего поля записи, переданной из другой активности
         values.put(KEY_ACTIVE, alarm.get_active());//заполнение поля информацией, извлеченной из соответствующего поля записи, переданной из другой активности
         values.put(KEY_CONTENT, alarm.get_content());//заполнение поля информацией, извлеченной из соответствующего поля записи, переданной из другой активности
         values.put(KEY_SOUND, alarm.get_Sound());
@@ -80,14 +85,14 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getReadableDatabase();//формат работы с БД
         //переменная, хранящая найденую запись
         Cursor cursor = db.query(TABLE_NOTES, new String[] { KEY_ID, KEY_HOUR,
-                        KEY_MINUTE, KEY_ACTIVE, KEY_CONTENT, KEY_SOUND, KEY_REPETDAYS },  KEY_ID + "=?",
+                        KEY_MINUTE, KEY_DELAY_HOUR, KEY_DELAY_MINUTE, KEY_ACTIVE, KEY_CONTENT, KEY_SOUND, KEY_REPETDAYS },  KEY_ID + "=?",
                 new String[] { String.valueOf(Id) }, null, null, null, null);
         if (cursor != null){
             cursor.moveToFirst();
         }
 //создание обьекта ЗАПИСЬ и заполняем его данными из найденной ранее записи
-        Alarm alarm = new Alarm(cursor.getInt(0), cursor.getInt(1), cursor.getInt(2), cursor.getInt(3), cursor.getString(4),
-                cursor.getInt(5), cursor.getString(6));
+        Alarm alarm = new Alarm(cursor.getInt(0), cursor.getInt(1), cursor.getInt(2), cursor.getInt(3), cursor.getInt(4),
+                cursor.getInt(5), cursor.getString(6), cursor.getInt(7), cursor.getString(8));
 
         return alarm;//возвращаум активности, которая запрашивала обьект с заполненными полями(тоесть найденую запись)
     }
@@ -106,10 +111,12 @@ public class DatabaseHandler extends SQLiteOpenHelper {
                 alarm.setID(cursor.getInt(0));//заполнение поля, данными взятыми из БД
                 alarm.set_hour(cursor.getInt(1));//заполнение поля, данными взятыми из БД
                 alarm.set_minute(cursor.getInt(2));//заполнение поля, данными взятыми из БД
-                alarm.set_active(cursor.getInt(3));//заполнение поля, данными взятыми из БД
-                alarm.set_content(cursor.getString(4));//заполнение поля, данными взятыми из БД
-                alarm.set_Sound(cursor.getInt(5));
-                alarm.set_repetDays(cursor.getString(6));
+                alarm.set_delayHour(cursor.getInt(3));//заполнение поля, данными взятыми из БД
+                alarm.set_delayMinute(cursor.getInt(4));//заполнение поля, данными взятыми из БД
+                alarm.set_active(cursor.getInt(5));//заполнение поля, данными взятыми из БД
+                alarm.set_content(cursor.getString(6));//заполнение поля, данными взятыми из БД
+                alarm.set_Sound(cursor.getInt(7));
+                alarm.set_repetDays(cursor.getString(8));
                 contactList.add(alarm);//добавление обьекта в список
             } while (cursor.moveToNext());// пока есть следующая запись
         }
@@ -126,6 +133,8 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         ContentValues values = new ContentValues();
         values.put(KEY_HOUR, alarm.get_hour());
         values.put(KEY_MINUTE, alarm.get_minute());//заполнение поля информацией, извлеченной из соответствующего поля записи, переданной из другой активности
+        values.put(KEY_DELAY_HOUR, alarm.get_delayHour());
+        values.put(KEY_DELAY_MINUTE, alarm.get_delayMinute());//заполнение поля информацией, извлеченной из соответствующего поля записи, переданной из другой активности
         values.put(KEY_ACTIVE, alarm.get_active());//заполнение поля информацией, извлеченной из соответствующего поля записи, переданной из другой активности
         values.put(KEY_CONTENT, alarm.get_content());//заполнение поля информацией, извлеченной из соответствующего поля записи, переданной из другой активности
         values.put(KEY_SOUND, alarm.get_Sound());

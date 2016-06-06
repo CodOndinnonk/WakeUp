@@ -7,6 +7,8 @@ public class Alarm {
     int _id;
     int _hour;
     int _minute;
+    int _delayHour;
+    int _delayMinute;
     int _active;
     String _content;
     int _sound;
@@ -15,11 +17,13 @@ public class Alarm {
     public Alarm(){
     }
 
-    public Alarm(int id, int hour, int minute,  int active, String content, int sound, String repetDays){
+    public Alarm(int id, int hour, int minute, int delayHour, int delayMinute, int active, String content, int sound, String repetDays){
 
         this._id = id;
         this._hour = hour;
         this._minute = minute;
+        this._delayHour = delayHour;
+        this._delayMinute = delayMinute;
         this._active = active;
         this._content = content;
         this._sound = sound;
@@ -27,10 +31,12 @@ public class Alarm {
 
     }
 
-    public Alarm(int hour, int minute,  int active, String content, int sound, String repetDays){
+    public Alarm(int hour, int minute, int delayHour, int delayMinute, int active, String content, int sound, String repetDays){
 
         this._hour = hour;
         this._minute = minute;
+        this._delayHour = delayHour;
+        this._delayMinute = delayMinute;
         this._active = active;
         this._content = content;
         this._sound = sound;
@@ -54,6 +60,22 @@ public class Alarm {
 
     public void set_minute(int _minute) {
         this._minute = _minute;
+    }
+
+    public void set_delayHour(int _delayHour) {
+        this._delayHour = _delayHour;
+    }
+
+    public void set_delayMinute(int _delaMinute) {
+        this._delayMinute = _delaMinute;
+    }
+
+    public int get_delayHour() {
+        return _delayHour;
+    }
+
+    public int get_delayMinute() {
+        return _delayMinute;
     }
 
     public void set_active(int _active) {

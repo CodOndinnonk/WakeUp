@@ -65,8 +65,8 @@ public class MainActivity extends Activity {
         List<Alarm> listGetAllAlarms = db.getAllAlarms();//создание списка обьектов типа "запись" и заполнения его значениями всех записей взятых из БД
 
         for (Alarm cn : listGetAllAlarms) {//проходим про каждому обьекту списка
-            listOfAlarms.add(new Alarm(cn.getID(), cn.get_hour(), cn.get_minute(), cn.get_active(), cn.get_content(),
-                     cn.get_Sound(), cn.get_repetDays()));
+            listOfAlarms.add(new Alarm(cn.getID(), cn.get_hour(), cn.get_minute(), cn.get_delayHour(), cn.get_delayMinute(), cn.get_active(), cn.get_content(),
+                    cn.get_Sound(), cn.get_repetDays()));
         }
     }
 
@@ -194,10 +194,10 @@ public class MainActivity extends Activity {
     }
 
     public void deleteAlarm(int id) {
-        Alarm needNote = db.getAlarmById(id);//создаем обьект ЗАПИСЬ и заполняем его значениями из записи взятой по нужному нам ID
-        db.deleteAlarm(new Alarm(needNote.getID(), needNote.get_hour(),
-                needNote.get_minute(), needNote.get_active(), needNote.get_content(),
-                needNote.get_Sound(), needNote.get_repetDays()));//запускаем метод "удаление" и передаем обьект ЗАПИСЬ со всеми полями
+        Alarm needAlarm = db.getAlarmById(id);//создаем обьект ЗАПИСЬ и заполняем его значениями из записи взятой по нужному нам ID
+        db.deleteAlarm(new Alarm(needAlarm.getID(), needAlarm.get_hour(),
+                needAlarm.get_minute(), needAlarm.get_delayHour(), needAlarm.get_delayMinute(), needAlarm.get_active(), needAlarm.get_content(),
+                needAlarm.get_Sound(), needAlarm.get_repetDays()));//запускаем метод "удаление" и передаем обьект ЗАПИСЬ со всеми полями
         Toast mytoast = Toast.makeText(getApplicationContext(),
                 R.string.alarmDeleted, Toast.LENGTH_SHORT);
         mytoast.show();

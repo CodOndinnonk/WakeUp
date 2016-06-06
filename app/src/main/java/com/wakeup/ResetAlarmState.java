@@ -29,8 +29,8 @@ public class ResetAlarmState {
         }else {// если нет повторений, то выключаем
             needAlarm.set_active(0);
         }
-        db.updateAlarm(new Alarm(needAlarm.getID(), needAlarm.get_hour(), needAlarm.get_minute(),
-                needAlarm.get_active(), needAlarm.get_content(),
+        db.updateAlarm(new Alarm(needAlarm.getID(), needAlarm.get_hour(), needAlarm.get_minute(), needAlarm.get_hour(),
+                needAlarm.get_minute(), needAlarm.get_active(), needAlarm.get_content(),
                 needAlarm.get_Sound(),needAlarm.get_repetDays()));
     }
 
@@ -38,15 +38,15 @@ public class ResetAlarmState {
         DatabaseHandler db = new DatabaseHandler(context);
         needAlarm = alarm;
         db.updateAlarm(new Alarm(needAlarm.getID(), needAlarm.get_hour(), needAlarm.get_minute(),
+                needAlarm.get_hour(), needAlarm.get_minute(),
                 needAlarm.get_active(), needAlarm.get_content(),
                 needAlarm.get_Sound(),needAlarm.get_repetDays()));
     }
 
     public void makeAlarmDelay(int alarmId){
+        Log.d(myLog,"ResetAlarmState  makeAlarmDelay ");
         DatabaseHandler db = new DatabaseHandler(context);
         needAlarm = db.getAlarmById(alarmId);
-
-        Log.d(myLog,"ResetAlarmState  makeAlarmDelay ");
 
         int delayMinutes = 0;
         try {
@@ -56,10 +56,10 @@ public class ResetAlarmState {
 
         Calendar calendar = Calendar.getInstance();
 
-        calendar.set(Calendar.HOUR_OF_DAY, needAlarm.get_hour());
-        calendar.set(Calendar.MINUTE, needAlarm.get_minute() + delayMinutes);
+        calendar.set(Calendar.HOUR_OF_DAY, needAlarm.get_delayHour());
+        calendar.set(Calendar.MINUTE, needAlarm.get_delayMinute() + delayMinutes);
 
-        db.updateAlarm(new Alarm(needAlarm.getID(), calendar.getTime().getHours(), calendar.getTime().getMinutes(),
+        db.updateAlarm(new Alarm(needAlarm.getID(), needAlarm.get_hour(), needAlarm.get_minute(), calendar.getTime().getHours(), calendar.getTime().getMinutes(),
                 needAlarm.get_active(), needAlarm.get_content(),
                 needAlarm.get_Sound(),needAlarm.get_repetDays()));
         }

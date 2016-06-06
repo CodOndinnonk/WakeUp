@@ -172,12 +172,12 @@ public class ShowAlarm extends Activity {
         }
 
 
-        int resultOfExistance = checkForExistanceAlarm(new Alarm(needId, setTimeHours, setTimeMinute, isActive, strContent,
-                soundNumber, repetDays));
+        int resultOfExistance = checkForExistanceAlarm(new Alarm(needId, setTimeHours, setTimeMinute, setTimeHours, setTimeMinute,
+                isActive, strContent, soundNumber, repetDays));
 
         if(resultOfExistance == 0) {
             Log.d(myLog,"ОБНОВЛЕНИЕ будильника (повтор по) = " + repetDays);
-            db.updateAlarm(new Alarm(needId, setTimeHours, setTimeMinute, isActive, strContent, soundNumber, repetDays));
+            db.updateAlarm(new Alarm(needId, setTimeHours, setTimeMinute, setTimeHours, setTimeMinute, isActive, strContent, soundNumber, repetDays));
 
             Toast mytoast = Toast.makeText(getApplicationContext(),
                     R.string.changesSaved, Toast.LENGTH_SHORT);
@@ -223,11 +223,11 @@ public class ShowAlarm extends Activity {
             repetDays = "0";
         }
 
-        int resultOfExistance = checkForExistanceAlarm(new Alarm(setTimeHours, setTimeMinute, isActive, strContent, soundNumber, repetDays));
+        int resultOfExistance = checkForExistanceAlarm(new Alarm(setTimeHours, setTimeMinute, setTimeHours, setTimeMinute, isActive, strContent, soundNumber, repetDays));
 
         if(resultOfExistance == 0) {
 
-            db.addAlarm(new Alarm(setTimeHours, setTimeMinute, isActive, strContent, soundNumber, repetDays));
+            db.addAlarm(new Alarm(setTimeHours, setTimeMinute, setTimeHours, setTimeMinute, isActive, strContent, soundNumber, repetDays));
 
             Toast mytoast = Toast.makeText(getApplicationContext(),
                     R.string.Toast_alarm_created, Toast.LENGTH_SHORT);
@@ -246,8 +246,8 @@ public class ShowAlarm extends Activity {
         List<Alarm> listGetAlarms = db.getAllAlarms();//создание списка обьектов типа "запись" и заполнения его значениями всех записей взятых из БД
 
         for (Alarm cn : listGetAlarms) {//проходим про каждому обьекту списка
-            alarms.add(new Alarm(cn.getID(), cn.get_hour(), cn.get_minute(), cn.get_active(), cn.get_content(),
-                     cn.get_Sound(), cn.get_repetDays()));
+            alarms.add(new Alarm(cn.getID(), cn.get_hour(), cn.get_minute(), cn.get_delayHour(), cn.get_delayMinute(),
+                    cn.get_active(), cn.get_content(), cn.get_Sound(), cn.get_repetDays()));
         }
     }
 
@@ -305,10 +305,11 @@ public class ShowAlarm extends Activity {
     }
 
     public void delete(View view) {
-        Alarm needNote = db.getAlarmById(needId);//создаем обьект ЗАПИСЬ и заполняем его значениями из записи взятой по нужному нам ID
-        db.deleteAlarm(new Alarm(needNote.getID(), needNote.get_hour(), needNote.get_minute(),
-                needNote.get_active(), needNote.get_content(),
-                needNote.get_Sound(), needNote.get_repetDays()));//запускаем метод "удаление" и передаем обьект ЗАПИСЬ со всеми полями
+        Alarm needAlarm = db.getAlarmById(needId);//создаем обьект ЗАПИСЬ и заполняем его значениями из записи взятой по нужному нам ID
+        db.deleteAlarm(new Alarm(needAlarm.getID(), needAlarm.get_hour(), needAlarm.get_minute(),
+                needAlarm.get_delayHour(), needAlarm.get_delayMinute(),
+                needAlarm.get_active(), needAlarm.get_content(),
+                needAlarm.get_Sound(), needAlarm.get_repetDays()));//запускаем метод "удаление" и передаем обьект ЗАПИСЬ со всеми полями
         Toast mytoast = Toast.makeText(getApplicationContext(),
                 "Запись успешно удалена", Toast.LENGTH_SHORT);
         mytoast.show();
