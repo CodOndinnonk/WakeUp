@@ -17,6 +17,7 @@ import java.util.List;
 
 public class AlarmService extends IntentService {
     public static final String DOWHATNEED = "DOWHATNEED";
+    public static final String DELETE = "DELETE";
     final static String myLog = "myLog";
     private IntentFilter matcher;
     public static final String ID = "id";
@@ -26,26 +27,63 @@ public class AlarmService extends IntentService {
     public static final String TONE = "alarmTone";
     public static final String ACTION_ALARM_CHANGED = "android.intent.action.ALARM_CHANGED";
     ArrayList<Alarm> alarms = new ArrayList<Alarm>();
-    ArrayList<String> repetDaysList;
+    ArrayList<String> repeatDaysList;
+    AlarmManager alarmManager;
+    DatabaseHandler db;
 
     public AlarmService() {
         super(null);
         matcher = new IntentFilter();
         matcher.addAction(DOWHATNEED);
+        matcher.addAction(DELETE);
     }
 
     @Override
     protected void onHandleIntent(Intent intent) {
         String action = intent.getAction();
+        int needAlarm = intent.getIntExtra("id", 999);
+
+        alarmManager = (AlarmManager)getSystemService(Context.ALARM_SERVICE);
+        db = new DatabaseHandler(this);//переменная для работы с БД
+
+
         if (matcher.matchAction(action)) {//если пеереданное значение совпадает с создать или отменить
-            execute(action);
+          if(action.equals(DOWHATNEED)){
+              execute(action);
+          }else if(action.equals(DELETE)){
+              deleteAlarm(needAlarm);
+          }
         }
     }
 
+    private void deleteAlarm(int alarmId){
+        Log.d(myLog, "id для удаления будильника = " + alarmId);
+        if(alarmId == -1){//еслии выбрано удаление всех будильников(вередан id = -1)
+            fillData();
+            for (Alarm alarm : alarms) {
+                stopAlarm(alarm);
+                db.deleteAlarm(alarm);//запускаем метод "удаление" и передаем обьект ЗАПИСЬ со всеми полями
+            }
+        }else {// если задано удаление конкретного будильника
+            Alarm alarm = db.getAlarmById(alarmId);
+            stopAlarm(alarm);
+            db.deleteAlarm(alarm);//запускаем метод "удаление" и передаем обьект ЗАПИСЬ со всеми полями
+        }
+    }
+
+    public void stopAlarm(Alarm alarm){
+        Intent intentForAlarmReceiver = new Intent(this, AlarmReceiver.class);
+        intentForAlarmReceiver.putExtra(ID, alarm.getID());
+        intentForAlarmReceiver.putExtra(TIME_HOUR, alarm.get_delayHour());
+        intentForAlarmReceiver.putExtra(TIME_MINUTE, alarm.get_delayMinute());
+
+        PendingIntent pendingIntent = PendingIntent.getBroadcast(this, (int) alarm.getID(), intentForAlarmReceiver,
+                PendingIntent.FLAG_UPDATE_CURRENT);
+        alarmManager.cancel(pendingIntent);//отключаем будильник
+    }
 
     private void execute(String action) {
         fillData();
-        AlarmManager alarmManager = (AlarmManager)getSystemService(Context.ALARM_SERVICE);
         int numberOfDays = 0;
 
         for (Alarm alarm : alarms) {
@@ -71,7 +109,7 @@ public class AlarmService extends IntentService {
             calendar.set(Calendar.SECOND, 00);
 
             if ((Integer.decode(String.valueOf(alarm.get_repetDays().charAt(0))) > 0) && (!(alarm.get_repetDays().equals("100")))) {
-                     repetDaysList = splitLine(alarm.get_repetDays());// получаем массив с днями
+                    repeatDaysList = splitLine(alarm.get_repetDays());// получаем массив с днями
                     int t = -1;// переменная для подсчета необходимого дня из списка
                     int i = -1;// переменная, указывающая на день (позицию в массиве), который следующий для срабатывания
 
@@ -81,8 +119,8 @@ public class AlarmService extends IntentService {
 
                         while (t < 0) {
                             i++;
-                            if (i < repetDaysList.size()) {// если список еще не закончен
-                                t = Integer.decode(repetDaysList.get(i)) - calendar.getTime().getDay();
+                            if (i < repeatDaysList.size()) {// если список еще не закончен
+                                t = Integer.decode(repeatDaysList.get(i)) - calendar.getTime().getDay();
                             } else {// если прошли по всему списку, и эти дни недели уже прошли, то выбираем первый пункт списка - первый день в неделе для срабатывания
                                 i = 0;
                                 break;
@@ -90,24 +128,24 @@ public class AlarmService extends IntentService {
                         }
                     }
 
-                if(calendar.getTime().getDay() == Integer.decode(repetDaysList.get(i))) {
+                if(calendar.getTime().getDay() == Integer.decode(repeatDaysList.get(i))) {
                     if (calendar.getTimeInMillis() < System.currentTimeMillis()) {// ставим будильник на следующую неделю
-                        if(i + 1 < repetDaysList.size()){
+                        if(i + 1 < repeatDaysList.size()){
                             i+= i + 1;
-                            numberOfDays =  - calendar.getTime().getDay() + Integer.decode(repetDaysList.get(i));
+                            numberOfDays =  - calendar.getTime().getDay() + Integer.decode(repeatDaysList.get(i));
                         }else {
                             i = 0;
-                            numberOfDays = 7 - calendar.getTime().getDay() + Integer.decode(repetDaysList.get(i));
+                            numberOfDays = 7 - calendar.getTime().getDay() + Integer.decode(repeatDaysList.get(i));
                         }
-                        Log.d(myLog, " numberOfDays = - " + calendar.getTime().getDay() + " + " + Integer.decode(repetDaysList.get(i)) + " = " + numberOfDays);
+                        Log.d(myLog, " numberOfDays = - " + calendar.getTime().getDay() + " + " + Integer.decode(repeatDaysList.get(i)) + " = " + numberOfDays);
                     } else {
                     }
-                }else if(calendar.getTime().getDay() < Integer.decode(repetDaysList.get(i))){
-                        numberOfDays =  - calendar.getTime().getDay() + Integer.decode(repetDaysList.get(i));
-                        Log.d(myLog, " numberOfDays = - " + calendar.getTime().getDay() + " + " + Integer.decode(repetDaysList.get(i)) + " = " + numberOfDays);
+                }else if(calendar.getTime().getDay() < Integer.decode(repeatDaysList.get(i))){
+                        numberOfDays =  - calendar.getTime().getDay() + Integer.decode(repeatDaysList.get(i));
+                        Log.d(myLog, " numberOfDays = - " + calendar.getTime().getDay() + " + " + Integer.decode(repeatDaysList.get(i)) + " = " + numberOfDays);
                     }else {
-                        numberOfDays = 7 - calendar.getTime().getDay() + Integer.decode(repetDaysList.get(i));
-                        Log.d(myLog, " numberOfDays = 7 - " + calendar.getTime().getDay() + " + " + Integer.decode(repetDaysList.get(i)) + " = " + numberOfDays);
+                        numberOfDays = 7 - calendar.getTime().getDay() + Integer.decode(repeatDaysList.get(i));
+                        Log.d(myLog, " numberOfDays = 7 - " + calendar.getTime().getDay() + " + " + Integer.decode(repeatDaysList.get(i)) + " = " + numberOfDays);
                     }
                     Log.d(myLog, "calendar.getTime().getDay() = " + calendar.getTime().getDay());
             }
@@ -151,7 +189,6 @@ public class AlarmService extends IntentService {
 
 
     void fillData() {
-        DatabaseHandler db = new DatabaseHandler(this);//переменная для работы с БД
         List<Alarm> listGetAlarms = db.getAllAlarms();//создание списка обьектов типа "запись" и заполнения его значениями всех записей взятых из БД
 
         for (Alarm cn : listGetAlarms) {//проходим про каждому обьекту списка

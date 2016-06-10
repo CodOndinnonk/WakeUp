@@ -107,9 +107,8 @@ containing a value of this type.
         public static final int infoFieldContextShowAlarm=0x7f0c0018;
         public static final int listViewMainActivity=0x7f0c0016;
         public static final int none=0x7f0c0002;
-        public static final int offAll=0x7f0c0030;
         public static final int scrollView=0x7f0c0026;
-        public static final int settings=0x7f0c0031;
+        public static final int settings=0x7f0c0030;
         public static final int showContentFieldShowContent=0x7f0c0027;
         public static final int showProverdShowContent=0x7f0c0029;
         public static final int showTaskFieldLocActivityArithmetic=0x7f0c0003;

@@ -3,6 +3,7 @@ package com.wakeup;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.util.Log;
 import android.view.ContextMenu;
 import android.view.Menu;
@@ -71,8 +72,14 @@ public class MainActivity extends Activity {
     }
 
 
+    public void setCommandToDeleteAlarm(int id){
+        Intent setAlarmIntent = new Intent(this, AlarmService.class);
+        setAlarmIntent.setAction(AlarmService.DELETE);
+        setAlarmIntent.putExtra("id",id);
+        this.startService(setAlarmIntent);
+    }
 
-    public void setComandToRemakeAlarms(){
+    public void setCommandToRemakeAlarms(){
         Intent setAlarmIntent = new Intent(this, AlarmService.class);
         setAlarmIntent.setAction(AlarmService.DOWHATNEED);
         this.startService(setAlarmIntent);
@@ -80,6 +87,7 @@ public class MainActivity extends Activity {
 
 
     public void resetList(){
+        Log.d(myLog, " MainActivity resetList");
         listOfAlarms.clear();
         fillData();
         boxAdapter.notifyDataSetChanged();
@@ -121,17 +129,7 @@ public class MainActivity extends Activity {
 
         switch (id) {
             case R.id.delAll://вызов окна О ПРОГРАММЕ
-                DatabaseHandler db = new DatabaseHandler(this);
-                db.deleteAll();
-                Intent AlarmServiceOffAllDel = new Intent(this, AlarmService.class);
-                AlarmServiceOffAllDel.setAction(AlarmService.DOWHATNEED);
-                this.startService(AlarmServiceOffAllDel);
-                return true;
-
-            case R.id.offAll://вызов окна О ПРОГРАММЕ
-                Intent AlarmServiceOffAll = new Intent(this, AlarmService.class);
-                AlarmServiceOffAll.setAction(AlarmService.DOWHATNEED);
-                this.startService(AlarmServiceOffAll);
+               deleteAlarm(-1);
                 return true;
 
             case R.id.settings://вызов окна О ПРОГРАММЕ
@@ -194,17 +192,18 @@ public class MainActivity extends Activity {
     }
 
     public void deleteAlarm(int id) {
-        Alarm needAlarm = db.getAlarmById(id);//создаем обьект ЗАПИСЬ и заполняем его значениями из записи взятой по нужному нам ID
-        db.deleteAlarm(new Alarm(needAlarm.getID(), needAlarm.get_hour(),
-                needAlarm.get_minute(), needAlarm.get_delayHour(), needAlarm.get_delayMinute(), needAlarm.get_active(), needAlarm.get_content(),
-                needAlarm.get_Sound(), needAlarm.get_repetDays()));//запускаем метод "удаление" и передаем обьект ЗАПИСЬ со всеми полями
-        Toast mytoast = Toast.makeText(getApplicationContext(),
+      Toast mytoast = Toast.makeText(getApplicationContext(),
                 R.string.alarmDeleted, Toast.LENGTH_SHORT);
         mytoast.show();
-        setComandToRemakeAlarms();
-        resetList();
-    }
+        setCommandToDeleteAlarm(id);
+        Handler handler = new Handler();
+        handler.postDelayed(new Runnable() {
+            public void run() {
+                resetList();
+            }
+        }, 500);
 
+    }
 
 
 }
